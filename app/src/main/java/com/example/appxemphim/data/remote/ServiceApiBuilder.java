@@ -16,12 +16,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceApiBuilder {
     private static final String URL_TMDB = "https://api.themoviedb.org/3/";
-    private static final String URL_USER_API = "https://192.168.1.5:85/userapi/";
-
+    private static final String URL_USER_API = "http://192.168.1.6:85/user/";
+    private static final String URL_YOUTUBE_DATA_API = "https://www.googleapis.com/youtube/v3/";
+    //AIzaSyBSBAJLOEJmynxkun7JBGJlPwjJTcnJQXI
     // Create logger
     private static final HttpLoggingInterceptor logger =
             new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
-
     // Create OkHttp Client
     private static final OkHttpClient.Builder okHttp =
             new OkHttpClient.Builder()
@@ -40,20 +40,22 @@ public class ServiceApiBuilder {
                         }
                     })
                     .addInterceptor(logger);
-
     private static final Retrofit.Builder builderTMDB = new Retrofit.Builder().baseUrl(URL_TMDB)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttp.build());
     private static final Retrofit.Builder builderUserApi = new Retrofit.Builder().baseUrl(URL_USER_API)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttp.build());
-
-
+    private static final Retrofit.Builder builderYoutubeApi = new Retrofit.Builder().baseUrl(URL_YOUTUBE_DATA_API)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttp.build());
     public static <S> S buildTMDBService(Class<S> serviceType) {
         return builderTMDB.build().create(serviceType);
     }
-
     public static <S> S buildUserApiService(Class<S> serviceType) {
+        return builderUserApi.build().create(serviceType);
+    }
+    public static <S> S buildYoutubeApiService(Class<S> serviceType) {
         return builderUserApi.build().create(serviceType);
     }
 }

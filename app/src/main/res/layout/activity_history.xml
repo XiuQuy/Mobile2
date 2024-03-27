@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
@@ -30,9 +31,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="16dp"
-            android:text="History"
+            android:text="Lịch sử xem"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size_title_activity"
             android:textStyle="bold" />
 
         <!-- Menu -->
@@ -54,49 +55,13 @@
         android:layout_below="@id/toolbar"
         android:background="@color/white">
 
-        <!-- Đặt code hiển thị lịch sử xem phim ở đây -->
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view_histories_atv_history"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <!-- Icon -->
-            <ImageView
-                android:id="@+id/image_view_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/netflix_logo_icon"
-                android:layout_gravity="center_vertical"/>
-
-            <!-- Title and Time -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="8dp">
-
-                <!-- Title -->
-                <TextView
-                    android:id="@+id/text_view_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Movie Title"
-                    android:textSize="16sp"/>
-
-                <!-- Time -->
-                <TextView
-                    android:id="@+id/text_view_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Time"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray"/>
-            </LinearLayout>
-
-        </LinearLayout>
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_recycle_view_activity_history"
+            
+        />
 
     </FrameLayout>
 

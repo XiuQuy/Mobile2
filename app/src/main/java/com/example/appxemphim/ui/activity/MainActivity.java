@@ -1,5 +1,6 @@
 package com.example.appxemphim.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
         navigationView = findViewById(R.id.nav_user);
 
         // Gán trình nghe sự kiện cho NavigationView
