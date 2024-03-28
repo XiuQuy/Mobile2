@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appxemphim.R;
+import com.example.appxemphim.data.local.SubDataHistories;
 import com.example.appxemphim.data.remote.HistoryService;
 import com.example.appxemphim.data.remote.ServiceApiBuilder;
 import com.example.appxemphim.data.remote.YoutubeService;
@@ -41,7 +42,12 @@ public class HistoryActivity extends AppCompatActivity {
         ItemSpacingDecoration itemDecoration = new ItemSpacingDecoration(spacingInPixels);
         recyclerView.addItemDecoration(itemDecoration);
 
-        fetchData();
+        SubDataHistories subDataHistories =  new SubDataHistories();
+        List<History> histories = subDataHistories.initData();
+
+        recyclerView.setAdapter(new HistoryAdapter(HistoryActivity.this, histories));
+
+        //fetchData();
 
 
     }
@@ -53,8 +59,8 @@ public class HistoryActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<History>> call, Response<List<History>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<History> movies = response.body();
-                    recyclerView.setAdapter(new HistoryAdapter(HistoryActivity.this, movies));
+                    List<History> histories = response.body();
+                    //recyclerView.setAdapter(new HistoryAdapter(HistoryActivity.this, histories));
                 } else {
                     Toast.makeText(HistoryActivity.this, "Failed to fetch movies", Toast.LENGTH_SHORT).show();
                 }

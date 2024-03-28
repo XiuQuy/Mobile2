@@ -63,7 +63,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
 
         public void bind(History history) {
             output_title.setText(history.getInformationMovie().getTitle());
-            output_tag.setText(String.valueOf(history.getSecondsCount()));
+            output_tag.setText(history.getInformationMovie().getTag());
             Glide.with(context)
                     .load(history.getInformationMovie().getImageLink())
                     .apply(new RequestOptions().placeholder(R.drawable.ic_baseline_lock_24)) // Placeholder nếu ảnh chưa được tải

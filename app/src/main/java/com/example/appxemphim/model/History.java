@@ -1,11 +1,24 @@
 package com.example.appxemphim.model;
 
+import java.time.LocalDateTime;
+
 public class History {
     private int id;
     private int userId;
-    private String watchedDate;
+    private LocalDateTime watchedDate;
     private int secondsCount;
     private InformationMovie informationMovie;
+
+    public History(int id, int userId, LocalDateTime watchedDate, int secondsCount, InformationMovie informationMovie) {
+        this.id = id;
+        this.userId = userId;
+        this.watchedDate = watchedDate;
+        this.secondsCount = secondsCount;
+        this.informationMovie = informationMovie;
+    }
+
+    public History() {
+    }
 
     public int getId() {
         return id;
@@ -23,11 +36,11 @@ public class History {
         this.userId = userId;
     }
 
-    public String getWatchedDate() {
+    public LocalDateTime getWatchedDate() {
         return watchedDate;
     }
 
-    public void setWatchedDate(String watchedDate) {
+    public void setWatchedDate(LocalDateTime watchedDate) {
         this.watchedDate = watchedDate;
     }
 

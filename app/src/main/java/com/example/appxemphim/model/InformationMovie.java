@@ -5,7 +5,20 @@ public class InformationMovie {
     private String movieId;
     private String title;
     private String tag;
+    private int durations;
     private String imageLink;
+
+    public InformationMovie(int id, String movieId, String title, String tag, String imageLink, int durations) {
+        this.id = id;
+        this.movieId = movieId;
+        this.title = title;
+        this.tag = tag;
+        this.imageLink = imageLink;
+        this.durations = durations;
+    }
+
+    public InformationMovie() {
+    }
 
     public int getId() {
         return id;
@@ -45,5 +58,13 @@ public class InformationMovie {
 
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
+    }
+
+    public int getDurations() {
+        return durations;
+    }
+
+    public void setDurations(int durations) {
+        this.durations = durations;
     }
 }

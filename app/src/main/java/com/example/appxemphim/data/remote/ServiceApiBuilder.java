@@ -18,7 +18,7 @@ public class ServiceApiBuilder {
     private static final String URL_TMDB = "https://api.themoviedb.org/3/";
     private static final String URL_USER_API = "http://192.168.1.6:85/user/";
     private static final String URL_YOUTUBE_DATA_API = "https://www.googleapis.com/youtube/v3/";
-    //AIzaSyBSBAJLOEJmynxkun7JBGJlPwjJTcnJQXI
+
     // Create logger
     private static final HttpLoggingInterceptor logger =
             new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
