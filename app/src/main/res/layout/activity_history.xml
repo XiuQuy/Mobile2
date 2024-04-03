@@ -59,7 +59,7 @@
             android:id="@+id/recycle_view_histories_atv_history"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_recycle_view_activity_history"
+            tools:listitem="@layout/item_recycler_view_activity_history"
             
         />
 

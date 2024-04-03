@@ -12,39 +12,44 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/background"
         app:layout_collapseMode="pin">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/imgBack"
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_baseline_arrow_back_ios_24" />
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/imgBack"
-            android:layout_toRightOf="@id/imgBack"
-            android:iconifiedByDefault="false"
-            android:queryHint="Search"/>
-    </RelativeLayout>
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imgBack"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/content_description_button_back"
+                android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view_atv_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/imgBack"
+                android:layoutDirection="rtl"
+                app:defaultQueryHint="Search" />
+
+        </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
     <TextView
         android:id="@+id/txtNameMovie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Top searches"
+        android:text="@string/top_searches"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/montserrat"
         android:textStyle="bold"/>
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_view_search_atv_search"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        tools:listitem="@layout/item_recycler_view_activity_search">
     </androidx.recyclerview.widget.RecyclerView>
-        </LinearLayout>
+</LinearLayout>

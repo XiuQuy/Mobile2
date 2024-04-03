@@ -5,4 +5,5 @@
     <dimen name="text_size_title_activity">20sp</dimen>
     <dimen name="text_size_tag_item_list">17sp</dimen>
     <dimen name="item_spacing">8dp</dimen>
+    <dimen name="margin_left_info_item_search">10dp</dimen>
 </resources>

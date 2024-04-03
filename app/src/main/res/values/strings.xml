@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MovieStream</string>
+    <string name="app_name">MovieReview</string>
     <string name="welcome">Welcome</string>
     <string name="signin">Sign in to continue</string>
     <string name="user">User name</string>
@@ -26,5 +26,16 @@
     <!--    các chức năng trong setting-->
     <string name="label_setting_darkmode">Dark Mode</string>
     <string name="label_setting_wifi">Use only Wifi</string>
-    <string name="label_setting_noitification">Noitification</string>
+    <string name="label_setting_notification">Notification</string>
+
+    <string name="cd_menu_each_item_recyclerview">Menu for each item</string>
+    <string name="release_date">"Release date: "</string>
+    <string name="default_title_item_search">3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem</string>
+    <string name="no_data">No data</string>
+    <string name="original_language">"Original language: "</string>
+    <string name="english">English</string>
+    <string name="votes">votes</string>
+    <string name="default_vote_item_search">53.8% / 35</string>
+    <string name="top_searches">Top searches</string>
+    <string name="content_description_button_back">Button back</string>
 </resources>

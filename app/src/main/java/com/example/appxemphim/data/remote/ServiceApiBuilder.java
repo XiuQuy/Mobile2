@@ -2,7 +2,11 @@ package com.example.appxemphim.data.remote;
 
 import android.os.Build;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
+import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +22,12 @@ public class ServiceApiBuilder {
     private static final String URL_TMDB = "https://api.themoviedb.org/3/";
     private static final String URL_USER_API = "http://192.168.1.6:85/user/";
     private static final String URL_YOUTUBE_DATA_API = "https://www.googleapis.com/youtube/v3/";
+    public static final String API_KEY_TMDB = "64d0aa770962667c44935e02b31da40f";
 
+    //Create covert date
+    static Gson gson = new GsonBuilder()
+            .registerTypeAdapter(Date.class, new DateTypeAdapter())
+            .create();
     // Create logger
     private static final HttpLoggingInterceptor logger =
             new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -41,7 +50,7 @@ public class ServiceApiBuilder {
                     })
                     .addInterceptor(logger);
     private static final Retrofit.Builder builderTMDB = new Retrofit.Builder().baseUrl(URL_TMDB)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttp.build());
     private static final Retrofit.Builder builderUserApi = new Retrofit.Builder().baseUrl(URL_USER_API)
             .addConverterFactory(GsonConverterFactory.create())

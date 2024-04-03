@@ -12,6 +12,7 @@ material = "1.11.0"
 activity = "1.8.2"
 constraintlayout = "2.1.4"
 retrofit = "2.3.0"
+legacySupportV4 = "1.0.0"
 
 [libraries]
 credentials = { module = "androidx.credentials:credentials", version.ref = "credentials" }
@@ -27,6 +28,7 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit2-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
