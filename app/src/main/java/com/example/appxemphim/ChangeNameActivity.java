@@ -10,8 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.accountinfo.R;
-
 
 public class ChangeNameActivity extends AppCompatActivity {
 
