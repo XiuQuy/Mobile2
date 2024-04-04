@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Name"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:layout_margin="10dp"
         android:textSize="20sp"
         android:fontFamily="@font/antic"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="UserName"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:layout_margin="10dp"
         android:textSize="15sp"
         android:fontFamily="@font/antic" />

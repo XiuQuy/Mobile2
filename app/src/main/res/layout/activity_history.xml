@@ -32,7 +32,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="16dp"
             android:text="Lịch sử xem"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
             android:textSize="@dimen/text_size_title_activity"
             android:textStyle="bold" />
 
@@ -53,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-        android:background="@color/white">
+        android:background="@color/text_color">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_view_histories_atv_history"

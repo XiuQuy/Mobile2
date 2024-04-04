@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="name"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:textSize="20sp"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/montserrat"
@@ -73,7 +73,7 @@
         android:layout_marginTop="10dp"
         android:text="DownLoad"
         android:textAllCaps="false"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:gravity="center"
         android:background="@drawable/bg_btn_down"/>
     <LinearLayout
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/antic"
                 android:text="My List"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 android:layout_gravity="center"/>
         </LinearLayout>
         <LinearLayout
@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/antic"
                 android:text="Rate"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 android:layout_gravity="center"/>
         </LinearLayout>
         <LinearLayout
@@ -136,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/antic"
                 android:text="Share"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 android:layout_gravity="center"/>
         </LinearLayout>
     </LinearLayout>
@@ -146,6 +146,6 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:padding="16dp"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:text="Description"/>
 </LinearLayout>

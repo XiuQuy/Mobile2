@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
             android:fontFamily="@font/montserrat"
             android:layout_marginStart="@dimen/margin_left_info_item_search"
             android:maxLines="3"
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 android:text="@string/release_date" />
 
             <TextView
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/no_data"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_color" />
         </LinearLayout>
 
         <LinearLayout
@@ -73,15 +73,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat"
+                android:textSize="@dimen/text_size_default"
+                android:textColor="@color/text_color"
                 android:text="@string/original_language" />
 
             <TextView
                 android:id="@+id/tv_language_item_rv_activity_search"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/montserrat"
                 android:layout_height="wrap_content"
                 android:text="@string/english"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_color" />
         </LinearLayout>
 
         <LinearLayout
@@ -94,13 +97,15 @@
                 android:id="@+id/tv_rate_item_rv_activity_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
                 android:text="@string/default_vote_item_search"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/text_color"
                  android:layout_marginStart="3dp"
                 android:text="@string/votes" />
         </LinearLayout>

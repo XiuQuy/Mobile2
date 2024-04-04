@@ -25,6 +25,7 @@ import java.net.SocketTimeoutException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -35,9 +36,9 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
     private List<Movie> listMovies;
 
 
-    public SearchAdapterActivitySearch(Context context, List<Movie> listMovies){
+    public SearchAdapterActivitySearch(Context context){
         this.context = context;
-        this.listMovies = listMovies;
+        listMovies = new ArrayList<>();
     }
 
     @Override
@@ -68,6 +69,8 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
         private TextView date;
         private TextView language;
         private TextView rate;
+        private Locale contextLanguageLocale;
+
         public MyViewHolder(View itemView){
             super(itemView);
             imageThumbnail = itemView.findViewById(R.id.img_thumbnail_item_rv_actv_search);
@@ -75,30 +78,43 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
             date = itemView.findViewById(R.id.tv_date_item_rv_activity_search);
             language = itemView.findViewById(R.id.tv_language_item_rv_activity_search);
             rate = itemView.findViewById(R.id.tv_rate_item_rv_activity_search);
+            contextLanguageLocale = context.getResources().getConfiguration().getLocales().get(0);
         }
 
         public void bind(Movie movie) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("vi"));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", contextLanguageLocale);
             DecimalFormat decimalFormat = new DecimalFormat("#.##", new DecimalFormatSymbols(Locale.US));
             Date dateInput = movie.getReleaseDate();
             if(dateInput != null){
                 date.setText(dateFormat.format(dateInput));
             }
             title.setText(movie.getName());
-            language.setText(new Locale(movie.getOriginalLanguage()).getDisplayLanguage());
+            language.setText(new Locale(movie.getOriginalLanguage()).getDisplayLanguage(contextLanguageLocale));
             String rateString = decimalFormat.format(movie.getVoteAverage()*10) + "% / " + movie.getVoteCount();
             rate.setText(rateString);
             Glide.with(context)
                     .load(movie.getPosterPath())
-                    .apply(new RequestOptions()
-                            .placeholder(R.drawable.placeholder_img_load)
-                    ).listener(new GlideLoadImgListener(imageThumbnail))
+                    .apply(new RequestOptions().placeholder(R.drawable.placeholder_img_load))
+                    .listener(new GlideLoadImgListener(imageThumbnail))
                     .into(imageThumbnail);
         }
     }
 
-    public void clearData() {
+    public void updateNewData(List<Movie> newData) {
+        listMovies.clear();
+        listMovies.addAll(newData);
+        notifyDataSetChanged();
+    }
+
+    public void addData(List<Movie> newData) {
+        int startPosition = listMovies.size();
+        listMovies.addAll(newData);
+        notifyItemRangeInserted(startPosition, newData.size());
+    }
+
+    public void clear() {
         listMovies.clear();
         notifyDataSetChanged();
     }
+
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.LoginActivity"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/text_color"
     android:padding="20dp"
     android:transitionName="layout_trans"
     android:id="@+id/layout_login">
@@ -92,7 +92,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLogin"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login"
@@ -120,7 +120,7 @@
             android:text="@string/signup"
             android:layout_marginTop="5dp"
             android:background="@drawable/custom_btn_login"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
             android:fontFamily="@font/antic"
             android:transitionName="btn_trans"
             android:textAllCaps="false"

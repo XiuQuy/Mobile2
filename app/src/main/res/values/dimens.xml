@@ -6,4 +6,9 @@
     <dimen name="text_size_tag_item_list">17sp</dimen>
     <dimen name="item_spacing">8dp</dimen>
     <dimen name="margin_left_info_item_search">10dp</dimen>
+    <dimen name="title_filter_search">25sp</dimen>
+    <dimen name="text_size_default">14sp</dimen>
+    <dimen name="text_size_title_option_filter">16sp</dimen>
+    <dimen name="margin_left_right_item_filter">10dp</dimen>
+    <dimen name="space_option_filter_search">10dp</dimen>
 </resources>

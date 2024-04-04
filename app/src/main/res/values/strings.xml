@@ -38,4 +38,13 @@
     <string name="default_vote_item_search">53.8% / 35</string>
     <string name="top_searches">Top searches</string>
     <string name="content_description_button_back">Button back</string>
+    <string name="filter">Filter</string>
+    <string name="lbl_include_adult">Include Adult</string>
+    <string name="lbl_year">Year</string>
+    <string name="lbl_genres">Genres</string>
+    <string name="text_btn_filter">Filter</string>
+    <string name="text_bnt_set_default">Set default</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
