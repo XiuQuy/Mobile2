@@ -32,7 +32,7 @@
     <string name="release_date">"Release date: "</string>
     <string name="default_title_item_search">3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem</string>
     <string name="no_data">No data</string>
-    <string name="original_language">"Original language: "</string>
+    <string name="language">"Language: "</string>
     <string name="english">English</string>
     <string name="votes">votes</string>
     <string name="default_vote_item_search">53.8% / 35</string>

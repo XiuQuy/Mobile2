@@ -2,12 +2,12 @@ package com.example.appxemphim.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class VideoYoutubeItem {
+public class YoutubeVideoItem {
 
     @SerializedName("snippet")
-    private VideoYoutubeSnippet snippet;
+    private YoutubeVideoSnippet snippet;
 
-    public VideoYoutubeSnippet getSnippet() {
+    public YoutubeVideoSnippet getSnippet() {
         return snippet;
     }
 

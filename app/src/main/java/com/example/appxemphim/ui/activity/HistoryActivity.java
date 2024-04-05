@@ -14,9 +14,9 @@ import com.example.appxemphim.data.remote.HistoryService;
 import com.example.appxemphim.data.remote.ServiceApiBuilder;
 import com.example.appxemphim.data.remote.YoutubeService;
 import com.example.appxemphim.model.History;
-import com.example.appxemphim.model.VideoYoutubeItem;
-import com.example.appxemphim.model.VideoYoutubeResponse;
-import com.example.appxemphim.model.VideoYoutubeSnippet;
+import com.example.appxemphim.model.YoutubeVideoItem;
+import com.example.appxemphim.model.YoutubeVideoResponse;
+import com.example.appxemphim.model.YoutubeVideoSnippet;
 import com.example.appxemphim.ui.adapter.HistoryAdapter;
 import com.example.appxemphim.ui.adapter.ItemSpacingDecoration;
 
@@ -77,14 +77,14 @@ public class HistoryActivity extends AppCompatActivity {
     public void getVideoInfo(String videoId) {
         YoutubeService youtubeService = ServiceApiBuilder.buildYoutubeApiService(YoutubeService.class);
 
-        Call<VideoYoutubeResponse> call = youtubeService.getVideoInfo("snippet", videoId, "AIzaSyBSBAJLOEJmynxkun7JBGJlPwjJTcnJQXI");
-        call.enqueue(new Callback<VideoYoutubeResponse>() {
+        Call<YoutubeVideoResponse> call = youtubeService.getVideoInfo("snippet", videoId, "AIzaSyBSBAJLOEJmynxkun7JBGJlPwjJTcnJQXI");
+        call.enqueue(new Callback<YoutubeVideoResponse>() {
             @Override
-            public void onResponse(Call<VideoYoutubeResponse> call, Response<VideoYoutubeResponse> response) {
+            public void onResponse(Call<YoutubeVideoResponse> call, Response<YoutubeVideoResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    VideoYoutubeItem[] items = response.body().getItems();
+                    YoutubeVideoItem[] items = response.body().getItems();
                     if (items != null && items.length > 0) {
-                        VideoYoutubeSnippet snippet = items[0].getSnippet();
+                        YoutubeVideoSnippet snippet = items[0].getSnippet();
                         // Ở đây bạn có thể truy cập các thông tin về video, bao gồm cả URL của thumbnail
                         String title = snippet.getTitle();
                         String description = snippet.getDescription();
@@ -97,7 +97,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<VideoYoutubeResponse> call, Throwable t) {
+            public void onFailure(Call<YoutubeVideoResponse> call, Throwable t) {
                 Log.e("API_ERROR", "Network error", t);
             }
         });

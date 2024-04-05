@@ -1,27 +1,19 @@
 package com.example.appxemphim.ui.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 import com.example.appxemphim.R;
 import com.example.appxemphim.model.Movie;
 
-import java.net.SocketTimeoutException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
@@ -106,10 +98,16 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
         notifyDataSetChanged();
     }
 
-    public void addData(List<Movie> newData) {
+    public void addAllData(List<Movie> newData) {
         int startPosition = listMovies.size();
         listMovies.addAll(newData);
         notifyItemRangeInserted(startPosition, newData.size());
+    }
+
+    public void addData(Movie movie) {
+        int position = listMovies.size();
+        listMovies.add(movie);
+        notifyItemInserted(position);
     }
 
     public void clear() {

@@ -2,7 +2,7 @@ package com.example.appxemphim.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class VideoYoutubeSnippet {
+public class YoutubeVideoSnippet {
     @SerializedName("title")
     private String title;
 

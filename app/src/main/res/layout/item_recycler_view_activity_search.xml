@@ -76,7 +76,7 @@
                 android:fontFamily="@font/montserrat"
                 android:textSize="@dimen/text_size_default"
                 android:textColor="@color/text_color"
-                android:text="@string/original_language" />
+                android:text="@string/language" />
 
             <TextView
                 android:id="@+id/tv_language_item_rv_activity_search"
