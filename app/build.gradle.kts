@@ -50,4 +50,10 @@ dependencies {
     implementation(libs.retrofit2.converter.gson)
     implementation(libs.logging.interceptor)
     implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+
+    implementation ("androidx.cardview:cardview:1.0.0")
+
+    implementation ("com.squareup.picasso:picasso:2.71828")
+
+
 }

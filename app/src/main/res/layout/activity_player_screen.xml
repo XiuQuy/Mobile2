@@ -37,22 +37,14 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- PlayerView cho phát video -->
-    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-        android:id="@+id/youtube_player_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:layout_marginTop="8dp"
-        app:videoId="vTJdVE_gjI0"
-        app:autoPlay="true" />
+
 
     <!-- RecyclerView cho danh sách các phim gợi ý -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_movies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/youtube_player_view"
+        android:layout_below="@id/toolbar"
         android:layout_marginTop="8dp"
         android:padding="8dp" />
 

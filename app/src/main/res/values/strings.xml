@@ -4,6 +4,7 @@
     <string name="signin">Sign in to continue</string>
     <string name="user">User name</string>
     <string name="pass">Password</string>
+    <string name="passConfirm">Password Confirm</string>
     <string name="forgotpass">Forgot password</string>
     <string name="login">Login</string>
     <string name="or">or</string>

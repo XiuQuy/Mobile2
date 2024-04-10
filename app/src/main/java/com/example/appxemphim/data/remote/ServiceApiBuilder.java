@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceApiBuilder {
     private static final String URL_TMDB = "https://api.themoviedb.org/3/";
-    private static final String URL_USER_API = "https://192.168.1.5:85/userapi/";
+    private static final String URL_USER_API = "https://nhom17movieappapi.azurewebsites.net/";
 
     // Create logger
     private static final HttpLoggingInterceptor logger =

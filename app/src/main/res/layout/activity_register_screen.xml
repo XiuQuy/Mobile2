@@ -10,6 +10,7 @@
     android:padding="20dp"
     android:transitionName="layout_trans"
     android:id="@+id/layout_register">
+
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btnBack"
         android:layout_width="50dp"
@@ -24,11 +25,12 @@
         android:layout_gravity="center"
         android:src="@drawable/netflix_logo_icon"
         android:transitionName="logo_trans"
-        android:layout_marginTop="50dp"/>
+        />
 
     <TextView
         android:id="@+id/txtTitleSignUp"
-        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
         android:text="@string/singup_title"
@@ -39,7 +41,8 @@
 
     <TextView
         android:id="@+id/txtDesSignUp"
-        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/antic"
         android:text="@string/singup_slogan"
@@ -58,16 +61,33 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/username_signup"
+            android:id="@+id/name_signup"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:transitionName="user_trans">
+            android:transitionName="pass_trans">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/user"
+                android:hint="@string/name"
+                android:fontFamily="@font/antic"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/username_signup"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:transitionName="user_trans">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
                 android:fontFamily="@font/antic" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -84,17 +104,20 @@
                 android:fontFamily="@font/antic" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/name_signup"
+            android:id="@+id/passwordConfirm_signup"
+            app:passwordToggleEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:transitionName="pass_trans">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/name"
-                android:fontFamily="@font/antic"/>
+                android:hint= "@string/passConfirm"
+                android:inputType="textPassword"
+                android:fontFamily="@font/antic" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
