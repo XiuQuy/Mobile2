@@ -47,4 +47,13 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!--gooogle-->
+    <string name="google_signin_client_id">793964661748-v2eko2imm6pi2dad49oc7ko2gkisgil0.apps.googleusercontent.com</string>
+
+    <!--facebook-->
+    <string name="facebook_app_id">1137577040603838</string>
+    <string name="fb_login_protocol_scheme">fb1137577040603838</string>
+    <string name="facebook_client_token">56789</string>
+    <string name="message_error_login">An error occurred during login, please try again</string>
 </resources>

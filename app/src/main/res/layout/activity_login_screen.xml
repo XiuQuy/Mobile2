@@ -140,6 +140,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center">
+
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btn_login_facebook"
             android:layout_width="wrap_content"
@@ -148,6 +149,7 @@
             android:background="@android:color/transparent"
             android:layout_margin="10dp"
             android:transitionName="btn_trans"/>
+
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btn_login_google"
             android:layout_width="wrap_content"
