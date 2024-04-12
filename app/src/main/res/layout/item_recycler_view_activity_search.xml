@@ -109,21 +109,20 @@
                  android:layout_marginStart="3dp"
                 android:text="@string/votes" />
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <ImageView
+        <TextView
             android:id="@+id/menu_item_rv_activity_search"
-            android:layout_width="25dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="8dp"
-            android:contentDescription="@string/cd_menu_each_item_recyclerview"
-            android:src="@drawable/ic_menu_vertical">
-        </ImageView>
+            android:textColor="@color/text_color"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="@string/horizontal_3dots"
+            android:textAppearance="?android:textAppearanceLarge" />
     </LinearLayout>
 </LinearLayout>

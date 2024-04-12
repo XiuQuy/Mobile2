@@ -47,7 +47,6 @@ public class RightFilterFragmentSearchActivity extends Fragment {
     private CheckBox cbAdult;
     private EditText txtYear;
     private ChipGroup genreGroup;
-    private Button btnSetDefault;
     private Button btnFilter;
     private FilterListener filterListener;
     private FragmentFilterSearchViewModel viewModel;
@@ -82,7 +81,7 @@ public class RightFilterFragmentSearchActivity extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(FragmentFilterSearchViewModel.class);
         cbAdult = fView.findViewById(R.id.checkbox_adult_filter_search);
         txtYear = fView.findViewById(R.id.txt_year_filter_search);
-        btnSetDefault = fView.findViewById(R.id.btn_set_default_filter_search);
+        Button btnSetDefault = fView.findViewById(R.id.btn_set_default_filter_search);
         genreGroup = fView.findViewById(R.id.chipGroup_genre_filter_search);
         btnFilter = fView.findViewById(R.id.btn_submit_filter_search);
         genreSet =  new HashSet<>();

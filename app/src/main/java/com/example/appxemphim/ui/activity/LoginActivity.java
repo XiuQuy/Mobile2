@@ -180,6 +180,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    saveUserInfoLoginSuccess(response.body());
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     Log.e("LOGIN_SUCCESS", ""+response.body());
@@ -203,6 +204,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    saveUserInfoLoginSuccess(response.body());
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     Log.e("LOGIN_SUCCESS", ""+response.body());
@@ -234,5 +236,4 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("tagSocialNetwork", user.getTagSocialNetwork());
         editor.apply();
     }
-
 }

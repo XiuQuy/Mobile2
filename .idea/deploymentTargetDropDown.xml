@@ -5,20 +5,23 @@
       <entry key="HistoryActivity">
         <State />
       </entry>
+      <entry key="SearchActivity">
+        <State />
+      </entry>
       <entry key="app">
         <State>
-          <targetSelectedWithDropDown>
+          <runningDeviceTargetSelectedWithDropDown>
             <Target>
-              <type value="QUICK_BOOT_TARGET" />
+              <type value="RUNNING_DEVICE_TARGET" />
               <deviceKey>
                 <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\PC\.android\avd\Pixel_7_Pro_API_31.avd" />
+                  <type value="SERIAL_NUMBER" />
+                  <value value="BKB00148182" />
                 </Key>
               </deviceKey>
             </Target>
-          </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-04-10T07:29:50.504552700Z" />
+          </runningDeviceTargetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-04-12T07:04:14.466460500Z" />
         </State>
       </entry>
     </value>

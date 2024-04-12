@@ -2,6 +2,7 @@ package com.example.appxemphim.ui.activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -121,11 +122,7 @@ public class SearchActivity extends AppCompatActivity implements RightFilterFrag
         btnFilter.setOnClickListener(v -> {
             drawerLayout.openDrawer(GravityCompat.END);
         });
-
-
-
     }
-
 
     // Function search movie
     public void searchMovieAndTv(String query, FilterSearch filter) {
