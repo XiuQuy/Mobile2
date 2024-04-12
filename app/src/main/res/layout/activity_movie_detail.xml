@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MovieDetail"
-    android:orientation="vertical"
-    android:background="@color/background">
+    android:background="@color/black"
+    android:padding="8dp">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/background"
-        app:layout_collapseMode="pin">
+        android:background="@color/black">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -32,120 +29,52 @@
                 android:src="@drawable/icons8_netflix_48px" />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-    <ImageView
-        android:id="@+id/imgDetail"
+
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        android:id="@+id/youtube_player_view"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="fitXY"/>
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:src="@drawable/netflix_logo_icon"/>
-    <TextView
-        android:id="@+id/txtNameMovie"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="name"
+        android:layout_below="@id/toolbar" />
+
+    <TextView
+        android:id="@+id/movie_title_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/youtube_player_view"
+        android:layout_marginTop="16dp"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/montserrat"
-        android:textStyle="bold"/>
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnPlay"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="Play"
-        android:textAllCaps="false"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:background="@drawable/bg_btn_play"/>
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnDownload"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:text="DownLoad"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:background="@drawable/bg_btn_down"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="10dp">
+        android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp">
-            <ImageView
-                android:id="@+id/imgAdd"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_baseline_add_24"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/antic"
-                android:text="My List"
-                android:textColor="@color/white"
-                android:layout_gravity="center"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp">
-            <ImageView
-                android:id="@+id/imgRate"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_baseline_star_rate_24"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/antic"
-                android:text="Rate"
-                android:textColor="@color/white"
-                android:layout_gravity="center"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp">
-            <ImageView
-                android:id="@+id/imgShare"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_baseline_share_24"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/antic"
-                android:text="Share"
-                android:textColor="@color/white"
-                android:layout_gravity="center"/>
-        </LinearLayout>
-    </LinearLayout>
     <TextView
-        android:id="@+id/txtMovieDescription"
+        android:id="@+id/movie_overview_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:padding="16dp"
-        android:textColor="@color/white"
-        android:text="Description"/>
-</LinearLayout>
+        android:layout_below="@id/movie_title_detail"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/movie_release_date_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/movie_overview_detail"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/movie_rating_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/movie_release_date_detail"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_allcate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/movie_rating_detail"
+        android:layout_marginTop="16dp"/>
+
+</RelativeLayout>
