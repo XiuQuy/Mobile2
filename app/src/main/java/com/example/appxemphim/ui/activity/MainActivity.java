@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 return false; // Trả về false để đánh dấu sự kiện chưa được xử lý
             }
         });
+
+
     }
 
 }

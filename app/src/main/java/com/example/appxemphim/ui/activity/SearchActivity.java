@@ -25,6 +25,7 @@ import com.example.appxemphim.model.TMDBSearchMovieResult;
 import com.example.appxemphim.model.TMDBSearchTVResponse;
 import com.example.appxemphim.model.TMDBSearchTVResult;
 import com.example.appxemphim.ui.adapter.SearchAdapterActivitySearch;
+import com.example.appxemphim.ui.fragment.PopupAddToPlayListFragment;
 import com.example.appxemphim.ui.fragment.RightFilterFragmentSearchActivity;
 import com.example.appxemphim.ui.viewmodel.SearchViewModel;
 
@@ -36,13 +37,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SearchActivity extends AppCompatActivity implements RightFilterFragmentSearchActivity.FilterListener{
-    private RecyclerView recyclerViewSearch;
     private String languageCode;
     private SearchView searchView;
     private SearchAdapterActivitySearch searchAdapter;
-    private ImageView btnFilter;
     private DrawerLayout drawerLayout;
     private RightFilterFragmentSearchActivity rightFilterFragment;
+    private SearchAdapterActivitySearch.PopupPlaylist popupPlayList;
+    PopupAddToPlayListFragment popupAddToPlayListFragment;
     private SearchViewModel searchViewModel;
 
     @Override
@@ -63,10 +64,17 @@ public class SearchActivity extends AppCompatActivity implements RightFilterFrag
         languageCode = currentLocale.getLanguage();
 
 
+        //Popup add to playlist
+        popupPlayList = () -> {
+            popupAddToPlayListFragment = new PopupAddToPlayListFragment();
+            popupAddToPlayListFragment.show(getSupportFragmentManager(), "custom_popup_fragment");
+        };
+
+
         //RecyclerView
-        recyclerViewSearch = findViewById(R.id.recycle_view_search_atv_search);
+        RecyclerView recyclerViewSearch = findViewById(R.id.recycle_view_search_atv_search);
         recyclerViewSearch.setLayoutManager(new LinearLayoutManager(SearchActivity.this));
-        searchAdapter = new SearchAdapterActivitySearch(SearchActivity.this);
+        searchAdapter = new SearchAdapterActivitySearch(SearchActivity.this, popupPlayList);
         recyclerViewSearch.setAdapter(searchAdapter);
         searchAdapter.addAllData(searchViewModel.getMovies());
         //Lazy load recycleView
@@ -118,7 +126,7 @@ public class SearchActivity extends AppCompatActivity implements RightFilterFrag
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.right_drawer_search_activity, rightFilterFragment).commit();
         //Btn open
-        btnFilter = findViewById(R.id.btn_filter_activity_search);
+        ImageView btnFilter = findViewById(R.id.btn_filter_activity_search);
         btnFilter.setOnClickListener(v -> {
             drawerLayout.openDrawer(GravityCompat.END);
         });

@@ -11,4 +11,5 @@
     <dimen name="text_size_title_option_filter">16sp</dimen>
     <dimen name="margin_left_right_item_filter">10dp</dimen>
     <dimen name="space_option_filter_search">10dp</dimen>
+    <dimen name="title_popup_add_to_playlist">16sp</dimen>
 </resources>

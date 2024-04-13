@@ -1,17 +1,11 @@
 package com.example.appxemphim.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.PopupMenu;
@@ -21,7 +15,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
 import com.example.appxemphim.model.Movie;
-import com.example.appxemphim.ui.activity.MovieDetailActivity;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -35,11 +28,12 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
 
     private Context context;
     private List<Movie> listMovies;
+    private PopupPlaylist popupPlaylist;
 
-
-    public SearchAdapterActivitySearch(Context context){
+    public SearchAdapterActivitySearch(Context context, PopupPlaylist popupPlaylist){
         this.context = context;
         listMovies = new ArrayList<>();
+        this.popupPlaylist = popupPlaylist;
     }
 
     @Override
@@ -62,7 +56,7 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
         holder.btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopupMenu(v, movie);
+                showOptionMenu(v, movie);
             }
         });
     }
@@ -134,13 +128,13 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
         notifyDataSetChanged();
     }
 
-    private void showPopupMenu(View view, Movie movie) {
+    private void showOptionMenu(View view, Movie movie) {
         PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
         popupMenu.getMenuInflater().inflate(R.menu.menu_item_search, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(item -> {
             int idItem = item.getItemId();
             if(idItem == R.id.item_search_add_to_playlist_option){
-                showPopupPlaylist();
+                popupPlaylist.showPopupAddToPlaylist();
                 Log.i("ITEM RECYCLER VIEW", "click add playlist option");
                 return true;
             }else if(idItem == R.id.item_search_view_detail_option){
@@ -154,17 +148,7 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
         popupMenu.show();
     }
 
-    private void showPopupPlaylist(){
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.layout_menu_add_to_playlist, null);
-        PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, 1000);
-        popupWindow.setFocusable(true);
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
-        Button btnFinish = popupView.findViewById(R.id.btn_finish_popup_add_to_playlist);
-        btnFinish.setOnClickListener(v -> {
-            popupWindow.dismiss();
-        });
+    public interface PopupPlaylist{
+        void showPopupAddToPlaylist();
     }
 }

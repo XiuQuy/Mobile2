@@ -4,28 +4,27 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="@drawable/border_popup_playlist"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
             android:textColor="@color/text_color"
-            android:textSize="16sp"
+            android:textSize="@dimen/title_popup_add_to_playlist"
             android:layout_weight="1"
             android:text="@string/add_to_playlist" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingRight="-10dp"
             app:srcCompat="@drawable/baseline_add_blue_24" />
 
         <TextView
@@ -33,10 +32,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
-            android:layout_weight="1"
             android:textAlignment="textEnd"
-            android:textColor="#1F5ECC"
-            android:textSize="16sp"
+            android:textColor="@color/btn_link_color"
+            android:textSize="@dimen/title_popup_add_to_playlist"
             android:text="@string/add_to_new_playlist" />
 
     </LinearLayout>
@@ -48,8 +46,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp"
+        android:layout_height="300dp"
+        android:maxHeight="300dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp">
 
@@ -65,6 +63,56 @@
                 android:textColor="@color/text_color"
                 android:text="CheckBox" />
 
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="CheckBox" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="CheckBox" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="CheckBox" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="CheckBox" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="CheckBox" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="CheckBox" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="CheckBox" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="CheckBox" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="CheckBox" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="CheckBox" />
             <CheckBox
                 android:id="@+id/checkBox2"
                 android:layout_width="match_parent"
@@ -113,8 +161,7 @@
         android:id="@+id/btn_finish_popup_add_to_playlist"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:backgroundTint="@color/background"
+        android:backgroundTint="@android:color/transparent"
         android:textColor="@color/text_color"
         android:text="@string/finish" />
-
 </LinearLayout>
