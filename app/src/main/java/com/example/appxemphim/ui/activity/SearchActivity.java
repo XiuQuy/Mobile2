@@ -65,9 +65,9 @@ public class SearchActivity extends AppCompatActivity implements RightFilterFrag
 
 
         //Popup add to playlist
-        popupPlayList = () -> {
-            popupAddToPlayListFragment = new PopupAddToPlayListFragment();
-            popupAddToPlayListFragment.show(getSupportFragmentManager(), "custom_popup_fragment");
+        popupPlayList = (movie) -> {
+            popupAddToPlayListFragment = new PopupAddToPlayListFragment(movie);
+            popupAddToPlayListFragment.show(getSupportFragmentManager(), "popup_add_to_playlist_fragment");
         };
 
 

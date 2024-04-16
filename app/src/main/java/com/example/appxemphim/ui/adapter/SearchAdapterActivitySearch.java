@@ -134,7 +134,7 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
         popupMenu.setOnMenuItemClickListener(item -> {
             int idItem = item.getItemId();
             if(idItem == R.id.item_search_add_to_playlist_option){
-                popupPlaylist.showPopupAddToPlaylist();
+                popupPlaylist.showPopupAddToPlaylist(movie);
                 Log.i("ITEM RECYCLER VIEW", "click add playlist option");
                 return true;
             }else if(idItem == R.id.item_search_view_detail_option){
@@ -149,6 +149,6 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
     }
 
     public interface PopupPlaylist{
-        void showPopupAddToPlaylist();
+        void showPopupAddToPlaylist(Movie movie);
     }
 }
