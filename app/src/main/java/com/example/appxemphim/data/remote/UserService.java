@@ -1,5 +1,6 @@
 package com.example.appxemphim.data.remote;
 
+import com.example.appxemphim.model.User;
 import com.example.appxemphim.model.UserLogin;
 import com.example.appxemphim.model.UserRegister;
 import com.example.appxemphim.model.UserResponse;
@@ -23,4 +24,5 @@ public interface UserService {
     Call<User> checkLoginGoogle(@Body String googleIdToken);
 
     @POST("api/User/login-facebook")
+    Call<User> checkLoginFacebook(@Body String firebaseAuthenFbIdToken);
 }

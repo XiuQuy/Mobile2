@@ -10,19 +10,20 @@ import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
 import com.example.appxemphim.model.History;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHolder> {
+public class HistoryAdapterPersonal extends RecyclerView.Adapter<HistoryAdapterPersonal.MyViewHolder> {
 
     private Context context;
     private List<History> listHistory;
 
-    public HistoryAdapter(Context context, List<History> listHistory) {
+    public HistoryAdapterPersonal(Context context, List<History> listHistory) {
 
         this.context = context;
         this.listHistory = listHistory;
@@ -72,7 +73,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
             output_tag.setText(history.getInformationMovie().getTag());
             // Load image using Picasso or any other image loading library
             String imageUrl = history.getInformationMovie().getImageLink();
-            Picasso.get().load(imageUrl).into(output_image);
+            Glide.with(context)
+                    .load(imageUrl)
+                    .apply(new RequestOptions().placeholder(R.drawable.placeholder_img_load))
+                    .listener(new GlideLoadImgListener(output_image))
+                    .into(output_image);
 
             String tag = history.getInformationMovie().getTag();
             if ("YOUTUBE".equals(tag)) {

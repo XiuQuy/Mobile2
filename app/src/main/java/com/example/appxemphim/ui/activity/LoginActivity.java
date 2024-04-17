@@ -2,14 +2,18 @@ package com.example.appxemphim.ui.activity;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.credentials.Credential;
 import androidx.credentials.CredentialManager;
@@ -189,7 +193,14 @@ public class LoginActivity extends AppCompatActivity {
                         String name = userResponse.getName();
                         String email = userResponse.getEmail();
                         String token = userResponse.getToken();
-
+                        String avatar =  userResponse.getAvatar();
+                        User userDTO = new User();
+                        userDTO.setId(id);
+                        userDTO.setEmail(email);
+                        userDTO.setName(name);
+                        userDTO.setToken(token);
+                        userDTO.setAvatar(avatar);
+                        saveUserInfoLoginSuccess(userDTO);
                         // Hiển thị dialog thông báo đăng nhập thành công và chuyển sang MainActivity
                         showDialogAndNavigateToMain("Đăng nhập thành công", "Chào mừng " + name + " đến với ứng dụng", id, name, email, token);
                     }
@@ -220,10 +231,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // Khi nhấn vào nút "OK", chuyển sang MainActivity và truyền thông tin người dùng
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("userId", id);
-                intent.putExtra("userName", name);
-                intent.putExtra("userEmail", email);
-                intent.putExtra("userToken", token);
                 startActivity(intent);
             }
         });
@@ -342,6 +349,7 @@ public class LoginActivity extends AppCompatActivity {
     public void saveUserInfoLoginSuccess(User user){
         // Lưu thông tin người dùng vào SharedPreferences
         SharedPreferences.Editor editor = getSharedPreferences("UserInfo", MODE_PRIVATE).edit();
+        editor.putInt("userId", user.getId());
         editor.putString("token", user.getToken());
         editor.putString("name", user.getName());
         editor.putString("email", user.getEmail());

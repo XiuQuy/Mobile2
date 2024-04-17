@@ -61,41 +61,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="8dp">
-
-            <!-- Icon -->
-            <ImageView
-                android:id="@+id/image_view_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/netflix_logo_icon"
-                android:layout_gravity="center_vertical"/>
-
-            <!-- Title and Time -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="8dp">
-
-                <!-- Title -->
-                <TextView
-                    android:id="@+id/text_view_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Movie Title"
-                    android:textSize="16sp"/>
-
-                <!-- Time -->
-                <TextView
-                    android:id="@+id/text_view_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Time"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray"/>
-            </LinearLayout>
-        </LinearLayout>
+        </androidx.recyclerview.widget.RecyclerView>
 
     </FrameLayout>
 

@@ -1,7 +1,6 @@
 package com.example.appxemphim.ui.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,21 +9,21 @@ import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
 import com.example.appxemphim.model.InformationMovie;
 import com.example.appxemphim.model.Playlist;
-import com.example.appxemphim.model.Playlist;
 import com.example.appxemphim.model.PlaylistItem;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 
-public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.MyViewHolder> {
+public class PlaylistAdapterPersonal extends RecyclerView.Adapter<PlaylistAdapterPersonal.MyViewHolder> {
     private Context context;
     private List<Playlist> Playlists;
 
-    public PlaylistAdapter(Context context, List<Playlist> Playlists) {
+    public PlaylistAdapterPersonal(Context context, List<Playlist> Playlists) {
         this.context = context;
         this.Playlists = Playlists;
     }
@@ -82,8 +81,11 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.MyView
                         // Lấy đường dẫn hình ảnh từ thông tin phim
                         String imageUrl = informationMovie.getImageLink();
 
-                        // Sử dụng Picasso để tải và hiển thị hình ảnh
-                        Picasso.get().load(imageUrl).into(imageView);
+                        Glide.with(context)
+                                .load(imageUrl)
+                                .apply(new RequestOptions().placeholder(R.drawable.placeholder_img_load))
+                                .listener(new GlideLoadImgListener(imageView))
+                                .into(imageView);
                     }
                 }
             }

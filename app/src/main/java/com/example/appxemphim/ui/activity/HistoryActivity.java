@@ -17,7 +17,7 @@ import com.example.appxemphim.model.History;
 import com.example.appxemphim.model.YoutubeVideoItem;
 import com.example.appxemphim.model.YoutubeVideoResponse;
 import com.example.appxemphim.model.YoutubeVideoSnippet;
-import com.example.appxemphim.ui.adapter.HistoryAdapter;
+import com.example.appxemphim.ui.adapter.HistoryAdapterPersonal;
 import com.example.appxemphim.ui.adapter.ItemSpacingDecoration;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public class HistoryActivity extends AppCompatActivity {
         SubDataHistories subDataHistories =  new SubDataHistories();
         List<History> histories = subDataHistories.initData();
 
-        recyclerView.setAdapter(new HistoryAdapter(HistoryActivity.this, histories));
+        recyclerView.setAdapter(new HistoryAdapterPersonal(HistoryActivity.this, histories));
 
         //fetchData();
 

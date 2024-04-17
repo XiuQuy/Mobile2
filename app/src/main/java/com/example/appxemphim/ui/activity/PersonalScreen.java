@@ -2,6 +2,7 @@ package com.example.appxemphim.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -12,13 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appxemphim.R;
 import com.example.appxemphim.data.remote.HistoryService;
-import com.example.appxemphim.data.remote.PlayListService;
+import com.example.appxemphim.data.remote.PlaylistService;
 import com.example.appxemphim.data.remote.ServiceApiBuilder;
 import com.example.appxemphim.model.History;
 import com.example.appxemphim.model.Playlist;
 import com.example.appxemphim.model.PlaylistItem;
-import com.example.appxemphim.ui.adapter.HistoryAdapter;
-import com.example.appxemphim.ui.adapter.PlaylistAdapter;
+import com.example.appxemphim.ui.adapter.HistoryAdapterPersonal;
+import com.example.appxemphim.ui.adapter.PlaylistAdapterPersonal;
 
 
 import java.util.ArrayList;
@@ -48,10 +49,11 @@ public class PersonalScreen extends AppCompatActivity {
         // Nhận thông tin người dùng từ Intent
         Intent intent = getIntent();
         if (intent != null) {
-            userName = intent.getStringExtra("userName");
-            userEmail = intent.getStringExtra("userEmail");
-            userId = intent.getIntExtra("userId", -1);
-            userToken = intent.getStringExtra("userToken");
+            SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
+            userName = prefs.getString("name", "");
+            userEmail = prefs.getString("email", "");
+            userId = prefs.getInt("userId", -1);
+            userToken = prefs.getString("token", "");
             // Gán tên người dùng vào TextView
             if (userName != null && !userName.isEmpty()) {
                 txtName.setText(userName);
@@ -78,7 +80,7 @@ public class PersonalScreen extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<History> movies = response.body();
                     RecyclerView recyclerView = findViewById(R.id.recycler_view_history);
-                    recyclerView.setAdapter(new HistoryAdapter(PersonalScreen.this, movies));
+                    recyclerView.setAdapter(new HistoryAdapterPersonal(PersonalScreen.this, movies));
                 } else {
                     Toast.makeText(PersonalScreen.this, "Failed to fetch movies", Toast.LENGTH_SHORT).show();
                 }
@@ -97,7 +99,7 @@ public class PersonalScreen extends AppCompatActivity {
     }
 
     private void fetchPlaylists() {
-        PlayListService tmdbApi = ServiceApiBuilder.buildUserApiService(PlayListService.class);
+        PlaylistService tmdbApi = ServiceApiBuilder.buildUserApiService(PlaylistService.class);
 
         Call<List<Playlist>> call = tmdbApi.getPlaylist(5, userId, "Bearer " + userToken);
 
@@ -118,7 +120,7 @@ public class PersonalScreen extends AppCompatActivity {
                                 if (playlistsProcessedSoFar == totalPlaylists) {
                                     // Tất cả các playlist đã được xử lý, vì vậy bạn có thể thiết lập Adapter ngay bây giờ
                                     RecyclerView recyclerView = findViewById(R.id.recycler_view_playlist);
-                                    recyclerView.setAdapter(new PlaylistAdapter(PersonalScreen.this, playlists));
+                                    recyclerView.setAdapter(new PlaylistAdapterPersonal(PersonalScreen.this, playlists));
                                 }
                             }
                         });
@@ -137,7 +139,7 @@ public class PersonalScreen extends AppCompatActivity {
     }
 
     private void fetchPlaylistItems(int watchListId, Playlist playlist, final OnFetchCompletedListener listener) {
-        PlayListService playlistItemService = ServiceApiBuilder.buildUserApiService(PlayListService.class);
+        PlaylistService playlistItemService = ServiceApiBuilder.buildUserApiService(PlaylistService.class);
 
         Call<List<PlaylistItem>> call = playlistItemService.getPlaylistItem(1, watchListId, userId, "Bearer " + userToken);
         call.enqueue(new Callback<List<PlaylistItem>>() {

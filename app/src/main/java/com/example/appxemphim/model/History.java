@@ -5,11 +5,11 @@ import java.time.LocalDateTime;
 public class History {
     private int id;
     private int userId;
-    private LocalDateTime watchedDate;
+    private String watchedDate;
     private int secondsCount;
     private InformationMovie informationMovie;
 
-    public History(int id, int userId, LocalDateTime watchedDate, int secondsCount, InformationMovie informationMovie) {
+    public History(int id, int userId, String watchedDate, int secondsCount, InformationMovie informationMovie) {
         this.id = id;
         this.userId = userId;
         this.watchedDate = watchedDate;
@@ -36,11 +36,11 @@ public class History {
         this.userId = userId;
     }
 
-    public LocalDateTime getWatchedDate() {
+    public String getWatchedDate() {
         return watchedDate;
     }
 
-    public void setWatchedDate(LocalDateTime watchedDate) {
+    public void setWatchedDate(String watchedDate) {
         this.watchedDate = watchedDate;
     }
 

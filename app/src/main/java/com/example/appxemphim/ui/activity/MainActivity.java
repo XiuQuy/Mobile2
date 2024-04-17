@@ -1,6 +1,7 @@
 package com.example.appxemphim.ui.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,10 +49,11 @@ public class MainActivity extends AppCompatActivity {
         // Nhận thông tin người dùng từ Intent
         Intent intent = getIntent();
         if (intent != null) {
-            userName = intent.getStringExtra("userName");
-            userEmail = intent.getStringExtra("userEmail");
-            userId = intent.getIntExtra("userId", -1);
-            userToken = intent.getStringExtra("userToken");
+            SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
+            userName = prefs.getString("name", "");
+            userEmail = prefs.getString("email", "");
+            userId = prefs.getInt("userId", -1);
+            userToken = prefs.getString("token", "");
             // Gán tên người dùng vào TextView
             if (userName != null && !userName.isEmpty()) {
                 txtnavName.setText(userName);
@@ -70,10 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.nav_profile) {
                     // Mở màn hình profile
                     Intent intent = new Intent(MainActivity.this, PersonalScreen.class);
-                    intent.putExtra("userId", userId);
-                    intent.putExtra("userName", userName);
-                    intent.putExtra("userEmail", userEmail);
-                    intent.putExtra("userToken", userToken);
                     startActivity(intent);
                     return true; // Đánh dấu sự kiện đã được xử lý
                 } else if (item.getItemId() == R.id.nav_pass) {
