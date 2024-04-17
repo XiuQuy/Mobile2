@@ -6,4 +6,15 @@
     </style>
 
     <style name="Theme.Appxemphim" parent="Base.Theme.Appxemphim" />
+
+    <style name="Widget.Appxemphim.Chip.Filter" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Appxemphim.Chip.Filter</item>
+    </style>
+    <!-- Disabling elevation overlays because when chip's default background/surface
+         composite are combined with elevation overlays in a highly elevated dialog,
+         the resulting color becomes too light and causes contrast
+         issues. -->
+    <style name="ThemeOverlay.Appxemphim.Chip.Filter" parent="">
+        <item name="elevationOverlayEnabled">false</item>
+    </style>
 </resources>
