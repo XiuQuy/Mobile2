@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:orientation="vertical"
-    tools:context=".MainActivity"
+    tools:context=".ui.activity.MainActivity"
     tools:openDrawer="end">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -51,6 +51,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:src="@drawable/user1" />
+
                 </RelativeLayout>
             </androidx.appcompat.widget.Toolbar>
 
@@ -59,8 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabBackground="@color/black"
-                app:tabIndicator="@color/white"
-                app:tabSelectedTextColor="@color/white"
+                app:tabIndicator="@color/text_color"
+                app:tabSelectedTextColor="@color/text_color"
                 app:tabTextColor="#989696">
 
                 <com.google.android.material.tabs.TabItem

@@ -199,5 +199,4 @@ public class MovieDetailActivity extends AppCompatActivity {
         });
     }
 
-
 }
