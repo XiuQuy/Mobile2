@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.LoginActivity"
     android:orientation="vertical"
     android:background="@color/text_color"
     android:padding="20dp"
@@ -56,7 +55,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/user"
+                android:hint="@string/email"
                 android:fontFamily="@font/antic"/>
 
         </com.google.android.material.textfield.TextInputLayout>
