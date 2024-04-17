@@ -6,6 +6,15 @@ public class User {
     private String token;
     private String avatar;
     private String email;
+    private String tagSocialNetwork;
+
+    public String getTagSocialNetwork() {
+        return tagSocialNetwork;
+    }
+
+    public void setTagSocialNetwork(String tagSocialNetwork) {
+        this.tagSocialNetwork = tagSocialNetwork;
+    }
 
     public int getId() {
         return id;

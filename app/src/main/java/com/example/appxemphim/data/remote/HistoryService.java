@@ -10,7 +10,6 @@ import retrofit2.http.Header;
 import retrofit2.http.Path;
 
 public interface HistoryService {
-
     @GET("api/History/{limit}/{userId}")
     Call<List<History>> getHistory(
             @Path("limit") int limit,
@@ -21,6 +20,5 @@ public interface HistoryService {
     Call<List<History>> getAllHistory(
             @Path("userId") int userId,
             @Header("Authorization") String token);
-
 
 }

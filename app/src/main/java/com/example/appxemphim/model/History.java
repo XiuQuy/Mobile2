@@ -1,17 +1,32 @@
 package com.example.appxemphim.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class History {
-    private int Id;
+    private int id;
     private int userId;
-    private String watchedDate;
+    private LocalDateTime watchedDate;
     private int secondsCount;
     private InformationMovie informationMovie;
 
-    public int getId() {return Id;}
+    public History(int id, int userId, LocalDateTime watchedDate, int secondsCount, InformationMovie informationMovie) {
+        this.id = id;
+        this.userId = userId;
+        this.watchedDate = watchedDate;
+        this.secondsCount = secondsCount;
+        this.informationMovie = informationMovie;
+    }
 
-    public void setId(int id) {Id = id;}
+    public History() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getUserId() {
         return userId;
@@ -21,11 +36,11 @@ public class History {
         this.userId = userId;
     }
 
-    public String getWatchedDate() {
+    public LocalDateTime getWatchedDate() {
         return watchedDate;
     }
 
-    public void setWatchedDate(String watchedDate) {
+    public void setWatchedDate(LocalDateTime watchedDate) {
         this.watchedDate = watchedDate;
     }
 
@@ -42,16 +57,6 @@ public class History {
     }
 
     public void setInformationMovie(InformationMovie informationMovie) {
-        this.informationMovie = informationMovie;
-    }
-
-    // Constructors, toString, hashCode, equals methods can be added as needed
-
-    public History(int Id, int userId, String watchedDate, int secondsCount, InformationMovie informationMovie) {
-        this.Id = Id;
-        this.userId = userId;
-        this.watchedDate = watchedDate;
-        this.secondsCount = secondsCount;
         this.informationMovie = informationMovie;
     }
 }

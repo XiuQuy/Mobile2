@@ -18,4 +18,9 @@ public interface UserService {
     @POST("api/User/register")
     Call<UserResponse> register(
             @Body UserRegister user);
+
+    @POST("api/User/login-google")
+    Call<User> checkLoginGoogle(@Body String googleIdToken);
+
+    @POST("api/User/login-facebook")
 }

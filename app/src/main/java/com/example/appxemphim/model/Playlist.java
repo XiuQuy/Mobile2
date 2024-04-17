@@ -48,7 +48,6 @@ public class Playlist {
     public void setItemCount(int itemCount) {
         this.itemCount = itemCount;
     }
-
     public List<PlaylistItem> getPlaylistItems() {
         return playlistItems;
     }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
@@ -30,9 +31,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="16dp"
-            android:text="History"
-            android:textColor="@color/white"
-            android:textSize="20sp"
+            android:text="Lịch sử xem"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_title_activity"
             android:textStyle="bold" />
 
         <!-- Menu -->
@@ -52,11 +53,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-        android:background="@color/white">
+        android:background="@color/text_color">
 
-        <!-- Đặt code hiển thị lịch sử xem phim ở đây -->
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view_histories_atv_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -95,8 +95,6 @@
                     android:textSize="14sp"
                     android:textColor="@android:color/darker_gray"/>
             </LinearLayout>
-
-
         </LinearLayout>
 
     </FrameLayout>
