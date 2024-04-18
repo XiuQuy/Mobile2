@@ -24,7 +24,7 @@ public class AccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.account_info);
+        setContentView(R.layout.activity_personal);
 
         // Nhận thông tin tài khoản từ Intent hoặc SharedPreferences hoặc bất kỳ nguồn dữ liệu nào khác
         String username = "MaiAnh";
