@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.appxemphim.R;
 
 
-public class AccountActivity extends AppCompatActivity {
+public class PersonalScreen extends AppCompatActivity {
     private TextView textViewUsername;
 
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -24,7 +24,7 @@ public class AccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.account_info);
+        setContentView(R.layout.activity_personal);
 
         // Nhận thông tin tài khoản từ Intent hoặc SharedPreferences hoặc bất kỳ nguồn dữ liệu nào khác
         String username = "MaiAnh";
@@ -56,7 +56,7 @@ public class AccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Thực hiện chuyển sang màn hình đổi mật khẩu
-                Intent intent = new Intent(AccountActivity.this, ChangePasswordActivity.class);
+                Intent intent = new Intent(PersonalScreen.this, ChangePasswordActivity.class);
                 intent.putExtra("temp_password", password);
                 startActivity(intent);
             }
@@ -68,7 +68,7 @@ public class AccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Thực hiện chuyển sang màn hình đổi tên
-                Intent intent = new Intent(AccountActivity.this, ChangeNameActivity.class);
+                Intent intent = new Intent(PersonalScreen.this, ChangeNameActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_CHANGE_NAME);
 
             }
@@ -97,7 +97,7 @@ public class AccountActivity extends AppCompatActivity {
             // Hiển thị hình ảnh đã chọn lên ImageView
             ImageView imageViewAvatar = findViewById(R.id.imageViewAvatar);
             imageViewAvatar.setImageURI(uri);
-            Toast.makeText(AccountActivity.this, "Đã thay đổi hình ảnh thành công", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PersonalScreen.this, "Đã thay đổi hình ảnh thành công", Toast.LENGTH_SHORT).show();
         }
 
         if (requestCode == REQUEST_CODE_CHANGE_NAME && resultCode == Activity.RESULT_OK && data != null) {
