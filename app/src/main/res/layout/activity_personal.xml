@@ -214,5 +214,4 @@
             android:textColor="@color/text_color" />
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

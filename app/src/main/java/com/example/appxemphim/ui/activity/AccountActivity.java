@@ -24,7 +24,7 @@ public class PersonalScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personal);
+        setContentView(R.layout.account_info);
 
         // Nhận thông tin tài khoản SharedPreferences
         SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
@@ -55,12 +55,7 @@ public class PersonalScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Thực hiện chuyển sang màn hình đổi mật khẩu
-<<<<<<<< HEAD:app/src/main/java/com/example/appxemphim/ui/activity/PersonalScreen.java
-                Intent intent = new Intent(PersonalScreen.this, ChangePasswordActivity.class);
-                intent.putExtra("temp_password", password);
-========
                 Intent intent = new Intent(AccountActivity.this, ChangePasswordActivity.class);
->>>>>>>> 012d7284eff6dd08ec37a8b7572b7b915a8021bf:app/src/main/java/com/example/appxemphim/ui/activity/AccountActivity.java
                 startActivity(intent);
             }
         });
@@ -110,9 +105,4 @@ public class PersonalScreen extends AppCompatActivity {
             }
         }
     }
-
-
-
-
-
 }
