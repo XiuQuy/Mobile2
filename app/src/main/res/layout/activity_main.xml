@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:orientation="vertical"
-    tools:context=".MainActivity"
+    tools:context=".ui.activity.MainActivity"
     tools:openDrawer="end">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -51,6 +51,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:src="@drawable/user1" />
+
                 </RelativeLayout>
             </androidx.appcompat.widget.Toolbar>
 
@@ -59,21 +60,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabBackground="@color/black"
-                app:tabIndicator="@color/white"
-                app:tabSelectedTextColor="@color/white"
+                app:tabIndicator="@color/text_color"
+                app:tabSelectedTextColor="@color/text_color"
                 app:tabTextColor="#989696">
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tabHome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Home"/>
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tabTVShow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TV Show" />
 
                 <com.google.android.material.tabs.TabItem
                     android:id="@+id/tabMovie"
@@ -82,10 +71,11 @@
                     android:text="Movies" />
 
                 <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tabKid"
+                    android:id="@+id/tabTVShow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kids" />
+                    android:text="TV Series" />
+
             </com.google.android.material.tabs.TabLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -94,36 +84,10 @@
             android:layout_height="match_parent"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_allcate"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp">
-
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/bannerViewPager"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tab_indicator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerInParent="true"
-                        android:background="@android:color/transparent"
-                        app:tabBackground="@drawable/indicator_seleect"
-                        app:tabIndicatorHeight="0dp" />
-                </RelativeLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_allcate"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
+                android:layout_height="match_parent" />
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

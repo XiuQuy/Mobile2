@@ -10,9 +10,9 @@
             android:icon="@drawable/ic_baseline_history_24"
             android:title="@string/nav_his"/>
         <item
-            android:id="@+id/nav_fav"
+            android:id="@+id/nav_playlist"
             android:icon="@drawable/ic_baseline_favorite_24"
-            android:title="@string/nav_fav" />
+            android:title="@string/nav_playlist" />
 
     </group>
 
