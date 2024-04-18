@@ -13,7 +13,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-public interface PlayListService {
+public interface PlaylistService {
     @GET("api/WatchList/{limit}/{userId}")
     Call<List<Playlist>> getPlaylist(
             @Path("limit") int limit,
