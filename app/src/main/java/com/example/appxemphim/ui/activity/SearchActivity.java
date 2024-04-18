@@ -2,7 +2,6 @@ package com.example.appxemphim.ui.activity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -21,9 +20,9 @@ import com.example.appxemphim.data.remote.TMDBService;
 import com.example.appxemphim.model.FilterSearch;
 import com.example.appxemphim.model.Movie;
 import com.example.appxemphim.model.TMDBSearchMovieResponse;
-import com.example.appxemphim.model.TMDBSearchMovieResult;
+import com.example.appxemphim.model.TMDBMovieResult;
 import com.example.appxemphim.model.TMDBSearchTVResponse;
-import com.example.appxemphim.model.TMDBSearchTVResult;
+import com.example.appxemphim.model.TMDBTVResult;
 import com.example.appxemphim.ui.adapter.SearchAdapterActivitySearch;
 import com.example.appxemphim.ui.fragment.PopupAddToPlayListFragment;
 import com.example.appxemphim.ui.fragment.RightFilterFragmentSearchActivity;
@@ -166,7 +165,7 @@ public class SearchActivity extends AppCompatActivity implements RightFilterFrag
                 if (response.isSuccessful() && response.body() != null) {
                     TMDBSearchMovieResponse searchMovieResponse = response.body();
                     searchViewModel.setSearchMovieNoData(searchMovieResponse.getTotalPages() <= searchMovieResponse.getPage());
-                    for(Movie movie : TMDBSearchMovieResult.toListMovie(searchMovieResponse.getResults())){
+                    for(Movie movie : TMDBMovieResult.toListMovie(searchMovieResponse.getResults())){
                         addMovieToRecycleView(movie);
                     }
                 } else {
@@ -193,7 +192,7 @@ public class SearchActivity extends AppCompatActivity implements RightFilterFrag
                 if (response.isSuccessful() && response.body() != null) {
                     TMDBSearchTVResponse searchTVResponse = response.body();
                     searchViewModel.setSearchTVNoData(searchTVResponse.getTotalPages() <= searchTVResponse.getPage());
-                    for(Movie movie : TMDBSearchTVResult.toListMovie(searchTVResponse.getResults())){
+                    for(Movie movie : TMDBTVResult.toListMovie(searchTVResponse.getResults())){
                         addMovieToRecycleView(movie);
                     }
                 } else {

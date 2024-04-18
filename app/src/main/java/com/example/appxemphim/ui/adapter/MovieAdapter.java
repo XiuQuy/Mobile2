@@ -93,10 +93,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         // Phương thức này được gọi để gắn dữ liệu của một đối tượng Movie vào ViewHolder
         public void bind(Movie movie) {
-            title.setText(movie.getTitle()); // Gắn tiêu đề của phim
+            title.setText(movie.getName()); // Gắn tiêu đề của phim
             // Sử dụng thư viện Glide để tải và hiển thị hình ảnh của phim từ URL
             Glide.with(itemView.getContext())
-                    .load("http://image.tmdb.org/t/p/w500" + movie.getPosterPath())
+                    .load(movie.getPosterPath())
                     .into(poster);
         }
     }

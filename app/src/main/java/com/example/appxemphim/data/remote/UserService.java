@@ -1,5 +1,7 @@
 package com.example.appxemphim.data.remote;
 
+import com.example.appxemphim.model.ChangeInfoUserDTO;
+import com.example.appxemphim.model.ChangePasswordDTO;
 import com.example.appxemphim.model.User;
 import com.example.appxemphim.model.UserLogin;
 import com.example.appxemphim.model.UserRegister;
@@ -25,4 +27,12 @@ public interface UserService {
 
     @POST("api/User/login-facebook")
     Call<User> checkLoginFacebook(@Body String firebaseAuthenFbIdToken);
+
+    @POST("api/User/change-password")
+    Call<Void> changePassword(@Body ChangePasswordDTO changePasswordDTO,
+                                @Header("Authorization") String token);
+
+    @POST("api/User/change-info")
+    Call<User> changeName(@Body ChangeInfoUserDTO changeInfoUserDTO,
+                                @Header("Authorization") String token);
 }

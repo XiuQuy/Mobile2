@@ -3,8 +3,6 @@
     <string-array name="simple_items">
         <item>Tiếng Việt</item>
         <item>English</item>
-        <item>Chinese</item>
-        <item>Japanese</item>
         <!-- Thêm các mục khác nếu cần -->
     </string-array>
 </resources>

@@ -9,13 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appxemphim.R;
+import com.example.appxemphim.data.remote.ServiceApiBuilder;
 import com.example.appxemphim.data.remote.TMDbApi;
+import com.example.appxemphim.model.ChangePasswordDTO;
 import com.example.appxemphim.model.Movie;
 import com.example.appxemphim.model.MovieResponse;
+import com.example.appxemphim.model.TMDBMovieResult;
 import com.example.appxemphim.ui.adapter.MovieAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,16 +50,12 @@ import org.w3c.dom.Text;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
-    // Khai báo biến để lưu thông tin người dùng
     private int userId;
     private String userName;
     private String userEmail;
     private String userToken;
-    private static final String API_KEY = "9a169454f96888fb8284d35eb3042308";
-
     private RecyclerView recyclerView;
     private MovieAdapter adapter;
-
     private NavigationView navigationView;
 
     @Override
@@ -76,9 +76,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new MovieAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Movie movie) {
-                Intent intent = new Intent(MainActivity.this, MovieDetailActivity.class);
-                intent.putExtra("MOVIE", movie);
-                startActivity(intent);
+
             }
         });
       
@@ -119,13 +117,23 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     return true; // Đánh dấu sự kiện đã được xử lý
                 } else if (item.getItemId() == R.id.nav_pass) {
-                    // Hiển thị Toast cho mục nav_pass
-                    Toast.makeText(MainActivity.this, "Navigation Pass Item Clicked", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, ChangePasswordActivity.class);
+                    startActivity(intent);
+                    return true;
+                }else if (item.getItemId() == R.id.nav_logout) {
+                    SharedPreferences.Editor editor = getSharedPreferences("UserInfo", MODE_PRIVATE).edit();
+                    editor.clear();
+                    editor.apply();
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                    return true; // Đánh dấu sự kiện đã được xử lý
+                }else if (item.getItemId() == R.id.nav_setting) {
+                    Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                    startActivity(intent);
                     return true; // Đánh dấu sự kiện đã được xử lý
                 }
-
                 // Thêm các trường hợp khác nếu cần
-
                 return false; // Trả về false để đánh dấu sự kiện chưa được xử lý
             }
         });
@@ -151,13 +159,13 @@ public class MainActivity extends AppCompatActivity {
 
         TMDbApi tmdbApi = retrofit.create(TMDbApi.class);
 
-        Call<MovieResponse> call = tmdbApi.getPopularMovies(API_KEY);
+        Call<MovieResponse> call = tmdbApi.getPopularMovies(ServiceApiBuilder.API_KEY_TMDB);
         call.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<Movie> movies = response.body().getResults();
-                    adapter.setMovies(movies);
+                    List<TMDBMovieResult> movies = response.body().getResults();
+                    adapter.setMovies(TMDBMovieResult.toListMovie(movies));
                 } else {
                     Toast.makeText(MainActivity.this, "Failed to fetch movies", Toast.LENGTH_SHORT).show();
                 }
