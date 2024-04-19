@@ -17,4 +17,20 @@ public class PlaylistModel extends ViewModel {
     public void setListPlaylist(List<Playlist> listPlaylist) {
         this.listPlaylist = listPlaylist;
     }
+
+    public void  addAPlaylist(Playlist playlist){
+        listPlaylist.add(0, playlist);
+    }
+
+    public void moveToTop(Integer id) {
+        for (int i = 0; i < listPlaylist.size(); i++) {
+            Playlist playlist = listPlaylist.get(i);
+            if (playlist.getId() == id) {
+                listPlaylist.remove(i);
+                listPlaylist.add(0, playlist);
+                break;
+            }
+        }
+    }
+
 }
