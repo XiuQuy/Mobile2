@@ -5,6 +5,9 @@
       <entry key="AccountActivity">
         <State />
       </entry>
+      <entry key="MovieDetailActivity">
+        <State />
+      </entry>
       <entry key="SearchActivity">
         <State>
           <runningDeviceTargetSelectedWithDropDown>
@@ -21,7 +24,7 @@
           <timeTargetWasSelectedWithDropDown value="2024-04-19T10:21:31.621071300Z" />
         </State>
       </entry>
-      <entry key="Unnamed">
+      <entry key="app">
         <State />
       </entry>
     </value>

@@ -1,6 +1,7 @@
 package com.example.appxemphim.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
 import com.example.appxemphim.model.Movie;
+import com.example.appxemphim.ui.activity.MainActivity;
+import com.example.appxemphim.ui.activity.MovieDetailActivity;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -45,13 +48,11 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Movie movie = listMovies.get(position);
         holder.bind(movie);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Intent intent =  new Intent(context, MovieDetailActivity.class);
-                //context.startActivity(intent);
-                Log.i("ITEM RECYCLER VIEW", "click view detail");
-            }
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent =  new Intent(context, MovieDetailActivity.class);
+            intent.putExtra("movieId", String.valueOf(movie.getId()));
+            intent.putExtra("tag", movie.getTag());
+            context.startActivity(intent);
         });
         holder.btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,5 +1,6 @@
 package com.example.appxemphim.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -33,6 +34,7 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,10 +51,22 @@ public class MovieDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String tag = "movi";
+
+        String tag = "TMDB_MOVIE";
         int movieId = 76479;
-        String apiKey = "64d0aa770962667c44935e02b31da40f";
-        if (tag.equals("movie")) {
+
+        // Nhận Intent
+        Intent intent = getIntent();
+        // Nhận dữ liệu từ Intent
+        if (intent != null) {
+            tag = intent.getStringExtra("tag");
+            movieId = Integer.parseInt(Objects.requireNonNull(intent.getStringExtra("movieId")));
+        }else{
+            finish();
+        }
+
+        String apiKey = ServiceApiBuilder.API_KEY_TMDB;
+        if (tag.equals("TMDB_MOVIE")) {
         setContentView(R.layout.activity_movie_detail);
         txtNameMovie = findViewById(R.id.txtNameMovie);
         imgDetail = findViewById(R.id.imgDetail);
