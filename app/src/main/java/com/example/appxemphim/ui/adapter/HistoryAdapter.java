@@ -71,6 +71,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
         public void bind(History history) {
             output_title.setText(history.getInformationMovie().getTitle());
             output_tag.setText(history.getInformationMovie().getTag());
+
+
             // Load image using Picasso or any other image loading library
             String imageUrl = history.getInformationMovie().getImageLink();
             Picasso.get().load(imageUrl).into(output_image);

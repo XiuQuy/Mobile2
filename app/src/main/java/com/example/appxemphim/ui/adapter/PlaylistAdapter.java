@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.appxemphim.R;
 import com.example.appxemphim.model.InformationMovie;
 import com.example.appxemphim.model.Playlist;
-import com.example.appxemphim.model.Playlist;
 import com.example.appxemphim.model.PlaylistItem;
 import com.squareup.picasso.Picasso;
 
@@ -28,7 +27,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.MyView
         this.context = context;
         this.Playlists = Playlists;
     }
-
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -3,15 +3,15 @@ package com.example.appxemphim.model;
 import java.util.Date;
 
 public class History {
-    private int Id;
+    private int id;
     private int userId;
     private String watchedDate;
     private int secondsCount;
     private InformationMovie informationMovie;
 
-    public int getId() {return Id;}
+    public int getId() {return id;}
 
-    public void setId(int id) {Id = id;}
+    public void setId(int id) {id = id;}
 
     public int getUserId() {
         return userId;
@@ -48,7 +48,7 @@ public class History {
     // Constructors, toString, hashCode, equals methods can be added as needed
 
     public History(int Id, int userId, String watchedDate, int secondsCount, InformationMovie informationMovie) {
-        this.Id = Id;
+        this.id = Id;
         this.userId = userId;
         this.watchedDate = watchedDate;
         this.secondsCount = secondsCount;

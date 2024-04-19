@@ -79,6 +79,7 @@
                 tools:ignore="Suspicious0dp" />
 
             <Button
+                android:id="@+id/btnSeeMoreHistory"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
@@ -137,6 +138,7 @@
                 tools:ignore="Suspicious0dp" />
 
             <Button
+                android:id="@+id/btnSeeMorePlaylist"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"

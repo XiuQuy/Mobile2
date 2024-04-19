@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,16 +63,49 @@ public class PersonalScreen extends AppCompatActivity {
             }
         }
 
+        Button btnSeeMorePlaylist = findViewById(R.id.btnSeeMorePlaylist);
+        btnSeeMorePlaylist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Điều hướng người dùng đến màn hình đăng ký
+                Intent intent = new Intent(PersonalScreen.this, PlaylistActivity.class);
+                intent.putExtra("userId", userId);
+                intent.putExtra("userName", userName);
+                intent.putExtra("userEmail", userEmail);
+                intent.putExtra("userToken", userToken);
+                startActivity(intent);
+            }
+        });
+
+        Button btnSeeMoreHistory = findViewById(R.id.btnSeeMoreHistory);
+        btnSeeMoreHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Điều hướng người dùng đến màn hình đăng ký
+                Intent intent = new Intent(PersonalScreen.this, HistoryActivity.class);
+                intent.putExtra("userId", userId);
+                intent.putExtra("userName", userName);
+                intent.putExtra("userEmail", userEmail);
+                intent.putExtra("userToken", userToken);
+                startActivity(intent);
+            }
+        });
+
         fetchHistories();
         fetchPlaylists();
     }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Gọi fetch() khi activity quay lại trạng thái active
+        fetchHistories();
+        fetchPlaylists();
+    }
     private void fetchHistories() {
 
         HistoryService tmdbApi = ServiceApiBuilder.buildUserApiService(HistoryService.class);
 
-        Call<List<History>> call = tmdbApi.getHistory(5, userId, "Bearer " + userToken);
-
+        Call<List<History>> call = tmdbApi.getNewestHistory(5, userId, "Bearer " + userToken);
 
         call.enqueue(new Callback<List<History>>() {
             @Override
@@ -100,7 +135,6 @@ public class PersonalScreen extends AppCompatActivity {
         PlayListService tmdbApi = ServiceApiBuilder.buildUserApiService(PlayListService.class);
 
         Call<List<Playlist>> call = tmdbApi.getPlaylist(5, userId, "Bearer " + userToken);
-
 
         call.enqueue(new Callback<List<Playlist>>() {
             @Override
