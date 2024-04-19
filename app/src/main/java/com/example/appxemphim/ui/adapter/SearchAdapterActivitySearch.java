@@ -28,12 +28,12 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
 
     private Context context;
     private List<Movie> listMovies;
-    private PopupPlaylist popupPlaylist;
+    private IPopupPlaylist iPopupPlaylist;
 
-    public SearchAdapterActivitySearch(Context context, PopupPlaylist popupPlaylist){
+    public SearchAdapterActivitySearch(Context context, IPopupPlaylist iPopupPlaylist){
         this.context = context;
         listMovies = new ArrayList<>();
-        this.popupPlaylist = popupPlaylist;
+        this.iPopupPlaylist = iPopupPlaylist;
     }
 
     @Override
@@ -134,7 +134,7 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
         popupMenu.setOnMenuItemClickListener(item -> {
             int idItem = item.getItemId();
             if(idItem == R.id.item_search_add_to_playlist_option){
-                popupPlaylist.showPopupAddToPlaylist(movie);
+                iPopupPlaylist.showPopupAddToPlaylist(movie);
                 Log.i("ITEM RECYCLER VIEW", "click add playlist option");
                 return true;
             }else if(idItem == R.id.item_search_view_detail_option){
@@ -148,7 +148,7 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
         popupMenu.show();
     }
 
-    public interface PopupPlaylist{
+    public interface IPopupPlaylist {
         void showPopupAddToPlaylist(Movie movie);
     }
 }

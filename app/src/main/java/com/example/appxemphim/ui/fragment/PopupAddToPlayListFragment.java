@@ -1,5 +1,6 @@
 package com.example.appxemphim.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,6 +22,7 @@ import com.example.appxemphim.data.remote.ServiceApiBuilder;
 import com.example.appxemphim.model.InformationMovie;
 import com.example.appxemphim.model.Movie;
 import com.example.appxemphim.model.Playlist;
+import com.example.appxemphim.model.PlaylistItem;
 import com.example.appxemphim.ui.viewmodel.PlaylistModel;
 
 import java.util.ArrayList;
@@ -37,9 +40,16 @@ public class PopupAddToPlayListFragment extends DialogFragment {
     LinearLayout containerPlaylist;
     List<Integer> inPlaylistBegin;
     List<Integer> inPlaylistEnd;
+    IPopupAddToPlaylistSendListener iPopupAddToPlaylistSendListener;
 
     public PopupAddToPlayListFragment(Movie movie) {
         this.movie = movie;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        iPopupAddToPlaylistSendListener = (IPopupAddToPlaylistSendListener) context;
     }
 
     @Nullable
@@ -58,8 +68,9 @@ public class PopupAddToPlayListFragment extends DialogFragment {
     }
 
     private void initContent() {
+        //Init content
         rootView.setFocusable(true);
-        playlistModel = new ViewModelProvider(this).get(PlaylistModel.class);
+        playlistModel = new ViewModelProvider(requireActivity()).get(PlaylistModel.class);
         containerPlaylist = rootView.findViewById(R.id.container_checkbox_playlist);
 
         //Check movie in all playlist
@@ -91,31 +102,33 @@ public class PopupAddToPlayListFragment extends DialogFragment {
         call.enqueue(new Callback<List<Integer>>() {
             @Override
             public void onResponse(Call<List<Integer>> call, Response<List<Integer>> response) {
-                containerPlaylist.removeAllViews();
-                assert response.body() != null;
-                inPlaylistBegin = new ArrayList<>(response.body());
-                inPlaylistEnd = response.body();
-                List<Playlist> playlists = playlistModel.getListPlaylist();
-                ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150);
-                for (Playlist playlist : playlists) {
-                    CheckBox checkBox = new CheckBox(requireContext());
-                    checkBox.setText(playlist.getTitle());
-                    if(response.body() != null && response.body().contains(playlist.getId())){
-                        checkBox.setChecked(true);
-                    }
-                    checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                        if (isChecked) {
-                            // Thêm vào kết quả
-                            inPlaylistEnd.add(playlist.getId());
-                            Log.i("CHECK", String.valueOf(playlist.getId()));
-                        } else {
-                            //Xoa khoi kết quả
-                            inPlaylistEnd.remove(Integer.valueOf(playlist.getId()));
-                            Log.i("UNCHECK", String.valueOf(playlist.getId()));
+                try {
+                    containerPlaylist.removeAllViews();
+                    assert response.body() != null;
+                    inPlaylistBegin = new ArrayList<>(response.body());
+                    inPlaylistEnd = response.body();
+                    List<Playlist> playlists = playlistModel.getListPlaylist();
+                    ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150);
+                    for (Playlist playlist : playlists) {
+                        CheckBox checkBox = new CheckBox(requireContext());
+                        checkBox.setText(playlist.getTitle());
+                        if (response.body() != null && response.body().contains(playlist.getId())) {
+                            checkBox.setChecked(true);
                         }
-                    });
-                    containerPlaylist.addView(checkBox, layoutParams);
-                }
+                        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                            if (isChecked) {
+                                // Thêm vào kết quả
+                                inPlaylistEnd.add(playlist.getId());
+                                Log.i("CHECK", String.valueOf(playlist.getId()));
+                            } else {
+                                //Xoa khoi kết quả
+                                inPlaylistEnd.remove(Integer.valueOf(playlist.getId()));
+                                Log.i("UNCHECK", String.valueOf(playlist.getId()));
+                            }
+                        });
+                        containerPlaylist.addView(checkBox, layoutParams);
+                    }
+                }catch (Exception ignored){}
             }
             @Override
             public void onFailure(Call<List<Integer>> call, Throwable t) {
@@ -127,20 +140,28 @@ public class PopupAddToPlayListFragment extends DialogFragment {
     // Ham xu ly add hay remove movie trong cac playlist
     private void handleFinishAddToPlaylist(){
        try {
-           List<Integer> listAdd = new ArrayList<>(inPlaylistEnd);
+           ArrayList<Integer> listAdd = new ArrayList<>(inPlaylistEnd);
            listAdd.removeAll(inPlaylistBegin);
-           List<Integer> listRemove =  new ArrayList<>(inPlaylistBegin);
+           ArrayList<Integer> listRemove =  new ArrayList<>(inPlaylistBegin);
            listRemove.removeAll(inPlaylistEnd);
+           InformationMovie informationMovie = new InformationMovie();
+           informationMovie.setMovieId(String.valueOf(movie.getId()));
+           informationMovie.setTag(movie.getTag());
+           informationMovie.setImageLink(movie.getPosterPath());
+           informationMovie.setTitle(movie.getName());
            if(!listAdd.isEmpty()){
-               for (Integer i: listAdd) {
-                   Log.i("LIST_ADD", String.valueOf(i));
+               for (Integer playlistId: listAdd) {
+                   playlistModel.moveToTop(playlistId);
                }
            }
-           if(!listRemove.isEmpty()){
-               for (Integer i: listRemove) {
-                   Log.i("LIST_REMOVE", String.valueOf(i));
-               }
-           }
+           //Load background
+           iPopupAddToPlaylistSendListener.whenPopupAddToPlaylistDismiss(listAdd, listRemove, informationMovie);
        }catch (Exception ignored){}
+    }
+
+    //interface send listener
+    public interface IPopupAddToPlaylistSendListener{
+        void whenPopupAddToPlaylistDismiss(ArrayList<Integer> listAdd, ArrayList<Integer> listRemove,
+                                           InformationMovie informationMovie);
     }
 }

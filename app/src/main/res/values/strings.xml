@@ -61,10 +61,15 @@
     <string name="add_to_playlist">Add to playlist</string>
     <string name="view_detail">View detail</string>
     <string name="horizontal_3dots">⋮</string>
-    <string name="add_to_new_playlist">Add to new playlist</string>
     <string name="finish">Finish</string>
     <string name="cancel">Cancel</string>
     <string name="add">Add</string>
     <string name="new_playlist_name">New playlist name</string>
     <string name="new_playlist">New playlist</string>
+    <string name="add_to">Add to</string>
+    <string name="successfully">successfully</string>
+    <string name="failure">failure</string>
+    <string name="remove_from">Remove from</string>
+    <string name="message_have_some_error">Some errors, please try again later!</string>
+    <string name="add_to_playlist_successfully">Add to playlist successfully</string>
 </resources>

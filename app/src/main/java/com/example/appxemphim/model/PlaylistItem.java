@@ -5,6 +5,9 @@ public class PlaylistItem {
     private int watchListId;
     private InformationMovie informationMovie;
 
+    public PlaylistItem() {
+    }
+
     public PlaylistItem(int id, int watchListId, InformationMovie informationMovie) {
         this.id = id;
         this.watchListId = watchListId;

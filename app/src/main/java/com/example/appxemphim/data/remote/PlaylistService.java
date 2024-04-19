@@ -3,6 +3,7 @@ package com.example.appxemphim.data.remote;
 import com.example.appxemphim.model.InformationMovie;
 import com.example.appxemphim.model.Playlist;
 import com.example.appxemphim.model.PlaylistItem;
+import com.example.appxemphim.model.PlaylistWithOneItemDTO;
 
 import java.util.List;
 
@@ -34,8 +35,13 @@ public interface PlaylistService {
             @Header("Authorization") String token);
 
     @POST("api/WatchList/add-to-new-watchlist")
-    Call<List<Integer>> addWithOneItem(
+    Call<Playlist> addWithOneItem(
             @Header("Authorization") String token,
-            @Body InformationMovie informationMovie
+            @Body PlaylistWithOneItemDTO playlistWithOneItemDTO
     );
+
+    @GET("api/WatchList/all/{userId}")
+    Call<List<Playlist>> getPlaylist(
+            @Path("userId") int userId,
+            @Header("Authorization") String token);
 }
