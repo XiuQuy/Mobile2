@@ -61,4 +61,6 @@ dependencies {
     implementation("com.facebook.android:facebook-android-sdk:latest.release")
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
     implementation("com.google.firebase:firebase-auth")
+    implementation("com.squareup.picasso:picasso:2.71828")
+    implementation("me.zhanghai.android.materialratingbar:library:1.4.0")
 }
