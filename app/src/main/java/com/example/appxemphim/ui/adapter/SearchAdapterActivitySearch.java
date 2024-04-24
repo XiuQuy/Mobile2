@@ -139,8 +139,10 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
                 Log.i("ITEM RECYCLER VIEW", "click add playlist option");
                 return true;
             }else if(idItem == R.id.item_search_view_detail_option){
-                //Intent intent =  new Intent(context, MovieDetailActivity.class);
-                //context.startActivity(intent);
+                Intent intent =  new Intent(context, MovieDetailActivity.class);
+                intent.putExtra("movieId", String.valueOf(movie.getId()));
+                intent.putExtra("tag", movie.getTag());
+                context.startActivity(intent);
                 Log.i("ITEM MENU RECYCLER VIEW", "click view detail");
                 return true;
             }

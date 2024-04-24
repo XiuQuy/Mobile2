@@ -4,8 +4,10 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,14 +47,19 @@ public class PlayListItemActivity extends AppCompatActivity implements PlayListI
 
         Intent intent = getIntent();
         if (intent != null) {
-            userName = intent.getStringExtra("userName");
-            userEmail = intent.getStringExtra("userEmail");
-            userId = intent.getIntExtra("userId", -1);
-            userToken = intent.getStringExtra("userToken");
+            SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
+            userName = prefs.getString("name", "");
+            userEmail = prefs.getString("email", "");
+            userId = prefs.getInt("userId", -1);
+            userToken = prefs.getString("token", "");
             playlistId = getIntent().getIntExtra("playlistId", -1);
         }
 
         fetchPlayListItem();
+        ImageView btnBack = findViewById(R.id.back_button);
+        btnBack.setOnClickListener(v -> {
+            finish();
+        });
     }
 
 

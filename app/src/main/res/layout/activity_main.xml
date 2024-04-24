@@ -18,8 +18,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Light">
+            android:fitsSystemWindows="true">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar_main"
@@ -33,22 +32,27 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/imageView"
+                        android:layout_width="35dp"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/netflix_logo_icon" />
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/icon_logo_new" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/icons8_netflix_48px" />
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/search_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/imgAvatar"
+                        android:layout_toEndOf="@+id/imageView"
+                        android:layoutDirection="rtl" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/imgAvatar"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginTop="10dp"
+                        android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"
                         android:src="@drawable/user1" />
 
