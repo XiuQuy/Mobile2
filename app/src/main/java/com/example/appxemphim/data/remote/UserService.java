@@ -25,4 +25,14 @@ public interface UserService {
 
     @POST("api/User/login-facebook")
     Call<User> checkLoginFacebook(@Body String firebaseAuthenFbIdToken);
+
+    @POST("api/User/forgot-password-request")
+    Call<Void> forgotPasswordRequest(@Body ForgotDTO forgotDTO);
+
+    @POST("api/User/forgot-password-checkcode")
+    Call<Void> forgotPasswordCheckCode(@Body ForgotDTO forgotDTO);
+
+
+    @POST("api/User/forgot-password-change")
+    Call<Void> forgotPasswordChange(@Body ForgotDTO forgotDTO);
 }
