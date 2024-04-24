@@ -27,6 +27,7 @@
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.PersonalScreen" />
+        <activity android:name=".ui.activity.PlayListItemActivity"/>
         <activity
             android:name=".ui.activity.SearchActivity"
             android:exported="true">
