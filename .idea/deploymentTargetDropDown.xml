@@ -2,28 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="AccountActivity">
-        <State />
-      </entry>
-      <entry key="MovieDetailActivity">
-        <State />
-      </entry>
-      <entry key="SearchActivity">
-        <State>
-          <runningDeviceTargetSelectedWithDropDown>
-            <Target>
-              <type value="RUNNING_DEVICE_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="SERIAL_NUMBER" />
-                  <value value="BKB00148182" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </runningDeviceTargetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-04-19T10:21:31.621071300Z" />
-        </State>
-      </entry>
       <entry key="app">
         <State />
       </entry>
