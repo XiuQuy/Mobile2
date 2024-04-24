@@ -1,6 +1,7 @@
 package com.example.appxemphim.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.annotation.Nullable;
 import androidx.loader.content.AsyncTaskLoader;
@@ -32,7 +33,8 @@ public class AddWithNewPlaylistLoader extends AsyncTaskLoader<Playlist> {
     @Override
     public Playlist loadInBackground() {
         try {
-            String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKV1RTZXJ2aWNlQWNjZXNzVG9rZW4iLCJqdGkiOiI5YTRhYmM2OS1hNWRkLTQzNGYtOWFmZC0xMjZkZDEyMzI0OGEiLCJpYXQiOiIxMi8wNC8yMDI0IDI6MTU6NTYgQ0giLCJVc2VySWQiOiIxIiwiRW1haWwiOiJkb2xlaHV5MjIyQGdtYWlsLmNvbSIsImV4cCI6MTcxMzc5NTM1NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0OTg3MCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDk4NzAifQ.bygdYjiAlUIsxm2104EoRQfuRKfQQfnJCRNczwDL6B8";
+            SharedPreferences sharedPreferences = getContext().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+            String token = sharedPreferences.getString("token", "");
             Response<Playlist> newPlaylistResponse = playlistService.addWithOneItem("Bearer "+token, playlist).execute();
             return newPlaylistResponse.body();
         } catch (Exception e) {

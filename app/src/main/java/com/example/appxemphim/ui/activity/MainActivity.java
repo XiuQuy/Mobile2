@@ -80,10 +80,12 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new MovieAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Movie movie) {
-                Intent intent =  new Intent(MainActivity.this, MovieDetailActivity.class);
-                intent.putExtra("movieId", String.valueOf(movie.getId()));
-                intent.putExtra("tag", movie.getTag());
-                startActivity(intent);
+                MovieDetailActivity.sendIntent(
+                        MainActivity.this,
+                        String.valueOf(movie.getId()),
+                        movie.getTag(),
+                        movie.getName(),
+                        movie.getPosterPath());
             }
         });
       

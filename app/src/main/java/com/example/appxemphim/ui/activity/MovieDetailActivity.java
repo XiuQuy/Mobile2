@@ -1,13 +1,19 @@
 package com.example.appxemphim.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +25,8 @@ import com.example.appxemphim.data.remote.DetailTvService;
 import com.example.appxemphim.data.remote.ServiceApiBuilder;
 import com.example.appxemphim.data.remote.TrailerService;
 import com.example.appxemphim.data.remote.TrailerTvService;
+import com.example.appxemphim.model.History;
+import com.example.appxemphim.model.InformationMovie;
 import com.example.appxemphim.model.ProductionCompanies;
 import com.example.appxemphim.ui.adapter.CastAdapter;
 import com.example.appxemphim.ui.adapter.CrewAdapter;
@@ -28,12 +36,16 @@ import com.example.appxemphim.ui.viewmodel.CreditsResponse;
 import com.example.appxemphim.ui.viewmodel.DetailMovieResponse;
 import com.example.appxemphim.ui.viewmodel.DetailTvResponse;
 import com.example.appxemphim.ui.viewmodel.TrailerResponse;
+import com.google.gson.Gson;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -60,7 +72,12 @@ public class MovieDetailActivity extends AppCompatActivity {
         // Nhận dữ liệu từ Intent
         if (intent != null) {
             tag = intent.getStringExtra("tag");
-            movieId = Integer.parseInt(Objects.requireNonNull(intent.getStringExtra("movieId")));
+            String movieIdString = intent.getStringExtra("movieId");
+            movieId = Integer.parseInt(Objects.requireNonNull(movieIdString));
+            String title = intent.getStringExtra("title");
+            String imgLink = intent.getStringExtra("imgLink");
+            //Call method saveHistory here
+
         }else{
             finish();
         }
@@ -68,6 +85,10 @@ public class MovieDetailActivity extends AppCompatActivity {
         String apiKey = ServiceApiBuilder.API_KEY_TMDB;
         if (tag.equals("TMDB_MOVIE")) {
         setContentView(R.layout.activity_movie_detail);
+        ImageView btnBack = findViewById(R.id.imgBack);
+        btnBack.setOnClickListener(v -> {
+            finish();
+        });
         txtNameMovie = findViewById(R.id.txtNameMovie);
         imgDetail = findViewById(R.id.imgDetail);
         txtStat = findViewById(R.id.txtStat);
@@ -335,5 +356,13 @@ public class MovieDetailActivity extends AppCompatActivity {
             productionCompanies.add(newCompany);
         }
         return productionCompanies;
+    }
+    public static void sendIntent(Context context, String movieId, String tag, String title, String imgLink){
+        Intent intent =  new Intent(context, MovieDetailActivity.class);
+        intent.putExtra("movieId", movieId);
+        intent.putExtra("tag", tag);
+        intent.putExtra("title", title);
+        intent.putExtra("imgLink", imgLink);
+        context.startActivity(intent);
     }
 }

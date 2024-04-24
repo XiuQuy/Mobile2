@@ -49,10 +49,12 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
         Movie movie = listMovies.get(position);
         holder.bind(movie);
         holder.itemView.setOnClickListener(view -> {
-            Intent intent =  new Intent(context, MovieDetailActivity.class);
-            intent.putExtra("movieId", String.valueOf(movie.getId()));
-            intent.putExtra("tag", movie.getTag());
-            context.startActivity(intent);
+            MovieDetailActivity.sendIntent(
+                    context,
+                    String.valueOf(movie.getId()),
+                    movie.getTag(),
+                    movie.getName(),
+                    movie.getPosterPath());
         });
         holder.btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,10 +141,12 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
                 Log.i("ITEM RECYCLER VIEW", "click add playlist option");
                 return true;
             }else if(idItem == R.id.item_search_view_detail_option){
-                Intent intent =  new Intent(context, MovieDetailActivity.class);
-                intent.putExtra("movieId", String.valueOf(movie.getId()));
-                intent.putExtra("tag", movie.getTag());
-                context.startActivity(intent);
+                MovieDetailActivity.sendIntent(
+                        context,
+                        String.valueOf(movie.getId()),
+                        movie.getTag(),
+                        movie.getName(),
+                        movie.getPosterPath());
                 Log.i("ITEM MENU RECYCLER VIEW", "click view detail");
                 return true;
             }
