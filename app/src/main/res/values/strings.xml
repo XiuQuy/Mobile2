@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">MovieStream</string>
+    <string name="app_name">MovieReview</string>
     <string name="welcome">Welcome</string>
     <string name="signin">Sign in to continue</string>
     <string name="user">User name</string>
     <string name="pass">Password</string>
+    <string name="passConfirm">Password Confirm</string>
     <string name="forgotpass">Forgot password</string>
     <string name="login">Login</string>
     <string name="or">or</string>
@@ -22,4 +23,82 @@
     <string name="nav_profile">My Profile</string>
     <string name="nav_chancePass">Change Password</string>
     <string name="nav_logout">Logout</string>
+    <string name="nav_playlist">Playlist</string>
+
+    <!--    các chức năng trong setting-->
+    <string name="setting">Setting</string>
+    <string name="label_setting_darkmode">Dark Mode</string>
+    <string name="label_setting_wifi">Use only Wifi</string>
+    <string name="label_setting_notification">Notification</string>
+
+    <string name="cd_menu_each_item_recyclerview">Menu for each item</string>
+    <string name="release_date">"Release date: "</string>
+    <string name="default_title_item_search">3 Body Problem</string>
+    <string name="no_data">No data</string>
+    <string name="language">"Language: "</string>
+    <string name="english">English</string>
+    <string name="votes">votes</string>
+    <string name="default_vote_item_search">53.8% / 35</string>
+    <string name="top_searches">Top searches</string>
+    <string name="content_description_button_back">Button back</string>
+    <string name="filter">Filter</string>
+    <string name="lbl_include_adult">Include Adult</string>
+    <string name="lbl_year">Year</string>
+    <string name="lbl_genres">Genres</string>
+    <string name="text_btn_filter">Filter</string>
+    <string name="text_bnt_set_default">Set default</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!--gooogle không được đổi-->
+    <string name="google_signin_client_id">793964661748-v2eko2imm6pi2dad49oc7ko2gkisgil0.apps.googleusercontent.com</string>
+    <!--end gooogle-->
+
+    <!--facebook không được đổi-->
+    <string name="facebook_app_id">1137577040603838</string>
+    <string name="fb_login_protocol_scheme">fb1137577040603838</string>
+    <string name="facebook_client_token">56789</string>
+    <!--end facebook-->
+
+    <!--tag không được đổi-->
+    <string name="facebook_tag_name">FACEBOOK</string>
+    <string name="google_tag_name">GOOGLE</string>
+    <string name="tmdb_movie_tag_name">TMDB_MOVIE</string>
+    <string name="tmdb_tv_series_tag_name">TMDB_TV_SERIES</string>
+    <string name="youtube_video_tag_name">YOUTUBE</string>
+    <!--end tag-->
+
+    <string name="message_error_login">An error occurred during login, please try again</string>
+    <string name="add_to_playlist">Add to playlist</string>
+    <string name="view_detail">View detail</string>
+    <string name="horizontal_3dots">⋮</string>
+    <string name="finish">Finish</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="new_playlist_name">New playlist name</string>
+    <string name="new_playlist">New playlist</string>
+    <string name="add_to">Add to</string>
+    <string name="successfully">successfully</string>
+    <string name="failure">failure</string>
+    <string name="remove_from">Remove from</string>
+    <string name="message_have_some_error">Some errors, please try again later!</string>
+    <string name="add_to_playlist_successfully">Add to playlist successfully</string>
+
+    <string name="movie">Movie</string>
+
+    <!--    accountinfo-->
+    <string name="name_label">Name:</string>
+    <string name="email_label">Email:</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_name">Change Name</string>
+    <string name="change_avatar">Change Avatar</string>
+    <string name="logout">Logout</string>
+
+    <string name="history_title">Watch History</string>
+    <string name="user_name_label">User Name</string>
+    <string name="username_label">Username</string>
+    <string name="playlist_title">Playlist</string>
+    <string name="view_all_playlists">View All</string>
+
 </resources>
