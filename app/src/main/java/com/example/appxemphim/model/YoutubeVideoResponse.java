@@ -2,11 +2,13 @@ package com.example.appxemphim.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class YoutubeVideoResponse {
     @SerializedName("items")
-    private YoutubeVideoItem[] items;
+    private List<YoutubeVideoItem> items;
 
-    public YoutubeVideoItem[] getItems() {
+    public List<YoutubeVideoItem> getItems() {
         return items;
     }
 }
