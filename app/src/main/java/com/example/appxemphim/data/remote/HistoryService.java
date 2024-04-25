@@ -23,4 +23,10 @@ public interface HistoryService {
             @Path("userId") int userId,
             @Header("Authorization") String token);
 
+    @POST("api/History/add")
+    Call<History> addOrUpdateHistory(
+            @Body History history,
+            @Header("Authorization") String token);
+
+
 }

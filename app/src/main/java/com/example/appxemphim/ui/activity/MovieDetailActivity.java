@@ -36,6 +36,7 @@ import com.example.appxemphim.ui.viewmodel.CreditsResponse;
 import com.example.appxemphim.ui.viewmodel.DetailMovieResponse;
 import com.example.appxemphim.ui.viewmodel.DetailTvResponse;
 import com.example.appxemphim.ui.viewmodel.TrailerResponse;
+import com.example.appxemphim.util.AddHistoryLoader;
 import com.google.gson.Gson;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 import com.squareup.picasso.Picasso;
@@ -77,7 +78,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             String title = intent.getStringExtra("title");
             String imgLink = intent.getStringExtra("imgLink");
             //Call method saveHistory here
-
+            saveHistory(movieIdString, title, tag, imgLink);
         }else{
             finish();
         }
@@ -365,4 +366,45 @@ public class MovieDetailActivity extends AppCompatActivity {
         intent.putExtra("imgLink", imgLink);
         context.startActivity(intent);
     }
+    LoaderManager.LoaderCallbacks<Void> loaderAddHistory =  new LoaderManager.LoaderCallbacks<Void>() {
+        @NonNull
+        @Override
+        public Loader<Void> onCreateLoader(int id, @Nullable Bundle args) {
+            assert args != null;
+            String historyJson = args.getString("historyJson");
+            Gson json = new Gson();
+            History history = json.fromJson(historyJson, History.class);
+            return new AddHistoryLoader(MovieDetailActivity.this, history);
+        }
+        @Override
+        public void onLoadFinished(@NonNull Loader<Void> loader, Void data) {}
+        @Override
+        public void onLoaderReset(@NonNull Loader<Void> loader) {}
+    };
+
+    private void saveHistory(String movieId, String title, String tag, String imgLink){
+        SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        String formattedDate = sdf.format(calendar.getTime());
+
+        InformationMovie informationMovie = new InformationMovie();
+        informationMovie.setMovieId(movieId);
+        informationMovie.setTitle(title);
+        informationMovie.setTag(tag);
+        informationMovie.setImageLink(imgLink);
+
+        History history = new History();
+        history.setUserId(sharedPreferences.getInt("userId", -1));
+        history.setSecondsCount(0);
+        history.setWatchedDate(formattedDate);
+        history.setInformationMovie(informationMovie);
+
+        Gson gson = new Gson();
+        String historyJson = gson.toJson(history);
+        Bundle bundle = new Bundle();
+        bundle.putString("historyJson", historyJson);
+        LoaderManager.getInstance(this).restartLoader(3, bundle, loaderAddHistory);
+    }
+
 }
