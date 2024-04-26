@@ -87,4 +87,7 @@
     <!--tên folder không được dịch sang ngôn ngữ khác-->
     <string name="folder_image_name">MovieReview</string>
     <!--end tên folder-->
+    <string name="day_ago">day ago</string>
+    <string name="month_ago">month ago</string>
+    <string name="year_ago">year ago</string>
 </resources>

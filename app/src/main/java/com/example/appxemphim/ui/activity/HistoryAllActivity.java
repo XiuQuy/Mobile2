@@ -3,6 +3,7 @@ package com.example.appxemphim.ui.activity;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -38,10 +39,11 @@ public class HistoryAllActivity extends AppCompatActivity implements HistoryAllA
         // Nhận thông tin người dùng từ Intent
         Intent intent = getIntent();
         if (intent != null) {
-            userName = intent.getStringExtra("userName");
-            userEmail = intent.getStringExtra("userEmail");
-            userId = intent.getIntExtra("userId", -1);
-            userToken = intent.getStringExtra("userToken");
+            SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
+            userName = prefs.getString("name", "");
+            userEmail = prefs.getString("email", "");
+            userId = prefs.getInt("userId", -1);
+            userToken = prefs.getString("token", "");
         }
         RecyclerView recyclerView = findViewById(R.id.recycler_view_items);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

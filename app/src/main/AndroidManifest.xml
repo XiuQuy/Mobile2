@@ -24,7 +24,7 @@
             android:name=".ui.activity.PlaylistActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.activity.HistoryActivity"
+            android:name=".ui.activity.HistoryAllActivity"
             android:exported="true" />
         <activity
             android:name=".ui.activity.LoginActivity"
@@ -43,6 +43,11 @@
             android:name=".ui.activity.SearchActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".ui.activity.VideoYoutubePlayerActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:hardwareAccelerated="true"
+            android:exported="true"/>
         <activity android:name=".ui.activity.ChangeNameActivity" />
         <activity android:name=".ui.activity.SettingActivity" />
         <activity android:name=".ui.activity.AccountActivity" />

@@ -68,7 +68,7 @@ public class PersonalScreen extends AppCompatActivity {
         fetchPlaylists();
         Button btnViewAllHistory = findViewById(R.id.btn_view_all_history);
         btnViewAllHistory.setOnClickListener(v -> {
-            Intent intentAllHistory = new Intent(PersonalScreen.this, HistoryActivity.class);
+            Intent intentAllHistory = new Intent(PersonalScreen.this, HistoryAllActivity.class);
             startActivity(intentAllHistory);
         });
         Button btnViewAllPlaylist = findViewById(R.id.btn_view_all_playlist);

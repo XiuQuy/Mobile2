@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentAllPlaylist);
                 return true; // Đánh dấu sự kiện đã được xử lý
             } else if (item.getItemId() == R.id.nav_his) {
-                Intent intentAllHistory = new Intent(MainActivity.this, HistoryActivity.class);
+                Intent intentAllHistory = new Intent(MainActivity.this, HistoryAllActivity.class);
                 startActivity(intentAllHistory);
                 return true; // Đánh dấu sự kiện đã được xử lý
             }else if (item.getItemId() == R.id.nav_profile) {
