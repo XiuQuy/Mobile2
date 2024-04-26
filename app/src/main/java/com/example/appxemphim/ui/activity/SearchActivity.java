@@ -1,5 +1,6 @@
 package com.example.appxemphim.ui.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -152,6 +153,25 @@ public class SearchActivity extends AppCompatActivity implements
         //Btn open
         ImageView btnFilter = findViewById(R.id.btn_filter_activity_search);
         btnFilter.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.END));
+
+        ImageView btnBack = findViewById(R.id.imgBack);
+        btnBack.setOnClickListener(v -> {
+            finish();
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Get query in intent
+        Intent intent = getIntent();
+        if (intent != null) {
+            String query = intent.getStringExtra("query");
+            if(query != null){
+                searchView.setQuery(query, true);
+                searchView.setIconifiedByDefault(false);
+            }
+        }
     }
 
     // Function search movie

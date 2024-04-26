@@ -1,6 +1,7 @@
 package com.example.appxemphim.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -46,8 +47,9 @@ public class AddMovieToPlaylistLoader extends AsyncTaskLoader<List<String>> {
             String removeFromString = getContext().getString(R.string.remove_from)+" ";
             String successfullyString = " "+getContext().getString(R.string.successfully);
             String failedString = " "+getContext().getString(R.string.failure);
-            int userId = 1;
-            String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKV1RTZXJ2aWNlQWNjZXNzVG9rZW4iLCJqdGkiOiI5YTRhYmM2OS1hNWRkLTQzNGYtOWFmZC0xMjZkZDEyMzI0OGEiLCJpYXQiOiIxMi8wNC8yMDI0IDI6MTU6NTYgQ0giLCJVc2VySWQiOiIxIiwiRW1haWwiOiJkb2xlaHV5MjIyQGdtYWlsLmNvbSIsImV4cCI6MTcxMzc5NTM1NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0OTg3MCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDk4NzAifQ.bygdYjiAlUIsxm2104EoRQfuRKfQQfnJCRNczwDL6B8";
+            SharedPreferences sharedPreferences = getContext().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+            String token = sharedPreferences.getString("token", "");
+            int userId = sharedPreferences.getInt("userId", -1);
             if(!listAdd.isEmpty()){
                 PlaylistItem playlistItem = new PlaylistItem();
                 playlistItem.setInformationMovie(informationMovie);

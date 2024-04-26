@@ -47,10 +47,12 @@ public class HistoryAdapterPersonal extends RecyclerView.Adapter<HistoryAdapterP
                 String tagMovie = history.getInformationMovie().getTag();
                 if(Objects.equals(tagMovie, "TMDB_MOVIE") ||
                    Objects.equals(tagMovie, "TMDB_TV_SERIES")){
-                    Intent intent =  new Intent(context, MovieDetailActivity.class);
-                    intent.putExtra("movieId", history.getInformationMovie().getMovieId());
-                    intent.putExtra("tag", history.getInformationMovie().getTag());
-                    context.startActivity(intent);
+                    MovieDetailActivity.sendIntent(
+                            context,
+                            history.getInformationMovie().getMovieId(),
+                            history.getInformationMovie().getTag(),
+                            history.getInformationMovie().getTitle(),
+                            history.getInformationMovie().getImageLink());
                 }
                 if(tagMovie.equals("YOUTUBE")){
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +66,16 @@ public class PersonalScreen extends AppCompatActivity {
 
         fetchHistories();
         fetchPlaylists();
+        Button btnViewAllHistory = findViewById(R.id.btn_view_all_history);
+        btnViewAllHistory.setOnClickListener(v -> {
+            Intent intentAllHistory = new Intent(PersonalScreen.this, HistoryActivity.class);
+            startActivity(intentAllHistory);
+        });
+        Button btnViewAllPlaylist = findViewById(R.id.btn_view_all_playlist);
+        btnViewAllPlaylist.setOnClickListener(v -> {
+            Intent intentAllPlaylist = new Intent(PersonalScreen.this, PlaylistActivity.class);
+            startActivity(intentAllPlaylist);
+        });
     }
 
     private void fetchHistories() {

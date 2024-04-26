@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,6 +45,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.appxemphim.R;
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import org.w3c.dom.Text;
 
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private String userName;
     private String userEmail;
     private String userToken;
+    private String userAvatar;
     private RecyclerView recyclerView;
     private MovieAdapter adapter;
     private NavigationView navigationView;
@@ -76,10 +80,12 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new MovieAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Movie movie) {
-                Intent intent =  new Intent(MainActivity.this, MovieDetailActivity.class);
-                intent.putExtra("movieId", String.valueOf(movie.getId()));
-                intent.putExtra("tag", movie.getTag());
-                startActivity(intent);
+                MovieDetailActivity.sendIntent(
+                        MainActivity.this,
+                        String.valueOf(movie.getId()),
+                        movie.getTag(),
+                        movie.getName(),
+                        movie.getPosterPath());
             }
         });
       
@@ -100,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
             userEmail = prefs.getString("email", "");
             userId = prefs.getInt("userId", -1);
             userToken = prefs.getString("token", "");
+            userAvatar = prefs.getString("avatar", "");
             // Gán tên người dùng vào TextView
             if (userName != null && !userName.isEmpty()) {
                 txtnavName.setText(userName);
@@ -108,40 +115,66 @@ public class MainActivity extends AppCompatActivity {
                 txtnavUsername.setText(userEmail);
             }
         }
-      
-        // Gán trình nghe sự kiện cho NavigationView
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+        CircleImageView imageAvatarInNav = headerView.findViewById(R.id.img_user);
+        CircleImageView circleImageView = findViewById(R.id.imgAvatar);
+        RequestCreator requestCreatorImageAvatar = Picasso.get().load(userAvatar);
+        requestCreatorImageAvatar.into(imageAvatarInNav);
+        requestCreatorImageAvatar.into(circleImageView);
+
+        SearchView searchView = findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                // Xử lý sự kiện khi người dùng chọn một mục trong NavigationView
-                if (item.getItemId() == R.id.nav_profile) {
-                    // Mở màn hình profile
-                    Intent intent = new Intent(MainActivity.this, PersonalScreen.class);
-                    startActivity(intent);
-                    return true; // Đánh dấu sự kiện đã được xử lý
-                } else if (item.getItemId() == R.id.nav_pass) {
-                    Intent intent = new Intent(MainActivity.this, AccountActivity.class);
-                    startActivity(intent);
-                    return true;
-                }else if (item.getItemId() == R.id.nav_logout) {
-                    SharedPreferences.Editor editor = getSharedPreferences("UserInfo", MODE_PRIVATE).edit();
-                    editor.clear();
-                    editor.apply();
-                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                    return true; // Đánh dấu sự kiện đã được xử lý
-                }else if (item.getItemId() == R.id.nav_setting) {
-                    Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-                    startActivity(intent);
-                    return true; // Đánh dấu sự kiện đã được xử lý
-                }
-                // Thêm các trường hợp khác nếu cần
-                return false; // Trả về false để đánh dấu sự kiện chưa được xử lý
+            public boolean onQueryTextSubmit(String query) {
+                Intent intentSearch = new Intent(MainActivity.this, SearchActivity.class);
+                intentSearch.putExtra("query", query);
+                startActivity(intentSearch);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
+
+        // Gán trình nghe sự kiện cho NavigationView
+        navigationView.setNavigationItemSelectedListener(item -> {
+            // Xử lý sự kiện khi người dùng chọn một mục trong NavigationView
+            if (item.getItemId() == R.id.nav_playlist) {
+                Intent intentAllPlaylist = new Intent(MainActivity.this, PlaylistActivity.class);
+                startActivity(intentAllPlaylist);
+                return true; // Đánh dấu sự kiện đã được xử lý
+            } else if (item.getItemId() == R.id.nav_his) {
+                Intent intentAllHistory = new Intent(MainActivity.this, HistoryActivity.class);
+                startActivity(intentAllHistory);
+                return true; // Đánh dấu sự kiện đã được xử lý
+            }else if (item.getItemId() == R.id.nav_profile) {
+                Intent intent1 = new Intent(MainActivity.this, PersonalScreen.class);
+                startActivity(intent1);
+                return true; // Đánh dấu sự kiện đã được xử lý
+            } else if (item.getItemId() == R.id.nav_pass) {
+                Intent intent1 = new Intent(MainActivity.this, AccountActivity.class);
+                startActivity(intent1);
+                return true;
+            }else if (item.getItemId() == R.id.nav_logout) {
+                SharedPreferences.Editor editor = getSharedPreferences("UserInfo", MODE_PRIVATE).edit();
+                editor.clear();
+                editor.apply();
+                Intent intent1 = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent1);
+                finish();
+                return true; // Đánh dấu sự kiện đã được xử lý
+            }else if (item.getItemId() == R.id.nav_setting) {
+                Intent intent1 = new Intent(MainActivity.this, SettingActivity.class);
+                startActivity(intent1);
+                return true; // Đánh dấu sự kiện đã được xử lý
+            }
+            // Thêm các trường hợp khác nếu cần
+            return false; // Trả về false để đánh dấu sự kiện chưa được xử lý
+        });
       
-        CircleImageView circleImageView = findViewById(R.id.imgAvatar);
+
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override

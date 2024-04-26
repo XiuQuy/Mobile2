@@ -2,7 +2,25 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="AccountActivity">
+        <State />
+      </entry>
+      <entry key="ImageLoadActivity">
+        <State />
+      </entry>
+      <entry key="MovieDetailActivity">
+        <State />
+      </entry>
+      <entry key="PlaylistActivity">
+        <State />
+      </entry>
+      <entry key="SearchActivity">
+        <State />
+      </entry>
       <entry key="app">
+        <State />
+      </entry>
+      <entry key="notificationManager">
         <State />
       </entry>
     </value>

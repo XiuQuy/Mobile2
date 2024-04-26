@@ -83,4 +83,8 @@
     <string name="remove_from">Remove from</string>
     <string name="message_have_some_error">Some errors, please try again later!</string>
     <string name="add_to_playlist_successfully">Add to playlist successfully</string>
+
+    <!--tên folder không được dịch sang ngôn ngữ khác-->
+    <string name="folder_image_name">MovieReview</string>
+    <!--end tên folder-->
 </resources>
