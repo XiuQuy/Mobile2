@@ -2,7 +2,9 @@ package com.example.appxemphim.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ThumbnailVideoYoutube {
+import java.io.Serializable;
+
+public class ThumbnailVideoYoutube implements Serializable {
     @SerializedName("url")
     private String url;
 

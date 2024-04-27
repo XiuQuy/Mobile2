@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceApiBuilder {
     private static final String URL_TMDB = "https://api.themoviedb.org/3/";
-    private static final String URL_USER_API = "http://192.168.1.4:80/user/";
+    private static final String URL_USER_API = "http://192.168.1.9:80/user/";
     private static final String URL_YOUTUBE_DATA_API = "https://www.googleapis.com/youtube/v3/";
     public static final String API_KEY_TMDB = "64d0aa770962667c44935e02b31da40f";
     public static final String API_KEY_YOUTUBE_DATA = "AIzaSyBSBAJLOEJmynxkun7JBGJlPwjJTcnJQXI";

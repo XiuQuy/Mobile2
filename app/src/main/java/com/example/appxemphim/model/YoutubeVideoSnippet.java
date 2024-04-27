@@ -1,47 +1,61 @@
-package com.example.appxemphim.model;
+    package com.example.appxemphim.model;
 
-import com.google.gson.annotations.SerializedName;
+    import androidx.annotation.Nullable;
 
-public class YoutubeVideoSnippet {
-    @SerializedName("title")
-    private String title;
+    import com.google.gson.annotations.SerializedName;
 
-    @SerializedName("description")
-    private String description;
+    import java.io.Serializable;
 
-    @SerializedName("channelId")
-    private String channelId;
+    public class YoutubeVideoSnippet implements Serializable {
+        @SerializedName("title")
+        private String title;
 
-    @SerializedName("channelTitle")
-    private String channelTitle;
+        @SerializedName("description")
+        private String description;
 
-    @SerializedName("thumbnails")
-    private ThumbnailsVideoYoutube thumbnails;
+        @SerializedName("channelId")
+        private String channelId;
 
-    @SerializedName("publishedAt")
-    private String publishedAt;
+        @SerializedName("channelTitle")
+        private String channelTitle;
 
-    public String getPublishedAt() {
-        return publishedAt;
+        @SerializedName("thumbnails")
+        private ThumbnailsYoutube thumbnails;
+
+        @SerializedName("publishedAt")
+        private String publishedAt;
+
+        public String getPublishedAt() {
+            return publishedAt;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getChannelTitle() {
+            return channelTitle;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getChannelId() {
+            return channelId;
+        }
+
+        public ThumbnailsYoutube getThumbnails() {
+            return thumbnails;
+        }
+
+        @Override
+        public int hashCode() {
+            return super.hashCode();
+        }
+
+        @Override
+        public boolean equals(@Nullable Object obj) {
+            return super.equals(obj);
+        }
     }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getChannelTitle() {
-        return channelTitle;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getChannelId() {
-        return channelId;
-    }
-
-    public ThumbnailsVideoYoutube getThumbnails() {
-        return thumbnails;
-    }
-}

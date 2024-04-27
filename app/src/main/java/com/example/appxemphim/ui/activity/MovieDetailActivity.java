@@ -189,7 +189,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
                     if (response.isSuccessful()) {
                         TrailerResponse trailerResponse = response.body();
-                        if (trailerResponse != null) {
+                        if (trailerResponse != null && !trailerResponse.getResults().isEmpty()) {
                             String key = trailerResponse.getResults().get(0).getKey();
                             getLifecycle().addObserver(youTubePlayerView);
                             youTubePlayerView.getYouTubePlayerWhenReady(youTubePlayer -> {
@@ -439,9 +439,10 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     public void getVideoYoutubeInfo(String[] videoId) {
+        String[] part = {"snippet", "statistics"};
         YoutubeService youtubeService = ServiceApiBuilder.buildYoutubeApiService(YoutubeService.class);
         Call<YoutubeVideoResponse> call = youtubeService.getVideoInfo(
-                "snippet",
+                part,
                 videoId,
                 ServiceApiBuilder.API_KEY_YOUTUBE_DATA
         );
@@ -492,9 +493,10 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     public void getVideoYoutubeReviewVideo(String[] videoId) {
+        String[] part = {"snippet", "statistics"};
         YoutubeService youtubeService = ServiceApiBuilder.buildYoutubeApiService(YoutubeService.class);
         Call<YoutubeVideoResponse> call = youtubeService.getVideoInfo(
-                "snippet",
+                part,
                 videoId,
                 ServiceApiBuilder.API_KEY_YOUTUBE_DATA
         );

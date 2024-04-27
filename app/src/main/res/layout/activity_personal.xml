@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="16dp"
-            android:text="Setting"
+            android:text="Your profile"
             android:textColor="@color/text_color"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -75,7 +75,7 @@
                 android:id="@+id/name_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/user_name_label"
+                android:text="@string/name_example_label"
                 android:textColor="@color/white"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="@string/username_label"
+                android:text="@string/email_example_label"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 

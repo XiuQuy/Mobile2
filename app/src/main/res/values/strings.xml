@@ -90,4 +90,17 @@
     <string name="day_ago">day ago</string>
     <string name="month_ago">month ago</string>
     <string name="year_ago">year ago</string>
+    <string name="username_label">Username</string>
+    <string name="email_example_label">example@email.com</string>
+    <string name="name_example_label">Developer</string>
+    <string name="history_title">History</string>
+    <string name="view_all_playlists">See more</string>
+    <string name="playlist_title">Playlist</string>
+    <string name="change_avatar">Change avatar</string>
+    <string name="change_name">Change name</string>
+    <string name="change_password">Change password</string>
+    <string name="views_string">views</string>
+    <string name="likes_string">likes</string>
+    <string name="show_more_string">Show more</string>
+    <string name="hide_less">Hide less</string>
 </resources>

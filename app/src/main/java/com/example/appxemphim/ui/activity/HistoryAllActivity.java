@@ -6,10 +6,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -93,7 +98,7 @@ public class HistoryAllActivity extends AppCompatActivity implements HistoryAllA
 
             // Thực hiện xóa mục và cập nhật RecyclerView
             histories.remove(position);
-            historyAllAdapter.notifyItemRemoved(position); // Thông báo cho adapter biết một mục đã bị xóa
+            //historyAllAdapter.notifyItemRemoved(position); // Thông báo cho adapter biết một mục đã bị xóa
 
             // Gọi phương thức xóa từ backend
             deleteItemFromBackend(historyId, userId, adapterPosition);

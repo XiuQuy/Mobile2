@@ -108,7 +108,7 @@ public class PlayListItemActivity extends AppCompatActivity implements PlayListI
 
             // Thực hiện xóa mục và cập nhật RecyclerView
             playListItems.remove(position);
-            playListItemAdapter.notifyItemRemoved(position); // Thông báo cho adapter biết một mục đã bị xóa
+            //playListItemAdapter.notifyItemRemoved(position); // Thông báo cho adapter biết một mục đã bị xóa
 
             // Gọi phương thức xóa từ backend
             deleteItemFromBackend(watchListItemId, userId, adapterPosition);

@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent1);
                 return true; // Đánh dấu sự kiện đã được xử lý
             } else if (item.getItemId() == R.id.nav_pass) {
-                Intent intent1 = new Intent(MainActivity.this, AccountActivity.class);
+                Intent intent1 = new Intent(MainActivity.this, ChangePasswordActivity.class);
                 startActivity(intent1);
                 return true;
             }else if (item.getItemId() == R.id.nav_logout) {

@@ -56,8 +56,6 @@ public class PersonalScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
 
-        LanguageManager.initLanguage(this);
-
         txtName = findViewById(R.id.name_label);
         txtUsername = findViewById(R.id.email_label);
 
