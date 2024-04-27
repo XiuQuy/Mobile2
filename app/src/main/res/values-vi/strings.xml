@@ -88,4 +88,47 @@
     <string name="username_label">Username</string>
     <string name="playlist_title">Danh sách phát</string>
     <string name="view_all_playlists">Xem tất cả</string>
+
+    <string name="select_photo">Chọn ảnh</string>
+    <string name="take_photo">Chụp ảnh</string>
+
+    <string name="toolbar_title">Nhập mã</string>
+    <string name="hint_code">Mã</string>
+    <string name="confirm_button">Xác nhận</string>
+
+    <string name="my_list">Danh sách của tôi</string>
+    <string name="status">Trạng thái:</string>
+
+    <string name="label_adult">Người lớn:</string>
+    <string name="label_overview">Tổng quan</string>
+    <string name="label_original_language">Ngôn ngữ gốc:</string>
+    <string name="label_spoken_language">Ngôn ngữ nói:</string>
+    <string name="label_trailer">Trailer</string>
+    <string name="label_crew">Nhóm sản xuất</string>
+    <string name="label_cast">Diễn viên</string>
+    <string name="label_product_companies">Công ty sản xuất:</string>
+    <string name="label_popularity">Độ phổ biến:</string>
+    <string name="label_budget">Ngân sách:</string>
+    <string name="label_revenue">Doanh thu:</string>
+    <string name="label_homepage">Trang chủ:</string>
+
+    <string name="title">Tiêu đề</string>
+    <string name="confirm_password">Xác nhận mật khẩu</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="reset_password">Đặt lại mật khẩu</string>
+
+    <string name="new_name">Nhập tên mới</string>
+    <string name="save">Lưu</string>
+
+    <string name="current_password_hint">Mật khẩu hiện tại</string>
+    <string name="new_password_hint">Mật khẩu mới</string>
+    <string name="confirm_password_hint">Nhập lại mật khẩu mới</string>
+    <string name="change_password_button">Đổi mật khẩu</string>
+    <string name="go_back_button">Quay lại</string>
+
+    <string name="movie_title">Tiêu đề phim</string>
+    <string name="tag">Nhãn</string>
+
+    <string name="series">Phim truyền hình</string>
+    <string name="search">Tìm kiếm</string>
 </resources>
