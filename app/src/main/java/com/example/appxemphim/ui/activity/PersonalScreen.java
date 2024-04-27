@@ -1,17 +1,23 @@
 package com.example.appxemphim.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.appxemphim.R;
 import com.example.appxemphim.data.remote.HistoryService;
 import com.example.appxemphim.data.remote.PlaylistService;
@@ -38,14 +44,22 @@ public class PersonalScreen extends AppCompatActivity {
     private String userName;
     private String userEmail;
     private String userToken;
+    private TextView txtUsername;
+    private ImageView imageViewAvatar;
+    private TextView txtName;
+
+    private static final int PICK_IMAGE_REQUEST = 1;
+    private static final int REQUEST_CODE_CHANGE_NAME = 1;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
 
-        TextView txtName = findViewById(R.id.name_label);
-        TextView txtUsername = findViewById(R.id.email_label);
+        LanguageManager.initLanguage(this);
+
+        txtName = findViewById(R.id.name_label);
+        txtUsername = findViewById(R.id.email_label);
 
         // Nhận thông tin người dùng từ Intent
         Intent intent = getIntent();
@@ -55,6 +69,7 @@ public class PersonalScreen extends AppCompatActivity {
             userEmail = prefs.getString("email", "");
             userId = prefs.getInt("userId", -1);
             userToken = prefs.getString("token", "");
+
             // Gán tên người dùng vào TextView
             if (userName != null && !userName.isEmpty()) {
                 txtName.setText(userName);
@@ -66,6 +81,68 @@ public class PersonalScreen extends AppCompatActivity {
 
         fetchHistories();
         fetchPlaylists();
+
+        // Xử lý sự kiện khi người dùng nhấn vào nút đổi mật khẩu
+        Button btnChangePassword = findViewById(R.id.btnChangePassword);
+        btnChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Thực hiện chuyển sang màn hình đổi mật khẩu
+                Intent intent = new Intent(PersonalScreen.this, ChangePasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // Xử lý sự kiện khi người dùng nhấn vào nút đổi tên
+        Button btnChangeName = findViewById(R.id.btnChangeName);
+        btnChangeName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Thực hiện chuyển sang màn hình đổi tên
+                Intent intent = new Intent(PersonalScreen.this, ChangeNameActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_CHANGE_NAME);
+            }
+        });
+
+        // Xử lý sự kiện khi người dùng nhấn vào nút đổi avatar
+        Button btnChangeAvatar = findViewById(R.id.btnChangeAvatar);
+        btnChangeAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PersonalScreen.this, ChangeAvatarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            // Load ảnh đại diện từ SharedPreferences và hiển thị nó lên ImageView
+            SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
+            String avatarUrl = prefs.getString("avatar", "");
+
+            // Sử dụng Glide để hiển thị ảnh đại diện
+            Glide.with(this)
+                    .load(avatarUrl)
+                    .placeholder(R.drawable.placeholder_img_load) // Placeholder nếu đường dẫn ảnh trống hoặc không hợp lệ
+                    .into(imageViewAvatar);
+        }
+
+        if (requestCode == REQUEST_CODE_CHANGE_NAME && resultCode == Activity.RESULT_OK && data != null) {
+            // Nhận tên mới từ Intent và cập nhật giao diện
+            String newName = data.getStringExtra("new_name");
+            if (newName != null) {
+                txtName.setText(newName); // Cập nhật tên mới trên giao diện
+                // Cập nhật tên mới trong SharedPreferences
+                SharedPreferences.Editor editor = getSharedPreferences("UserInfo", MODE_PRIVATE).edit();
+                editor.putString("name", newName);
+                editor.apply();
+            }
+        }
         Button btnViewAllHistory = findViewById(R.id.btn_view_all_history);
         btnViewAllHistory.setOnClickListener(v -> {
             Intent intentAllHistory = new Intent(PersonalScreen.this, HistoryAllActivity.class);
@@ -180,5 +257,7 @@ public class PersonalScreen extends AppCompatActivity {
         });
     }
 
-
+    public void goBack(View view) {
+        finish();
+    }
 }
