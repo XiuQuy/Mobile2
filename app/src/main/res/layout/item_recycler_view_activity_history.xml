@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <!-- Icon -->
+    <ImageView
+        android:id="@+id/img_icon_item_recycle_view_activity_history"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/netflix_logo_icon"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/rounded_corner"/>
+
+    <!-- Title and Time -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="8dp">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tv_title_item_recycle_view_activity_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:text="@string/movie_title"
+            android:textSize="@dimen/text_size_title_item_list" />
+
+        <!-- Tag -->
+        <TextView
+            android:id="@+id/tv_tag_item_recycle_view_activity_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tag"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/text_size_tag_item_list" />
+    </LinearLayout>
+
+</LinearLayout>

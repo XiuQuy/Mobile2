@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/background_popup"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:textStyle="bold"
+        android:textColor="@color/text_color"
+        android:textSize="20sp"
+        android:text="@string/new_playlist" />
+
+    <EditText
+        android:id="@+id/txt_name_playlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/text_color"
+        android:ems="10"
+        android:inputType="text"
+        android:paddingTop="15dp"
+        android:hint="@string/new_playlist_name"
+        android:text="" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="rtl"
+        android:paddingTop="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_add"
+            android:fontFamily="@font/montserrat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:enabled="false"
+            android:textColor="#233D6A"
+            android:text="@string/add" />
+
+        <TextView
+            android:id="@+id/btn_cancel"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:textSize="15sp"
+            android:textColor="@color/btn_link_color"
+            android:text="@string/cancel" />
+    </LinearLayout>
+</LinearLayout>
