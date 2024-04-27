@@ -2,6 +2,7 @@ package com.example.appxemphim.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,7 +18,6 @@ import com.example.appxemphim.R;
 
 public class AccountActivity extends AppCompatActivity {
     private TextView textViewUsername;
-
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int REQUEST_CODE_CHANGE_NAME = 1;
 
@@ -26,11 +26,10 @@ public class AccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_info);
 
-        // Nhận thông tin tài khoản từ Intent hoặc SharedPreferences hoặc bất kỳ nguồn dữ liệu nào khác
-        String username = "MaiAnh";
-        String email = "maianh123@gmail.com";
-        String password = "123456";
-
+        // Nhận thông tin tài khoản SharedPreferences
+        SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        String username = prefs.getString("name", "");
+        String email = prefs.getString("email", "");
 
         // Hiển thị thông tin tài khoản trên TextViews
         textViewUsername = findViewById(R.id.textViewUsername);
@@ -57,7 +56,6 @@ public class AccountActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Thực hiện chuyển sang màn hình đổi mật khẩu
                 Intent intent = new Intent(AccountActivity.this, ChangePasswordActivity.class);
-                intent.putExtra("temp_password", password);
                 startActivity(intent);
             }
         });
@@ -70,7 +68,6 @@ public class AccountActivity extends AppCompatActivity {
                 // Thực hiện chuyển sang màn hình đổi tên
                 Intent intent = new Intent(AccountActivity.this, ChangeNameActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_CHANGE_NAME);
-
             }
         });
 

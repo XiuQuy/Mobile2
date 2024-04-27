@@ -95,12 +95,6 @@
                     android:layout_height="match_parent"
                     android:checked="true"
                     android:text="@string/label_setting_darkmode" />
-
-                <com.google.android.material.materialswitch.MaterialSwitch
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/label_setting_wifi" />
-
             </LinearLayout>
         </ScrollView>
 

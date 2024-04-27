@@ -8,12 +8,12 @@ import java.util.List;
 public class MovieResponse {
 
     // Danh sách các phim nhận được từ phản hồi API
-    private List<Movie> results;
+    private List<TMDBMovieResult> results;
     /**
      * Lấy danh sách các phim.
      * @return Danh sách các phim
      */
-    public List<Movie> getResults() {
+    public List<TMDBMovieResult> getResults() {
         return results;
     }
 
@@ -22,7 +22,7 @@ public class MovieResponse {
      * Thiết lập danh sách các phim.
      * @param results Danh sách các phim
      */
-    public void setResults(List<Movie> results) {
+    public void setResults(List<TMDBMovieResult> results) {
         this.results = results;
     }
 

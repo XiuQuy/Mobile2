@@ -23,6 +23,7 @@
     <string name="nav_profile">My Profile</string>
     <string name="nav_chancePass">Change Password</string>
     <string name="nav_logout">Logout</string>
+    <string name="nav_playlist">Playlist</string>
 
     <!--    các chức năng trong setting-->
     <string name="label_setting_darkmode">Dark Mode</string>
@@ -31,7 +32,7 @@
 
     <string name="cd_menu_each_item_recyclerview">Menu for each item</string>
     <string name="release_date">"Release date: "</string>
-    <string name="default_title_item_search">3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem 3 Body Problem</string>
+    <string name="default_title_item_search">3 Body Problem</string>
     <string name="no_data">No data</string>
     <string name="language">"Language: "</string>
     <string name="english">English</string>
@@ -49,21 +50,44 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <!--gooogle-->
+    <!--gooogle không được đổi-->
     <string name="google_signin_client_id">793964661748-v2eko2imm6pi2dad49oc7ko2gkisgil0.apps.googleusercontent.com</string>
+    <!--end gooogle-->
 
-    <!--facebook-->
+    <!--facebook không được đổi-->
     <string name="facebook_app_id">1137577040603838</string>
     <string name="fb_login_protocol_scheme">fb1137577040603838</string>
     <string name="facebook_client_token">56789</string>
+    <!--end facebook-->
+
+    <!--tag không được đổi-->
+    <string name="facebook_tag_name">FACEBOOK</string>
+    <string name="google_tag_name">GOOGLE</string>
+    <string name="tmdb_movie_tag_name">TMDB_MOVIE</string>
+    <string name="tmdb_tv_series_tag_name">TMDB_TV_SERIES</string>
+    <string name="youtube_video_tag_name">YOUTUBE</string>
+    <!--end tag-->
+
     <string name="message_error_login">An error occurred during login, please try again</string>
     <string name="add_to_playlist">Add to playlist</string>
     <string name="view_detail">View detail</string>
     <string name="horizontal_3dots">⋮</string>
-    <string name="add_to_new_playlist">Add to new playlist</string>
     <string name="finish">Finish</string>
     <string name="cancel">Cancel</string>
     <string name="add">Add</string>
     <string name="new_playlist_name">New playlist name</string>
     <string name="new_playlist">New playlist</string>
+    <string name="add_to">Add to</string>
+    <string name="successfully">successfully</string>
+    <string name="failure">failure</string>
+    <string name="remove_from">Remove from</string>
+    <string name="message_have_some_error">Some errors, please try again later!</string>
+    <string name="add_to_playlist_successfully">Add to playlist successfully</string>
+
+    <!--tên folder không được dịch sang ngôn ngữ khác-->
+    <string name="folder_image_name">MovieReview</string>
+    <!--end tên folder-->
+    <string name="day_ago">day ago</string>
+    <string name="month_ago">month ago</string>
+    <string name="year_ago">year ago</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.appxemphim.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import com.example.appxemphim.R;
 import com.example.appxemphim.model.InformationMovie;
 import com.example.appxemphim.model.Playlist;
 import com.example.appxemphim.model.PlaylistItem;
+import com.example.appxemphim.ui.activity.MovieDetailActivity;
+import com.example.appxemphim.ui.activity.PlayListItemActivity;
 
 import java.util.List;
 
@@ -39,6 +42,11 @@ public class PlaylistAdapterPersonal extends RecyclerView.Adapter<PlaylistAdapte
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Playlist Playlist = Playlists.get(position);
         holder.bind(Playlist);
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(context, PlayListItemActivity.class);
+            intent.putExtra("playlistId", Playlist.getId());
+            context.startActivity(intent);
+        });
     }
 
     @Override

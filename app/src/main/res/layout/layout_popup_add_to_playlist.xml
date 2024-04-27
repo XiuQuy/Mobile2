@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/montserrat"
-            android:text="@string/add_to_playlist"
+            android:text="@string/add_to"
             android:textColor="@color/text_color"
             android:textSize="@dimen/title_popup_add_to_playlist" />
 
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
-            android:text="@string/add_to_new_playlist"
+            android:text="@string/new_playlist"
             android:textAlignment="textEnd"
             android:textColor="@color/btn_link_color"
             android:textSize="@dimen/title_popup_add_to_playlist" />

@@ -18,6 +18,13 @@ public class YoutubeVideoSnippet {
     @SerializedName("thumbnails")
     private ThumbnailsVideoYoutube thumbnails;
 
+    @SerializedName("publishedAt")
+    private String publishedAt;
+
+    public String getPublishedAt() {
+        return publishedAt;
+    }
+
     public String getTitle() {
         return title;
     }

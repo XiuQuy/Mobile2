@@ -8,7 +8,7 @@ public class TMDBSearchTVResponse {
     @SerializedName("page")
     private int page;
     @SerializedName("results")
-    private List<TMDBSearchTVResult> results;
+    private List<TMDBTVResult> results;
     @SerializedName("total_pages")
     private int totalPages;
     @SerializedName("total_results")
@@ -18,7 +18,7 @@ public class TMDBSearchTVResponse {
         return page;
     }
 
-    public List<TMDBSearchTVResult> getResults() {
+    public List<TMDBTVResult> getResults() {
         return results;
     }
 

@@ -5,7 +5,9 @@ import static android.content.ContentValues.TAG;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Credentials;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -53,8 +55,12 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
+import com.google.gson.Gson;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -66,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputLayout emailInputLayout;
     private TextInputLayout passwordInputLayout;
-
     CallbackManager callbackManager;
     private FirebaseAuth mAuth;
     GetGoogleIdOption googleIdOption;
@@ -76,6 +81,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+
+        if(checkTokenExpiration()){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         emailInputLayout = findViewById(R.id.username);
         passwordInputLayout = findViewById(R.id.password);
@@ -113,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-      //google
+        //google
         googleIdOption = new GetGoogleIdOption.Builder()
                 .setFilterByAuthorizedAccounts(false)
                 .setServerClientId(getResources().getString(R.string.google_signin_client_id))
@@ -232,6 +243,7 @@ public class LoginActivity extends AppCompatActivity {
                 // Khi nhấn vào nút "OK", chuyển sang MainActivity và truyền thông tin người dùng
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         builder.show();
@@ -265,6 +277,8 @@ public class LoginActivity extends AppCompatActivity {
                         GetTokenResult tokenTokenResult = user.getIdToken(false).getResult();
                         String tokenFirebaseUser = tokenTokenResult.getToken();
                         handleSignFacebookInUserAPI(tokenFirebaseUser);
+                        LoginManager.getInstance().logOut();
+                        FirebaseAuth.getInstance().signOut();
                     } else {
                         showErrorMessage();
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -356,5 +370,45 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("avatar", user.getAvatar());
         editor.putString("tagSocialNetwork", user.getTagSocialNetwork());
         editor.apply();
+    }
+
+    public boolean checkTokenExpiration() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", null);
+
+        if (token == null) {
+            // Token not found, need login
+            return false;
+        }
+
+        // Decode JWT token
+        String[] splitToken = token.split("\\.");
+        String base64EncodedBody = splitToken[1];
+        byte[] decodedBytes = Base64.decode(base64EncodedBody, Base64.URL_SAFE);
+        String jsonBody = new String(decodedBytes, StandardCharsets.UTF_8);
+        Log.i("BODY", jsonBody);
+        // Deserialize JSON body
+        Gson gson = new Gson();
+        TokenData tokenData = gson.fromJson(jsonBody, TokenData.class);
+
+        // Check token expiration
+        Date now = Calendar.getInstance().getTime();
+        long currentTimeMillis = now.getTime() / 1000;
+        if (currentTimeMillis > tokenData.getExpirationDate()) {
+            // Token expired, need login
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+            return false;
+        }
+
+        // Token still valid
+        return true;
+    }
+    private static class TokenData {
+        private long exp;
+        public long getExpirationDate() {
+            return exp;
+        }
     }
 }

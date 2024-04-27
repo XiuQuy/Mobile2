@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- season_item.xml -->
+<!-- season_item.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imgSeasonPoster"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/default_poster" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp">
+
+        <TextView
+            android:id="@+id/tvSeasonName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Season 2"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/white"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+<!--        <ProgressBar-->
+<!--            android:id="@+id/seasonRate"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="22dp"-->
+<!--            android:indeterminate="false"-->
+<!--            android:max="100"-->
+<!--            android:progress="0"/>-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/round_layout"
+            android:padding="3dp"
+            android:layout_marginRight="10dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/star_yellow"
+                android:layout_marginRight="2dp"
+                />
+            <TextView
+                android:id="@+id/seasonRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Rate"
+                android:textColor="@color/white"
+
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tvAirDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Date"
+            android:layout_marginBottom="8dp"
+            android:paddingTop="3dp"
+            />
+        <TextView
+            android:paddingTop="3dp"
+            android:id="@+id/tvEpisodeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="count"
+            android:layout_marginBottom="8dp"
+            />
+    </LinearLayout>
+        <TextView
+            android:id="@+id/tvOverview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+           android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</LinearLayout>

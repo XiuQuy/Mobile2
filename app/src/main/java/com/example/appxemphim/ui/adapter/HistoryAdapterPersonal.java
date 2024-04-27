@@ -1,6 +1,7 @@
 package com.example.appxemphim.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
 import com.example.appxemphim.model.History;
+import com.example.appxemphim.ui.activity.MovieDetailActivity;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class HistoryAdapterPersonal extends RecyclerView.Adapter<HistoryAdapterPersonal.MyViewHolder> {
@@ -41,7 +44,19 @@ public class HistoryAdapterPersonal extends RecyclerView.Adapter<HistoryAdapterP
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String tagMovie = history.getInformationMovie().getTag();
+                if(Objects.equals(tagMovie, "TMDB_MOVIE") ||
+                   Objects.equals(tagMovie, "TMDB_TV_SERIES")){
+                    MovieDetailActivity.sendIntent(
+                            context,
+                            history.getInformationMovie().getMovieId(),
+                            history.getInformationMovie().getTag(),
+                            history.getInformationMovie().getTitle(),
+                            history.getInformationMovie().getImageLink());
+                }
+                if(tagMovie.equals("YOUTUBE")){
 
+                }
             }
         });
     }

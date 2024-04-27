@@ -73,33 +73,4 @@ public class HistoryActivity extends AppCompatActivity {
             }
         });
     }
-
-    public void getVideoInfo(String videoId) {
-        YoutubeService youtubeService = ServiceApiBuilder.buildYoutubeApiService(YoutubeService.class);
-
-        Call<YoutubeVideoResponse> call = youtubeService.getVideoInfo("snippet", videoId, "AIzaSyBSBAJLOEJmynxkun7JBGJlPwjJTcnJQXI");
-        call.enqueue(new Callback<YoutubeVideoResponse>() {
-            @Override
-            public void onResponse(Call<YoutubeVideoResponse> call, Response<YoutubeVideoResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    YoutubeVideoItem[] items = response.body().getItems();
-                    if (items != null && items.length > 0) {
-                        YoutubeVideoSnippet snippet = items[0].getSnippet();
-                        // Ở đây bạn có thể truy cập các thông tin về video, bao gồm cả URL của thumbnail
-                        String title = snippet.getTitle();
-                        String description = snippet.getDescription();
-                        String channelId = snippet.getChannelId();
-                        String thumbnailUrl = snippet.getThumbnails().getDefaultThumbnail().getUrl();
-                        String channelTitle = snippet.getChannelTitle();
-                    }
-                } else {
-                    Toast.makeText(HistoryActivity.this, "Failed to fetch", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<YoutubeVideoResponse> call, Throwable t) {
-                Log.e("API_ERROR", "Network error", t);
-            }
-        });
-    }
 }

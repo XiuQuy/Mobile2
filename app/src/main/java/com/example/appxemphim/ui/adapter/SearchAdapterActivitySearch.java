@@ -1,6 +1,7 @@
 package com.example.appxemphim.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
 import com.example.appxemphim.model.Movie;
+import com.example.appxemphim.ui.activity.MainActivity;
+import com.example.appxemphim.ui.activity.MovieDetailActivity;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -28,12 +31,12 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
 
     private Context context;
     private List<Movie> listMovies;
-    private PopupPlaylist popupPlaylist;
+    private IPopupPlaylist iPopupPlaylist;
 
-    public SearchAdapterActivitySearch(Context context, PopupPlaylist popupPlaylist){
+    public SearchAdapterActivitySearch(Context context, IPopupPlaylist iPopupPlaylist){
         this.context = context;
         listMovies = new ArrayList<>();
-        this.popupPlaylist = popupPlaylist;
+        this.iPopupPlaylist = iPopupPlaylist;
     }
 
     @Override
@@ -45,13 +48,13 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Movie movie = listMovies.get(position);
         holder.bind(movie);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Intent intent =  new Intent(context, MovieDetailActivity.class);
-                //context.startActivity(intent);
-                Log.i("ITEM RECYCLER VIEW", "click view detail");
-            }
+        holder.itemView.setOnClickListener(view -> {
+            MovieDetailActivity.sendIntent(
+                    context,
+                    String.valueOf(movie.getId()),
+                    movie.getTag(),
+                    movie.getName(),
+                    movie.getPosterPath());
         });
         holder.btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,12 +137,16 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
         popupMenu.setOnMenuItemClickListener(item -> {
             int idItem = item.getItemId();
             if(idItem == R.id.item_search_add_to_playlist_option){
-                popupPlaylist.showPopupAddToPlaylist(movie);
+                iPopupPlaylist.showPopupAddToPlaylist(movie);
                 Log.i("ITEM RECYCLER VIEW", "click add playlist option");
                 return true;
             }else if(idItem == R.id.item_search_view_detail_option){
-                //Intent intent =  new Intent(context, MovieDetailActivity.class);
-                //context.startActivity(intent);
+                MovieDetailActivity.sendIntent(
+                        context,
+                        String.valueOf(movie.getId()),
+                        movie.getTag(),
+                        movie.getName(),
+                        movie.getPosterPath());
                 Log.i("ITEM MENU RECYCLER VIEW", "click view detail");
                 return true;
             }
@@ -148,7 +155,7 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
         popupMenu.show();
     }
 
-    public interface PopupPlaylist{
+    public interface IPopupPlaylist {
         void showPopupAddToPlaylist(Movie movie);
     }
 }

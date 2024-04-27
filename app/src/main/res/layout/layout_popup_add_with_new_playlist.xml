@@ -42,7 +42,8 @@
             android:layout_marginStart="10dp"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:textColor="@color/btn_link_color"
+            android:enabled="false"
+            android:textColor="#233D6A"
             android:text="@string/add" />
 
         <TextView
