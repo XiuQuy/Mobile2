@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="16dp"
-            android:text="Setting"
+            android:text="@string/setting"
             android:textColor="@color/text_color"
             android:textSize="20sp"
             android:textStyle="bold" />
