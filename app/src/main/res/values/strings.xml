@@ -87,7 +87,6 @@
 
     <string name="movie">Movie</string>
 
-    <!--    accountinfo-->
     <string name="name_label">Name:</string>
     <string name="email_label">Email:</string>
     <string name="change_password">Change Password</string>
@@ -101,4 +100,46 @@
     <string name="playlist_title">Playlist</string>
     <string name="view_all_playlists">View All</string>
 
+    <string name="select_photo">Select photo</string>
+    <string name="take_photo">Take a photo</string>
+
+    <string name="toolbar_title">Enter code</string>
+    <string name="hint_code">Code</string>
+    <string name="confirm_button">Confirm</string>
+
+    <string name="my_list">My List</string>
+    <string name="status">Status:</string>
+
+    <string name="label_adult">Adult:</string>
+    <string name="label_overview">Overview</string>
+    <string name="label_original_language">Original language:</string>
+    <string name="label_spoken_language">Spoken language:</string>
+    <string name="label_trailer">Trailer</string>
+    <string name="label_crew">Crew</string>
+    <string name="label_cast">Cast</string>
+    <string name="label_product_companies">Product companies:</string>
+    <string name="label_popularity">Popularity:</string>
+    <string name="label_budget">Budget:</string>
+    <string name="label_revenue">Revenue:</string>
+    <string name="label_homepage">Homepage:</string>
+
+    <string name="title">Title</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="new_password">New password</string>
+    <string name="reset_password">Reset password</string>
+
+    <string name="new_name">Enter a new name</string>
+    <string name="save">Save</string>
+
+    <string name="current_password_hint">Current Password</string>
+    <string name="new_password_hint">New Password</string>
+    <string name="confirm_password_hint">Confirm New Password</string>
+    <string name="change_password_button">Change Password</string>
+    <string name="go_back_button">Go Back</string>
+
+    <string name="movie_title">Movie Title</string>
+    <string name="tag">Tag</string>
+
+    <string name="series">TV Series</string>
+    <string name="search">Search</string>
 </resources>
