@@ -55,8 +55,8 @@
     <!--end gooogle-->
 
     <!--facebook không được đổi-->
-    <string name="facebook_app_id">1137577040603838</string>
-    <string name="fb_login_protocol_scheme">fb1137577040603838</string>
+    <string name="facebook_app_id">460102680010973</string>
+    <string name="fb_login_protocol_scheme">fb460102680010973</string>
     <string name="facebook_client_token">56789</string>
     <!--end facebook-->
 
