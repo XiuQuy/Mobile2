@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/antic"
-                android:text="@string/my_list"
+                android:text="My List"
                 android:textColor="@color/white" />
         </LinearLayout>
 
@@ -143,7 +143,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/status"
+            android:text="Status: "
             android:textColor="@color/white"
             android:paddingLeft="16dp"
             android:textStyle="bold"
@@ -172,7 +172,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_adult"
+                android:text="Adult: "
                 android:textSize="16dp"
                 android:textColor="@color/white"
                 android:paddingLeft="16dp"
@@ -190,7 +190,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
-            android:text="@string/label_overview"
+            android:text="Overview"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -213,7 +213,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_original_language"
+            android:text="Original language:"
             android:paddingLeft="16dp"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -233,7 +233,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_spoken_language"
+                android:text="Spoken language:"
                 android:paddingLeft="16dp"
                 android:textColor="@color/white"
                 android:textSize="16sp"
@@ -252,7 +252,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/label_trailer"
+        android:text="Trailer"
         android:paddingTop="15dp"
         android:paddingLeft="16dp"
         android:textColor="@color/white"
@@ -266,7 +266,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/other_video"
+        android:text="Other videos"
         android:paddingLeft="16dp"
         android:paddingTop="10dp"
         android:textColor="@color/white"
@@ -289,7 +289,7 @@
         android:id="@+id/tv_review_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/review_other"
+        android:text="Review Video"
         android:paddingLeft="16dp"
         android:paddingTop="10dp"
         android:textColor="@color/white"
@@ -312,7 +312,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/label_crew"
+        android:text="Crew"
         android:paddingLeft="16dp"
         android:paddingTop="10dp"
         android:textColor="@color/white"
@@ -334,7 +334,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/label_cast"
+        android:text="Cast"
         android:paddingLeft="16dp"
         android:textColor="@color/white"
         android:textSize="20dp"
@@ -355,7 +355,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/label_product_companies"
+        android:text="Product companies: "
         android:layout_marginLeft="16dp"
         android:textStyle="bold"
         android:textSize="16dp"
@@ -379,7 +379,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:text="@string/label_popularity"
+        android:text="Popularity: "
         android:textSize="16dp"
         android:paddingLeft="16dp"/>
         <TextView
@@ -397,7 +397,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/label_budget"
+        android:text="Budget: "
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="16dp"
@@ -418,7 +418,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_revenue"
+            android:text="Revenue: "
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="16dp"
@@ -439,7 +439,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_homepage"
+            android:text="Homepage: "
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="16dp"
