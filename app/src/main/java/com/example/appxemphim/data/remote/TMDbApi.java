@@ -1,6 +1,7 @@
 package com.example.appxemphim.data.remote;
 
 import com.example.appxemphim.model.MovieResponse;
+import com.example.appxemphim.model.TMDBGenreListResponse;
 import com.example.appxemphim.model.VideoResponse;
 
 import retrofit2.Call;
@@ -19,11 +20,14 @@ public interface TMDbApi {
      * @return Đối tượng gọi API để lấy phản hồi danh sách các bộ phim
      */
     @GET("movie/popular")
-    Call<MovieResponse> getPopularMovies(@Query("api_key") String apiKey);
+    Call<MovieResponse> getPopularMovies(
+            @Query("language") String language,
+            @Query("api_key") String apiKey);
 
 
     @GET("movie/{movie_id}/videos")
     Call<VideoResponse> getMovieVideos(
+            @Query("language") String language,
             @Path("movie_id") int movieId, // Sử dụng @Path để thêm giá trị động vào URL
             @Query("api_key") String apiKey // Sử dụng @Query để thêm tham số query vào URL
     );

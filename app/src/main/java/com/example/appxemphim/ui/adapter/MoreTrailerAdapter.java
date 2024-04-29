@@ -60,7 +60,7 @@ public class MoreTrailerAdapter extends RecyclerView.Adapter<MoreTrailerAdapter.
             imageThumbnail = itemView.findViewById(R.id.img_thumbnail);
             title = itemView.findViewById(R.id.tv_title);
             channelName = itemView.findViewById(R.id.tv_channel);
-            btnGoToYoutube = itemView.findViewById(R.id.btn_to_youtube);
+//            btnGoToYoutube = itemView.findViewById(R.id.btn_to_youtube);
         }
 
         public void bind(YoutubeVideoItem video) {
@@ -71,11 +71,11 @@ public class MoreTrailerAdapter extends RecyclerView.Adapter<MoreTrailerAdapter.
                     .apply(new RequestOptions().placeholder(R.drawable.placeholder_img_load))
                     .listener(new GlideLoadImgListener(imageThumbnail))
                     .into(imageThumbnail);
-            btnGoToYoutube.setOnClickListener(v -> {
-                Intent intent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://www.youtube.com/watch?v="+video.getId()));
-                context.startActivity(intent);
-            });
+//            btnGoToYoutube.setOnClickListener(v -> {
+//                Intent intent = new Intent(Intent.ACTION_VIEW,
+//                        Uri.parse("https://www.youtube.com/watch?v="+video.getId()));
+//                context.startActivity(intent);
+//            });
         }
     }
 
