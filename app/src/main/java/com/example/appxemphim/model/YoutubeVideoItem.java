@@ -1,31 +1,32 @@
-    package com.example.appxemphim.model;
+package com.example.appxemphim.model;
 
-    import androidx.annotation.Nullable;
+import androidx.annotation.Nullable;
 
-    import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName;
 
-    import java.io.Serializable;
-    import java.util.Objects;
+import java.io.Serializable;
+import java.util.Objects;
 
-    public class YoutubeVideoItem implements Serializable {
+public class YoutubeVideoItem implements Serializable {
 
-        @SerializedName("snippet")
-        private YoutubeVideoSnippet snippet;
-        @SerializedName("id")
-        private String id;
-        @SerializedName("statistics")
-        private YoutubeVideoStatistics statistics;
+    @SerializedName("snippet")
+    private YoutubeVideoSnippet snippet;
+    @SerializedName("id")
+    private String id;
+    @SerializedName("statistics")
+    private YoutubeVideoStatistics statistics;
 
-        public YoutubeVideoSnippet getSnippet() {
-            return snippet;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public YoutubeVideoStatistics getStatistics() {
-            return statistics;
-        }
-
+    public YoutubeVideoSnippet getSnippet() {
+        return snippet;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public YoutubeVideoStatistics getStatistics() {
+        return statistics;
+    }
+
+}
+

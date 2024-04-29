@@ -1,6 +1,8 @@
 package com.example.appxemphim.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,12 +54,14 @@ public class ReviewVideoAdapter extends RecyclerView.Adapter<ReviewVideoAdapter.
         private ImageView imageThumbnail;
         private TextView title;
         private TextView channelName;
+        private ImageView btnGoToYoutube;
 
         public MyViewHolder(View itemView){
             super(itemView);
             imageThumbnail = itemView.findViewById(R.id.img_thumbnail);
             title = itemView.findViewById(R.id.tv_title);
             channelName = itemView.findViewById(R.id.tv_channel);
+            btnGoToYoutube = itemView.findViewById(R.id.btn_to_youtube);
         }
 
         public void bind(YoutubeVideoItem video) {
@@ -68,8 +72,14 @@ public class ReviewVideoAdapter extends RecyclerView.Adapter<ReviewVideoAdapter.
                     .apply(new RequestOptions().placeholder(R.drawable.placeholder_img_load))
                     .listener(new GlideLoadImgListener(imageThumbnail))
                     .into(imageThumbnail);
+            btnGoToYoutube.setOnClickListener(v -> {
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://www.youtube.com/watch?v="+video.getId()));
+                context.startActivity(intent);
+            });
         }
     }
+
 
     public void addAllData(List<YoutubeVideoItem> newData) {
         int startPosition = listVideos.size();

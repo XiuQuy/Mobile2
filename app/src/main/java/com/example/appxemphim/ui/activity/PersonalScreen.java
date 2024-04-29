@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
 import com.example.appxemphim.data.remote.HistoryService;
 import com.example.appxemphim.data.remote.PlaylistService;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,7 +47,7 @@ public class PersonalScreen extends AppCompatActivity {
     private String userEmail;
     private String userToken;
     private TextView txtUsername;
-    private ImageView imageViewAvatar;
+    private CircleImageView imageViewAvatar;
     private TextView txtName;
 
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -58,6 +60,7 @@ public class PersonalScreen extends AppCompatActivity {
 
         txtName = findViewById(R.id.name_label);
         txtUsername = findViewById(R.id.email_label);
+        imageViewAvatar = findViewById(R.id.imgAvatar);
 
         // Nhận thông tin người dùng từ Intent
         Intent intent = getIntent();
@@ -76,12 +79,29 @@ public class PersonalScreen extends AppCompatActivity {
                 txtUsername.setText(userEmail);
             }
         }
+        // Lấy dữ liệu từ SharedPreferences
+        SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        String avatarUrl = prefs.getString("avatar", "");
 
+        // Sử dụng Glide để tải hình ảnh
+        Glide.with(this)
+                .load(avatarUrl) // Load từ URL lấy từ SharedPreferences
+                .apply(new RequestOptions().placeholder(R.drawable.placeholder_img_load))
+                .into(imageViewAvatar);
+
+        // hiển thị danh sách lịch sử, danh sách phát
         fetchHistories();
         fetchPlaylists();
 
         // Xử lý sự kiện khi người dùng nhấn vào nút đổi mật khẩu
         Button btnChangePassword = findViewById(R.id.btnChangePassword);
+        String tagSocialNetwork = prefs.getString("tagSocialNetwork", "");
+        
+        // ẩn nút đổi mật khẩu khi người dùng đăng nhập bằng facebook hoặc google
+        if(tagSocialNetwork.equals("FACEBOOK") || tagSocialNetwork.equals("GOOGLE")){
+            btnChangePassword.setVisibility(View.GONE);
+        }
+
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
