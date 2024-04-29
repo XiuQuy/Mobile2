@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
 import com.example.appxemphim.data.remote.HistoryService;
 import com.example.appxemphim.data.remote.PlaylistService;
@@ -76,12 +77,29 @@ public class PersonalScreen extends AppCompatActivity {
                 txtUsername.setText(userEmail);
             }
         }
+        // Lấy dữ liệu từ SharedPreferences
+        SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        String avatarUrl = prefs.getString("avatar", "");
 
+        // Sử dụng Glide để tải hình ảnh
+        Glide.with(this)
+                .load(avatarUrl) // Load từ URL lấy từ SharedPreferences
+                .apply(new RequestOptions().placeholder(R.drawable.placeholder_img_load))
+                .into(imageViewAvatar);
+
+        // hiển thị danh sách lịch sử, danh sách phát
         fetchHistories();
         fetchPlaylists();
 
         // Xử lý sự kiện khi người dùng nhấn vào nút đổi mật khẩu
         Button btnChangePassword = findViewById(R.id.btnChangePassword);
+        String tagSocialNetwork = prefs.getString("tagSocialNetwork", "");
+        
+        // ẩn nút đổi mật khẩu khi người dùng đăng nhập bằng facebook hoặc google
+        if(tagSocialNetwork.equals("FACEBOOK") || tagSocialNetwork.equals("GOOGLE")){
+            btnChangePassword.setVisibility(View.GONE);
+        }
+
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
