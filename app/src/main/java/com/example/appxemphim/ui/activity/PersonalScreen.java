@@ -108,7 +108,7 @@ public class PersonalScreen extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
         String avatarUrl = prefs.getString("avatar", "");
 
-        // Sử dụng Glide để tải hình ảnh
+        // Sử dụng Glide để tải hình ảnhgit 
         Glide.with(this)
                 .load(avatarUrl) // Load từ URL lấy từ SharedPreferences
                 .apply(new RequestOptions().placeholder(R.drawable.placeholder_img_load))
