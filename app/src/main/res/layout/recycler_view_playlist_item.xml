@@ -76,7 +76,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:paddingLeft="6dp"
-                    android:text="@string/movie_title"
+                    android:text="Title Video"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />

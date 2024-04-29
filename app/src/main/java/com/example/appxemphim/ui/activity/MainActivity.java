@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        LanguageManager.initLanguage(this);
 
         recyclerView = findViewById(R.id.rcv_allcate);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                         movie.getPosterPath());
             }
         });
-
+      
         navigationView = findViewById(R.id.nav_user);
 
         // Lấy headerView của NavigationView
@@ -174,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
             // Thêm các trường hợp khác nếu cần
             return false; // Trả về false để đánh dấu sự kiện chưa được xử lý
         });
-
+      
 
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
         circleImageView.setOnClickListener(new View.OnClickListener() {

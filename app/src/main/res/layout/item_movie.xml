@@ -29,7 +29,7 @@
             android:id="@+id/text_view_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/movie_title"
+            android:text="Movie Title"
             android:textColor="@color/white"
             android:textSize="16sp"
             />
@@ -39,7 +39,7 @@
             android:id="@+id/text_view_tag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tag"
+            android:text="Tag"
             android:textColor="@color/white"
             android:textSize="14sp" />
     </LinearLayout>

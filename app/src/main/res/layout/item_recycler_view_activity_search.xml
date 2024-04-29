@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/text_color"
-                android:layout_marginStart="3dp"
+                 android:layout_marginStart="3dp"
                 android:text="@string/votes" />
         </LinearLayout>
     </LinearLayout>
