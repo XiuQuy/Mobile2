@@ -169,8 +169,8 @@ public class MainActivity extends AppCompatActivity {
                 return true; // Đánh dấu sự kiện đã được xử lý
             }else if (item.getItemId() == R.id.nav_setting) {
                 Intent intent1 = new Intent(MainActivity.this, SettingActivity.class);
-                startActivity(intent1);
-                return true; // Đánh dấu sự kiện đã được xử lý
+                startActivityForResult(intent1, YOUR_REQUEST_CODE); // Khởi động SettingActivity với yêu cầu trả về kết quả
+                return true;
             }
             // Thêm các trường hợp khác nếu cần
             return false; // Trả về false để đánh dấu sự kiện chưa được xử lý
