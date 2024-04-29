@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MovieAdapter adapter;
     private NavigationView navigationView;
+    private static final int YOUR_REQUEST_CODE = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,6 +214,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == YOUR_REQUEST_CODE && resultCode == RESULT_OK) {
+            if (data != null && data.getBooleanExtra("languageChanged", false)) {
+                // Ngôn ngữ đã thay đổi, tái khởi động lại activity
+                recreate();
+            }
+        }
+    }
 }
         
