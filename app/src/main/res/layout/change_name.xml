@@ -10,7 +10,7 @@
         android:id="@+id/editTextNewName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nhập tên mới"
+        android:hint="@string/new_name"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="#000000"
-            android:text="Lưu"
+            android:text="@string/save"
             android:textColor="#FFFFFF" />
 
         <Button
@@ -36,7 +36,7 @@
             android:layout_marginTop="16dp"
             android:background="#000000"
             android:onClick="goBack"
-            android:text="Quay lại"
+            android:text="@string/go_back_button"
             android:textColor="#FFFFFF" />
     </LinearLayout>
 

@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        LanguageManager.initLanguage(this);
 
         recyclerView = findViewById(R.id.rcv_allcate);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
