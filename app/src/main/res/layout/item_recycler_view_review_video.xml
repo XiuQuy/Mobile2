@@ -32,7 +32,7 @@
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:textColor="@color/text_color"
             android:fontFamily="@font/montserrat"
             android:layout_marginHorizontal="5dp"
@@ -41,29 +41,14 @@
             android:textSize="14sp"
             android:text="@string/default_title_item_search" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="5dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_channel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat"
-                android:layout_weight="1"
-                android:text="Channel"
-                android:textColor="@color/text_color"
-                android:textSize="11sp" />
-
-            <ImageView
-                android:id="@+id/btn_to_youtube"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:srcCompat="@drawable/youtube_icon" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_channel"
+            android:layout_marginStart="@dimen/margin_left_info_item_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:textSize="10sp"
+            android:textColor="@color/text_color"
+            android:text="@string/channel" />
     </LinearLayout>
 </LinearLayout>
-

@@ -30,65 +30,65 @@
             android:textStyle="bold"
             android:layout_marginBottom="8dp"
             android:textColor="@color/white"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-<!--        <ProgressBar-->
-<!--            android:id="@+id/seasonRate"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="22dp"-->
-<!--            android:indeterminate="false"-->
-<!--            android:max="100"-->
-<!--            android:progress="0"/>-->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/round_layout"
-            android:padding="3dp"
-            android:layout_marginRight="10dp">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/star_yellow"
-                android:layout_marginRight="2dp"
-                />
+            android:orientation="horizontal">
+            <!--        <ProgressBar-->
+            <!--            android:id="@+id/seasonRate"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="22dp"-->
+            <!--            android:indeterminate="false"-->
+            <!--            android:max="100"-->
+            <!--            android:progress="0"/>-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/round_layout"
+                android:padding="3dp"
+                android:layout_marginRight="10dp">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/star_yellow"
+                    android:layout_marginRight="2dp"
+                    />
+                <TextView
+                    android:id="@+id/seasonRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="@string/rate"
+                    android:textColor="@color/white"
+
+                    />
+            </LinearLayout>
             <TextView
-                android:id="@+id/seasonRate"
+                android:id="@+id/tvAirDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="Rate"
-                android:textColor="@color/white"
-
+                android:text="Date"
+                android:layout_marginBottom="8dp"
+                android:paddingTop="3dp"
+                />
+            <TextView
+                android:paddingTop="3dp"
+                android:id="@+id/tvEpisodeCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="count"
+                android:layout_marginBottom="8dp"
                 />
         </LinearLayout>
-        <TextView
-            android:id="@+id/tvAirDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Date"
-            android:layout_marginBottom="8dp"
-            android:paddingTop="3dp"
-            />
-        <TextView
-            android:paddingTop="3dp"
-            android:id="@+id/tvEpisodeCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="count"
-            android:layout_marginBottom="8dp"
-            />
-    </LinearLayout>
         <TextView
             android:id="@+id/tvOverview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-           android:textColor="@color/white"/>
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 
