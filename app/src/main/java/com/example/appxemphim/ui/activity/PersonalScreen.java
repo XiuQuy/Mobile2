@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,7 +47,7 @@ public class PersonalScreen extends AppCompatActivity {
     private String userEmail;
     private String userToken;
     private TextView txtUsername;
-    private ImageView imageViewAvatar;
+    private CircleImageView imageViewAvatar;
     private TextView txtName;
 
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -59,6 +60,7 @@ public class PersonalScreen extends AppCompatActivity {
 
         txtName = findViewById(R.id.name_label);
         txtUsername = findViewById(R.id.email_label);
+        imageViewAvatar = findViewById(R.id.imgAvatar);
 
         // Nhận thông tin người dùng từ Intent
         Intent intent = getIntent();

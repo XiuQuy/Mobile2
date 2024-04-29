@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
                 android:layout_weight="1"
-                android:text="Channel"
+                android:text="@string/channel"
                 android:textColor="@color/text_color"
                 android:textSize="11sp" />
 
