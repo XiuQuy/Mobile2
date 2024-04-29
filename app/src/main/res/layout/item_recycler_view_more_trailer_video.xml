@@ -49,6 +49,6 @@
             android:fontFamily="@font/montserrat"
             android:textSize="10sp"
             android:textColor="@color/text_color"
-            android:text="Channel" />
+            android:text="@string/channel" />
     </LinearLayout>
 </LinearLayout>
