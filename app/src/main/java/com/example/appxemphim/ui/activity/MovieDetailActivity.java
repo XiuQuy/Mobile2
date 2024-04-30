@@ -309,7 +309,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             call1.enqueue(new Callback<TrailerResponse>() {
                 @Override
                 public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
-                    if (response.isSuccessful()){
+                    if (response.isSuccessful() && response.body() != null && !response.body().getResults().isEmpty()){
                         TrailerResponse trailerResponse=response.body();
                         String key = trailerResponse.getResults().get(0).getKey();
                         getLifecycle().addObserver(youTubePlayerView);

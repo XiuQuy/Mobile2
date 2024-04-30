@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
 import com.example.appxemphim.model.YoutubeVideoItem;
+import com.example.appxemphim.ui.activity.VideoYoutubePlayerActivity;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class ReviewVideoAdapter extends RecyclerView.Adapter<ReviewVideoAdapter.
         YoutubeVideoItem video = listVideos.get(position);
         holder.bind(video);
         holder.itemView.setOnClickListener(view -> {
-
+//            VideoYoutubePlayerActivity.sendIntent(context, video, listVideos);
         });
     }
 
