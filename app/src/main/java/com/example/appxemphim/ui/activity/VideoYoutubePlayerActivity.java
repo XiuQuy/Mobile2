@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appxemphim.R;
+import com.example.appxemphim.data.remote.ServiceApiBuilder;
 import com.example.appxemphim.data.remote.TMDbApi;
 import com.example.appxemphim.model.Movie;
 import com.example.appxemphim.model.MovieResponse;
@@ -96,7 +97,9 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity {
                 .build();
 
         TMDbApi tmdbApi = retrofit.create(TMDbApi.class);
-        tmdbApi.getMovieVideos(movieId, API_KEY).enqueue(new Callback<VideoResponse>() {
+        String selectedLanguage = LanguageManager.getSelectedLanguage(this);
+
+        tmdbApi.getMovieVideos(selectedLanguage, movieId, API_KEY).enqueue(new Callback<VideoResponse>() {
             @Override
             public void onResponse(Call<VideoResponse> call, Response<VideoResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -132,7 +135,8 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity {
 
         TMDbApi tmdbApi = retrofit.create(TMDbApi.class);
 
-        Call<MovieResponse> call = tmdbApi.getPopularMovies(API_KEY);
+        String selectedLanguage = LanguageManager.getSelectedLanguage(this);
+        Call<MovieResponse> call = tmdbApi.getPopularMovies(selectedLanguage, ServiceApiBuilder.API_KEY_TMDB);
         call.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
