@@ -1,202 +1,299 @@
 package com.example.appxemphim.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
 import com.example.appxemphim.data.remote.ServiceApiBuilder;
-import com.example.appxemphim.data.remote.TMDbApi;
-import com.example.appxemphim.model.Movie;
-import com.example.appxemphim.model.MovieResponse;
-import com.example.appxemphim.model.Video;
-import com.example.appxemphim.model.VideoResponse;
-import com.example.appxemphim.ui.adapter.MovieAdapter;
+
+import com.example.appxemphim.data.remote.YoutubeService;
+import com.example.appxemphim.model.YoutubeChannelItem;
+import com.example.appxemphim.model.YoutubeChannelResponse;
+import com.example.appxemphim.model.YoutubeVideoItem;
+import com.example.appxemphim.ui.adapter.GlideLoadImgListener;
+import com.example.appxemphim.util.ConvertDateToDayAgo;
+import com.example.appxemphim.util.ConvertNumberToShortFormat;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.FullscreenListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Optional;
 
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class VideoYoutubePlayerActivity extends AppCompatActivity {
-    private static final String API_KEY = "9a169454f96888fb8284d35eb3042308";
-    private RecyclerView recyclerView;
-    private MovieAdapter adapter;
-
+    private YouTubePlayerView youTubePlayerView;
+    private YouTubePlayer youTubePlayer;
+    private FrameLayout fullscreenViewContainer;
+    private static final int MAX_LINES_TEXTVIEW_OVERVIEW = 3;
+    private TextView textViewOverview, textViewTitle, textViewViewCount, textViewLikeCount,
+            textViewDayAgo, textViewChannelName;
+    private ImageView imgChannel;
+    private TextView btnHideLessOverview, btnShowMoreOverview;
+    private List<YoutubeVideoItem> listVideo;
+    private YoutubeVideoItem videoPlaying;
+    private String languageCode;
+    private LinearLayout containerVideo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_video_youtube);
-        recyclerView = findViewById(R.id.rcv_allcate);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Khởi tạo adapter với context của activity
-        adapter = new MovieAdapter(new ArrayList<>(), this);
-        recyclerView.setAdapter(adapter);
+        //Init
+        containerVideo = findViewById(R.id.container_video);
+        fullscreenViewContainer = findViewById(R.id.full_screen_view_container);
+        textViewOverview = findViewById(R.id.overview);
+        textViewOverview.setMaxLines(MAX_LINES_TEXTVIEW_OVERVIEW + 1);
+        textViewTitle = findViewById(R.id.title);
+        textViewViewCount = findViewById(R.id.view_count);
+        textViewLikeCount = findViewById(R.id.like_count);
+        textViewDayAgo = findViewById(R.id.day_ago);
+        textViewChannelName = findViewById(R.id.channel_name);
+        imgChannel = findViewById(R.id.channel_img);
+        btnHideLessOverview = findViewById(R.id.btn_hide_less_overview);
+        btnShowMoreOverview = findViewById(R.id.btn_show_more_overview);
+        btnShowMoreOverview.setPaintFlags(textViewOverview.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        btnHideLessOverview.setPaintFlags(textViewOverview.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-        // Gọi API và cập nhật danh sách phim
-        fetchMovies();
+        //click bnt view overview
+        btnShowMoreOverview.setOnClickListener(v -> {
+            textViewOverview.setMaxLines(Integer.MAX_VALUE);
+            btnShowMoreOverview.setVisibility(View.GONE);
+            btnHideLessOverview.setVisibility(View.VISIBLE);
+        });
+        // hide less btn click
+        btnHideLessOverview.setOnClickListener(v -> {
+            textViewOverview.setMaxLines(MAX_LINES_TEXTVIEW_OVERVIEW + 1);
+            btnHideLessOverview.setVisibility(View.GONE);
+            btnShowMoreOverview.setVisibility(View.VISIBLE);
+        });
 
-        // Nhận đối tượng phim từ Intent
-        Movie movie = (Movie) getIntent().getSerializableExtra("MOVIE");
-
-        if (movie != null) {
-            //int movieId = movie.getId(); // Lấy ID của phim từ đối tượng Movie
-            // Gọi API để lấy thông tin chi tiết của phim với ID đã lấy được
-            //fetchMovieDetails(movieId);
-            TextView titleTextView = findViewById(R.id.movie_title_detail);
-            TextView overviewTextView = findViewById(R.id.movie_overview_detail);
-            TextView releaseDateTextView = findViewById(R.id.movie_release_date_detail);
-            TextView ratingTextView = findViewById(R.id.movie_rating_detail);
-
-            // Hiển thị tiêu đề phim
-            titleTextView.setText(movie.getName());
-
-            // Hiển thị tóm tắt của phim
-            //overviewTextView.setText(movie.getOverview());
-            // Hiển thị ngày phát hành của phim
-            //releaseDateTextView.setText(getString(R.string.release_date, movie.getReleaseDate()));
-
-            // Hiển thị rating của phim
-            //ratingTextView.setText(getString(R.string.rating, Double.toString(movie.getRating())));
+        //Get data from intent
+        Intent intent = getIntent();
+        if(intent != null){
+            YoutubeVideoItem videoItem = (YoutubeVideoItem) intent.getSerializableExtra("youtubeVideo");
+            if(videoItem != null){
+                videoPlaying = videoItem;
+                listVideo = new Gson().fromJson(
+                        intent.getStringExtra("listVideo"),
+                        new TypeToken<ArrayList<YoutubeVideoItem>>(){}.getType()
+                );
+            }
+            else {
+                finish();
+            }
         }
 
+        // Lấy ngôn ngữ
+        Locale currentLocale = getResources().getConfiguration().getLocales().get(0);
+        languageCode = currentLocale.getLanguage();
+
+        //xoa video dang phat ra khoi list
+        Optional<YoutubeVideoItem> optionalVideoInList= listVideo.stream()
+                .filter(video -> Objects.equals(video.getId(), videoPlaying.getId())).findFirst();
+        optionalVideoInList.ifPresent(youtubeVideoItem -> listVideo.remove(youtubeVideoItem));
+
+        //info video playing
+        setVideoPlayingInfo(videoPlaying);
+        bindListVideoToContainer(listVideo);
+
         // YouTubePlayerView
-        YouTubePlayerView youTubePlayerView = findViewById(R.id.youtube_player_view);
+        youTubePlayerView = findViewById(R.id.youtube_player_view);
+        youTubePlayerView.setEnableAutomaticInitialization(false);
+        youTubePlayerView.addFullscreenListener(new FullscreenListener() {
+            @Override
+            public void onEnterFullscreen(@NonNull View view, @NonNull Function0<Unit> function0) {
+                // the video will continue playing in fullscreenView
+                youTubePlayerView.setVisibility(View.GONE);
+                fullscreenViewContainer.setVisibility(View.VISIBLE);
+                fullscreenViewContainer.addView(view);
+            }
+            @Override
+            public void onExitFullscreen() {
+                // the video will continue playing in the player
+                youTubePlayerView.setVisibility(View.VISIBLE);
+                fullscreenViewContainer.setVisibility(View.GONE);
+                fullscreenViewContainer.removeAllViews();
+            }
+        });
+
+        //Thiết lập nút toàn màn hình
+        IFramePlayerOptions iFramePlayerOptions = new IFramePlayerOptions.Builder()
+                .controls(1)
+                .fullscreen(1)
+                .build();
+
+        // Khởi tạo YouTubePlayerListener
+        AbstractYouTubePlayerListener listener = new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                VideoYoutubePlayerActivity.this.youTubePlayer = youTubePlayer;
+                if(videoPlaying != null){
+                    // Phát video
+                    youTubePlayer.loadVideo(videoPlaying.getId(), 0);
+                }
+
+            }
+        };
+        // Khởi tạo YouTubePlayerView
+        youTubePlayerView.initialize(listener, iFramePlayerOptions);
         getLifecycle().addObserver(youTubePlayerView);
 
+        // Sự kiện btn back
         ImageView imgBack = findViewById(R.id.imgBack);
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Xử lý sự kiện khi người dùng nhấn vào ImageView
-                onBackPressed();
-            }
+        imgBack.setOnClickListener(v -> {
+            // Xử lý sự kiện khi người dùng nhấn vào ImageView
+            finish();
         });
+
+        //xư lý hiẻn thị overview
+        textViewOverview.post(() -> {
+            Log.i("LAYOUT_POST", "");
+            setViewButtonShowOverview();
+        });
+
     }
 
-    private void fetchMovieDetails(int movieId) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        TMDbApi tmdbApi = retrofit.create(TMDbApi.class);
-        String selectedLanguage = LanguageManager.getSelectedLanguage(this);
-
-        tmdbApi.getMovieVideos(selectedLanguage, movieId, API_KEY).enqueue(new Callback<VideoResponse>() {
-            @Override
-            public void onResponse(Call<VideoResponse> call, Response<VideoResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    VideoResponse videoResponse = response.body();
-                    List<Video> videos = videoResponse.getResults();
-
-                    if (!videos.isEmpty()) { // Kiểm tra danh sách không trống
-                        Video firstVideo = videos.get(0); // Lấy video đầu tiên từ danh sách
-                        String key = firstVideo.getKey();
-                        Log.d("First Video Key", key);
-                        playVideo(key); // Gọi phương thức để phát video với key đã lấy được
-                    }
-
-                } else {
-                    Log.e("Video API", "Failed to get videos"); // Hiển thị thông báo lỗi trong logcat
-                    // Xử lý trường hợp không thành công khi lấy thông tin video
-                }
-            }
-
-            @Override
-            public void onFailure(Call<VideoResponse> call, Throwable t) {
-                Log.e("Video API", "Network error: " + t.getMessage()); // Hiển thị thông báo lỗi trong logcat
-                // Xử lý trường hợp lỗi kết nối mạng
-            }
-        });
+    private void handlePlayVideoInActivity(YoutubeVideoItem newVideo){
+        // add video cu vao
+        listVideo.add(videoPlaying);
+        //lay video moi
+        videoPlaying = newVideo;
+        //xoa video dang phat ra khoi list
+        Optional<YoutubeVideoItem> optionalVideoInList= listVideo.stream()
+                .filter(video -> Objects.equals(video.getId(), videoPlaying.getId())).findFirst();
+        optionalVideoInList.ifPresent(youtubeVideoItem -> listVideo.remove(youtubeVideoItem));
+        // chay video
+        youTubePlayer.loadVideo(videoPlaying.getId(), 0);
+        setVideoPlayingInfo(videoPlaying);
     }
 
-    private void fetchMovies() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    private void bindListVideoToContainer(List<YoutubeVideoItem> listVideo){
+        LayoutInflater inflater = LayoutInflater.from(this);
+        ImageView imageThumbnail;
+        TextView channelName, viewCount, likeCount, title;
+        for(YoutubeVideoItem video : listVideo){
+            View itemLayout = inflater.inflate(
+                    R.layout.item_list_video_youtube_activity_player,
+                    containerVideo, false);
+            imageThumbnail = itemLayout.findViewById(R.id.img_thumbnail);
+            title = itemLayout.findViewById(R.id.tv_title);
+            channelName = itemLayout.findViewById(R.id.tv_channel);
+            viewCount = itemLayout.findViewById(R.id.view_count);
+            likeCount = itemLayout.findViewById(R.id.like_count);
 
-        TMDbApi tmdbApi = retrofit.create(TMDbApi.class);
+            title.setText(video.getSnippet().getTitle());
+            channelName.setText(video.getSnippet().getChannelTitle());
+            Glide.with(this)
+                    .load(video.getSnippet().getThumbnails().getMediumThumbnail().getUrl())
+                    .apply(new RequestOptions().placeholder(R.drawable.placeholder_img_load))
+                    .listener(new GlideLoadImgListener(imageThumbnail))
+                    .into(imageThumbnail);
+            String viewCountString = ConvertNumberToShortFormat.convert(
+                    Long.parseLong(video.getStatistics().getViewCount()), languageCode) +
+                    " " + getString(R.string.views_string);
+            viewCount.setText(viewCountString);
+            String likeCountString = ConvertNumberToShortFormat.convert(
+                    Long.parseLong(video.getStatistics().getLikeCount()), languageCode) +
+                    " " + getString(R.string.likes_string);
+            likeCount.setText(likeCountString);
+            itemLayout.setOnClickListener(v -> {
+                containerVideo.removeView(itemLayout);
+                List<YoutubeVideoItem> i = new ArrayList<>();
+                i.add(videoPlaying);
+                bindListVideoToContainer(i);
+                handlePlayVideoInActivity(video);
+            });
+            containerVideo.addView(itemLayout);
+        }
 
-        String selectedLanguage = LanguageManager.getSelectedLanguage(this);
-        Call<MovieResponse> call = tmdbApi.getPopularMovies(selectedLanguage, ServiceApiBuilder.API_KEY_TMDB);
-        call.enqueue(new Callback<MovieResponse>() {
-            @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    //List<Movie> movies = response.body().getResults();
-                    //adapter.setMovies(movies);
-                    adapter.setOnItemClickListener(new MovieAdapter.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(Movie movie) {
-                            //int movieId = movie.getId(); // Lấy ID của phim được chọn
-                            //fetchMovieDetails(movieId); // Gọi phương thức để lấy thông tin chi tiết của phim với ID đã lấy được
-
-                            TextView titleTextView = findViewById(R.id.movie_title_detail);
-                            TextView overviewTextView = findViewById(R.id.movie_overview_detail);
-                            TextView releaseDateTextView = findViewById(R.id.movie_release_date_detail);
-                            TextView ratingTextView = findViewById(R.id.movie_rating_detail);
-
-                            // Hiển thị tiêu đề phim
-                            //titleTextView.setText(movie.getTitle());
-
-                            // Hiển thị tóm tắt của phim
-                            //overviewTextView.setText(movie.getOverview());
-                            // Hiển thị ngày phát hành của phim
-                            //releaseDateTextView.setText(getString(R.string.release_date, movie.getReleaseDate()));
-
-                            // Hiển thị rating của phim
-                            //ratingTextView.setText(getString(R.string.rating, Double.toString(movie.getRating())));
-
-                        }
-                    });
-                } else {
-                    Toast.makeText(VideoYoutubePlayerActivity.this, "Failed to fetch movies", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
-                Toast.makeText(VideoYoutubePlayerActivity.this, "Network error", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
-    private YouTubePlayer youTubePlayer; // Biến lưu trữ YouTubePlayer
-    private boolean isVideoPlaying = false; // Biến boolean để kiểm tra trạng thái video
+    private void setViewButtonShowOverview(){
+        btnHideLessOverview.setVisibility(View.GONE);
+        String textDefault = textViewOverview.getText().toString();
+        if (textViewOverview.getLayout() != null &&
+                textDefault.length() > MAX_LINES_TEXTVIEW_OVERVIEW *
+                        textViewOverview.getLayout().getLineEnd(0)) {
+            btnShowMoreOverview.setVisibility(View.VISIBLE);
+        }
+    }
 
-    private void playVideo(String key) {
-        Log.d("Key", key);
-        YouTubePlayerView youTubePlayerView = findViewById(R.id.youtube_player_view);
-        youTubePlayerView.getYouTubePlayerWhenReady(new YouTubePlayerCallback() {
+    public static void sendIntent(Context context, YoutubeVideoItem youtubeVideo, List<YoutubeVideoItem> listVideo){
+        Intent intent = new Intent(context, VideoYoutubePlayerActivity.class);
+        intent.putExtra("youtubeVideo", youtubeVideo);
+        intent.putExtra("listVideo", new Gson().toJson(listVideo));
+        context.startActivity(intent);
+    }
+
+    private void setVideoPlayingInfo(YoutubeVideoItem video){
+        textViewOverview.setText(video.getSnippet().getDescription());
+        setViewButtonShowOverview();
+        textViewTitle.setText(video.getSnippet().getTitle());
+        textViewViewCount.setText(
+                ConvertNumberToShortFormat.convert(
+                        Long.parseLong(video.getStatistics().getViewCount()),
+                        languageCode));
+        textViewLikeCount.setText(ConvertNumberToShortFormat.convert(
+                Long.parseLong(video.getStatistics().getLikeCount()),
+                languageCode));
+        LocalDateTime localDateTime = LocalDateTime.parse(
+                video.getSnippet().getPublishedAt(), DateTimeFormatter.ISO_DATE_TIME);
+        textViewDayAgo.setText(ConvertDateToDayAgo.convert(
+                localDateTime, getString(R.string.day_ago),
+                getString(R.string.month_ago), getString(R.string.year_ago)));
+        String[] idChanelList = {video.getSnippet().getChannelId()};
+        fetchChannelInfo(idChanelList);
+    }
+
+    private void fetchChannelInfo(String[] id){
+        String[] part = {"snippet"};
+        YoutubeService youtubeService = ServiceApiBuilder.buildYoutubeApiService(YoutubeService.class);
+        Call<YoutubeChannelResponse> call = youtubeService.getChannelInfo(part, id, ServiceApiBuilder.API_KEY_YOUTUBE_DATA);
+        call.enqueue(new Callback<YoutubeChannelResponse>() {
             @Override
-            public void onYouTubePlayer(@NonNull YouTubePlayer player) {
-                youTubePlayer = player; // Lưu trữ YouTubePlayer để sử dụng sau này
-                if (isVideoPlaying) {
-                    // Nếu video trước đó đang phát, dừng nó trước khi phát video mới
-                    youTubePlayer.pause();
-                    isVideoPlaying = false; // Đặt lại trạng thái video
+            public void onResponse(Call<YoutubeChannelResponse> call, Response<YoutubeChannelResponse> response) {
+                if(response.isSuccessful() && response.body() != null){
+                    List<YoutubeChannelItem> channelItems = response.body().getItems();
+                    textViewChannelName.setText(channelItems.get(0).getSnippet().getTitle());
+                    Glide.with(VideoYoutubePlayerActivity.this)
+                            .load(channelItems.get(0).getSnippet().getThumbnails().getDefaultThumbnail().getUrl())
+                            .apply(new RequestOptions().placeholder(R.drawable.placeholder_img_load))
+                            .into(imgChannel);
                 }
-                // Phát video mới
-                player.loadVideo(key, 0);
-                isVideoPlaying = true; // Đặt lại trạng thái video
+            }
+            @Override
+            public void onFailure(Call<YoutubeChannelResponse> call, Throwable t) {
+
             }
         });
     }
