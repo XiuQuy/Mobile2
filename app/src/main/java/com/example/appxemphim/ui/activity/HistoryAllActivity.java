@@ -2,19 +2,16 @@ package com.example.appxemphim.ui.activity;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,18 +22,22 @@ import com.example.appxemphim.model.DeleteResponse;
 import com.example.appxemphim.model.History;
 import com.example.appxemphim.ui.adapter.HistoryAllAdapter;
 
+import android.widget.ImageView;
+import android.widget.PopupMenu;
+
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HistoryAllActivity extends AppCompatActivity implements HistoryAllAdapter.OnDeleteItemClickListener{
+public class HistoryAllActivity extends AppCompatActivity implements HistoryAllAdapter.OnDeleteItemClickListener {
     private int userId;
     private String userName;
     private String userEmail;
     private String userToken;
     private HistoryAllAdapter historyAllAdapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,22 +45,23 @@ public class HistoryAllActivity extends AppCompatActivity implements HistoryAllA
         // Nhận thông tin người dùng từ Intent
         Intent intent = getIntent();
         if (intent != null) {
-            SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
-            userName = prefs.getString("name", "");
-            userEmail = prefs.getString("email", "");
-            userId = prefs.getInt("userId", -1);
-            userToken = prefs.getString("token", "");
+            userName = intent.getStringExtra("userName");
+            userEmail = intent.getStringExtra("userEmail");
+            userId = intent.getIntExtra("userId", -1);
+            userToken = intent.getStringExtra("userToken");
         }
         RecyclerView recyclerView = findViewById(R.id.recycler_view_items);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         fetchHistories();
+        ImageView btnBack = findViewById(R.id.back_button);
+        btnBack.setOnClickListener(v -> finish());
     }
 
     private void fetchHistories() {
 
         HistoryService tmdbApi = ServiceApiBuilder.buildUserApiService(HistoryService.class);
 
-        Call<List<History>> call = tmdbApi.getAllHistory(userId,"Bearer " + userToken);
+        Call<List<History>> call = tmdbApi.getAllHistory(userId, "Bearer " + userToken);
 
         call.enqueue(new Callback<List<History>>() {
             @Override
@@ -82,6 +84,166 @@ public class HistoryAllActivity extends AppCompatActivity implements HistoryAllA
             }
         });
     }
+
+    @SuppressLint("NonConstantResourceId")
+    private void showOptionMenu() {
+        TextView btnShowOptionMenu = findViewById(R.id.btn_show_menu);
+        btnShowOptionMenu.setOnClickListener(v -> {
+            PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
+            popupMenu.getMenuInflater().inflate(R.menu.menu_history_delete, popupMenu.getMenu());
+            popupMenu.setOnMenuItemClickListener(item -> {
+                int id = item.getItemId();
+                if (id == R.id.one_hour) {
+                    sendRequestDeleteLastHour();
+                    return true;
+                } else if (id == R.id.one_day) {
+                    sendRequestDeleteLastDay();
+                    return true;
+                } else if (id == R.id.one_week) {
+                    sendRequestDeleteLastWeek();
+                    return true;
+                } else if (id == R.id.one_month) {
+                    sendRequestDeleteLastMonth();
+                    return true;
+                } else if (id == R.id.all) {
+                    sendRequestDeleteAll();
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            popupMenu.show();
+        });
+    }
+
+    private void sendRequestDeleteLastHour() {
+        showConfirmationDialog("Bạn có chắc chắn muốn xóa lịch sử của giờ qua?", () -> {
+            HistoryService historyService = ServiceApiBuilder.buildUserApiService(HistoryService.class);
+            Call<DeleteResponse> call = historyService.deleteLastHourHistory(userId, "Bearer " + userToken);
+
+            call.enqueue(new Callback<DeleteResponse>() {
+                @Override
+                public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
+                    if (response.isSuccessful()) {
+                        fetchHistories();
+                    } else {
+                        // Xử lý trường hợp không thành công nếu cần
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<DeleteResponse> call, Throwable t) {
+                    // Xử lý lỗi nếu có
+                }
+            });
+        });
+
+    }
+
+    private void sendRequestDeleteLastDay() {
+        showConfirmationDialog("Bạn có chắc chắn muốn xóa lịch sử xem trong ngày?", () -> {
+            HistoryService historyService = ServiceApiBuilder.buildUserApiService(HistoryService.class);
+            Call<DeleteResponse> call = historyService.deleteLastDayHistory(userId, "Bearer " + userToken);
+
+            call.enqueue(new Callback<DeleteResponse>() {
+                @Override
+                public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
+                    if (response.isSuccessful()) {
+                        fetchHistories();
+                    } else {
+                        // Xử lý trường hợp không thành công nếu cần
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<DeleteResponse> call, Throwable t) {
+                    // Xử lý lỗi nếu có
+                }
+            });
+        });
+
+    }
+
+    private void sendRequestDeleteLastWeek() {
+        showConfirmationDialog("Bạn có chắc chắn muốn xóa lịch sử xem trong tuần qua?", () -> {
+            HistoryService historyService = ServiceApiBuilder.buildUserApiService(HistoryService.class);
+            Call<DeleteResponse> call = historyService.deleteLastWeekHistory(userId, "Bearer " + userToken);
+
+            call.enqueue(new Callback<DeleteResponse>() {
+                @Override
+                public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
+                    if (response.isSuccessful()) {
+                        fetchHistories();
+                    } else {
+                        // Xử lý trường hợp không thành công nếu cần
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<DeleteResponse> call, Throwable t) {
+                    // Xử lý lỗi nếu có
+                }
+            });
+        });
+
+    }
+
+    private void sendRequestDeleteLastMonth() {
+        showConfirmationDialog("Bạn có chắc chắn muốn xóa lịch sử xem trong tháng qua?", () -> {
+            HistoryService historyService = ServiceApiBuilder.buildUserApiService(HistoryService.class);
+            Call<DeleteResponse> call = historyService.deleteLastMonthHistory(userId, "Bearer " + userToken);
+
+            call.enqueue(new Callback<DeleteResponse>() {
+                @Override
+                public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
+                    if (response.isSuccessful()) {
+                        fetchHistories();
+                    } else {
+                        // Xử lý trường hợp không thành công nếu cần
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<DeleteResponse> call, Throwable t) {
+                    // Xử lý lỗi nếu có
+                }
+            });
+        });
+
+    }
+
+    private void sendRequestDeleteAll() {
+        showConfirmationDialog("Bạn có chắc chắn muốn xóa tất cả lịch sử đã xem?", () -> {
+            HistoryService historyService = ServiceApiBuilder.buildUserApiService(HistoryService.class);
+            Call<DeleteResponse> call = historyService.deleteAll(userId, "Bearer " + userToken);
+
+            call.enqueue(new Callback<DeleteResponse>() {
+                @Override
+                public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
+                    if (response.isSuccessful()) {
+                        fetchHistories();
+                    } else {
+                        // Xử lý trường hợp không thành công nếu cần
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<DeleteResponse> call, Throwable t) {
+                    // Xử lý lỗi nếu có
+                }
+            });
+        });
+
+    }
+
+    private void showConfirmationDialog(String message, Runnable onConfirm) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("Xác nhận", (dialog, which) -> onConfirm.run())
+                .setNegativeButton("Hủy", null)
+                .show();
+    }
+
     @Override
     public void onDeleteItemClick(int position) {
         // Lấy danh sách các mục từ adapter
@@ -98,7 +260,7 @@ public class HistoryAllActivity extends AppCompatActivity implements HistoryAllA
 
             // Thực hiện xóa mục và cập nhật RecyclerView
             histories.remove(position);
-            //historyAllAdapter.notifyItemRemoved(position); // Thông báo cho adapter biết một mục đã bị xóa
+            historyAllAdapter.notifyItemRemoved(position); // Thông báo cho adapter biết một mục đã bị xóa
 
             // Gọi phương thức xóa từ backend
             deleteItemFromBackend(historyId, userId, adapterPosition);
