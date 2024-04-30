@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
 import com.example.appxemphim.data.remote.ServiceApiBuilder;
+
 import com.example.appxemphim.data.remote.YoutubeService;
 import com.example.appxemphim.model.YoutubeChannelItem;
 import com.example.appxemphim.model.YoutubeChannelResponse;
@@ -28,6 +29,7 @@ import com.example.appxemphim.util.ConvertDateToDayAgo;
 import com.example.appxemphim.util.ConvertNumberToShortFormat;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.FullscreenListener;

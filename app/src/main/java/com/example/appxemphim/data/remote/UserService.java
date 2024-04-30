@@ -2,6 +2,7 @@ package com.example.appxemphim.data.remote;
 
 import com.example.appxemphim.model.ChangeInfoUserDTO;
 import com.example.appxemphim.model.ChangePasswordDTO;
+import com.example.appxemphim.model.ForgotDTO;
 import com.example.appxemphim.model.User;
 import com.example.appxemphim.model.UserLogin;
 import com.example.appxemphim.model.UserRegister;
@@ -9,7 +10,6 @@ import com.example.appxemphim.model.UserResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 

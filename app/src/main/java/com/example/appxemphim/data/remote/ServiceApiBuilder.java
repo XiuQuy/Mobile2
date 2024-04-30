@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceApiBuilder {
     private static final String URL_TMDB = "https://api.themoviedb.org/3/";
-    private static final String URL_USER_API = "http://192.168.1.4:80/user/";
+    private static final String URL_USER_API = "https://nhom17movieappapi.azurewebsites.net/";
     private static final String URL_YOUTUBE_DATA_API = "https://www.googleapis.com/youtube/v3/";
     public static final String API_KEY_TMDB = "64d0aa770962667c44935e02b31da40f";
     public static final String API_KEY_YOUTUBE_DATA = "AIzaSyBSBAJLOEJmynxkun7JBGJlPwjJTcnJQXI";
@@ -35,7 +35,7 @@ public class ServiceApiBuilder {
     // Create OkHttp Client
     private static final OkHttpClient.Builder okHttp =
             new OkHttpClient.Builder()
-                    .readTimeout(30, TimeUnit.SECONDS)
+                    .readTimeout(50, TimeUnit.SECONDS)
                     .addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {

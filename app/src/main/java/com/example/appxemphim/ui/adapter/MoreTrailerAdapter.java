@@ -1,23 +1,21 @@
 package com.example.appxemphim.ui.adapter;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
-import com.example.appxemphim.model.Movie;
 import com.example.appxemphim.model.YoutubeVideoItem;
-import com.example.appxemphim.model.YoutubeVideoSnippet;
-import com.example.appxemphim.ui.activity.MovieDetailActivity;
+import com.example.appxemphim.ui.activity.VideoYoutubePlayerActivity;
 
 import java.util.List;
 
@@ -42,7 +40,7 @@ public class MoreTrailerAdapter extends RecyclerView.Adapter<MoreTrailerAdapter.
         YoutubeVideoItem video = listVideos.get(position);
         holder.bind(video);
         holder.itemView.setOnClickListener(view -> {
-
+            //VideoYoutubePlayerActivity.sendIntent(context, video, listVideos);
         });
     }
 
@@ -55,12 +53,14 @@ public class MoreTrailerAdapter extends RecyclerView.Adapter<MoreTrailerAdapter.
         private ImageView imageThumbnail;
         private TextView title;
         private TextView channelName;
+        private ImageView btnGoToYoutube;
 
         public MyViewHolder(View itemView){
             super(itemView);
             imageThumbnail = itemView.findViewById(R.id.img_thumbnail);
             title = itemView.findViewById(R.id.tv_title);
             channelName = itemView.findViewById(R.id.tv_channel);
+//            btnGoToYoutube = itemView.findViewById(R.id.btn_to_youtube);
         }
 
         public void bind(YoutubeVideoItem video) {
@@ -71,8 +71,14 @@ public class MoreTrailerAdapter extends RecyclerView.Adapter<MoreTrailerAdapter.
                     .apply(new RequestOptions().placeholder(R.drawable.placeholder_img_load))
                     .listener(new GlideLoadImgListener(imageThumbnail))
                     .into(imageThumbnail);
+//            btnGoToYoutube.setOnClickListener(v -> {
+//                Intent intent = new Intent(Intent.ACTION_VIEW,
+//                        Uri.parse("https://www.youtube.com/watch?v="+video.getId()));
+//                context.startActivity(intent);
+//            });
         }
     }
+
 
     public void addAllData(List<YoutubeVideoItem> newData) {
         int startPosition = listVideos.size();

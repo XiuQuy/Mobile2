@@ -1,8 +1,11 @@
 package com.example.appxemphim.model;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class YoutubeVideoItem implements Serializable {
 
@@ -24,4 +27,6 @@ public class YoutubeVideoItem implements Serializable {
     public YoutubeVideoStatistics getStatistics() {
         return statistics;
     }
+
 }
+

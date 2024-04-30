@@ -82,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
+        LanguageManager.initLanguage(this);
         if(checkTokenExpiration()){
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
@@ -317,6 +318,7 @@ public class LoginActivity extends AppCompatActivity {
                     saveUserInfoLoginSuccess(response.body());
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    finish();
                     Log.e("LOGIN_SUCCESS", ""+response.body());
                 } else {
                     Log.e("API_ERROR", "Failed to fetch");
@@ -341,9 +343,10 @@ public class LoginActivity extends AppCompatActivity {
                     saveUserInfoLoginSuccess(response.body());
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    finish();
                     Log.e("LOGIN_SUCCESS", ""+response.body());
                 } else {
-                    Log.e("API_ERROR", "Failed to fetch");
+                    Log.e("API_LOGIN_FB_ERROR", "Failed to fetch");
                     showErrorMessage();
                 }
             }

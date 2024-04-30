@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MovieReview</string>
+    <string name="welcome">Chào mừng</string>
+    <string name="signin">Đăng nhập để tiếp tục</string>
+    <string name="user">Tên người dùng</string>
+    <string name="pass">Mật khẩu</string>
+    <string name="passConfirm">Xác nhận mật khẩu</string>
+    <string name="forgotpass">Quên mật khẩu</string>
+    <string name="login">Đăng nhập</string>
+    <string name="or">hoặc</string>
+    <string name="signup">Đăng ký</string>
+    <string name="singup_title">Đăng ký</string>
+    <string name="singup_slogan">Đăng ký miễn phí</string>
+    <string name="name">Tên</string>
+    <string name="signup_fb">Đăng ký bằng Facebook</string>
+    <string name="signup_gg">Đăng ký bằng Gmail</string>
+    <string name="email">Email</string>
+    <string name="signin_gg">Đăng nhập bằng Gmail</string>
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_fav">Yêu thích</string>
+    <string name="nav_his">Lịch sử</string>
+    <string name="nav_account">Tài khoản</string>
+    <string name="nav_profile">Hồ sơ của tôi</string>
+    <string name="nav_chancePass">Thay đổi mật khẩu</string>
+    <string name="nav_logout">Đăng xuất</string>
+    <string name="nav_playlist">Danh sách phát</string>
+
+    <!-- các chức năng trong cài đặt -->
+    <string name="setting">Cài đặt</string>
+    <string name="label_setting_darkmode">Chế độ Tối</string>
+    <string name="label_setting_wifi">Sử dụng chỉ Wifi</string>
+    <string name="label_setting_notification">Thông báo</string>
+
+    <string name="cd_menu_each_item_recyclerview">Menu cho mỗi mục</string>
+    <string name="release_date">"Ngày phát hành: "</string>
+    <string name="default_title_item_search">Vấn đề 3 thân</string>
+    <string name="no_data">Không có dữ liệu</string>
+    <string name="language">"Ngôn ngữ: "</string>
+    <string name="english">Tiếng Anh</string>
+    <string name="votes">lượt bình chọn</string>
+    <string name="default_vote_item_search">53.8% / 35</string>
+    <string name="top_searches">Tìm kiếm hàng đầu</string>
+    <string name="content_description_button_back">Nút quay lại</string>
+    <string name="filter">Bộ lọc</string>
+    <string name="lbl_include_adult">Bao gồm Người lớn</string>
+    <string name="lbl_year">Năm</string>
+    <string name="lbl_genres">Thể loại</string>
+    <string name="text_btn_filter">Lọc</string>
+    <string name="text_bnt_set_default">Đặt mặc định</string>
+
+    <string name="navigation_drawer_open">Mở ngăn kéo điều hướng</string>
+    <string name="navigation_drawer_close">Đóng ngăn kéo điều hướng</string>
+
+    <!-- không được thay đổi cho google -->
+    <string name="google_signin_client_id">793964661748-v2eko2imm6pi2dad49oc7ko2gkisgil0.apps.googleusercontent.com</string>
+    <!--end google-->
+
+    <!-- không được thay đổi cho facebook -->
+    <string name="facebook_app_id">460102680010973</string>
+    <string name="fb_login_protocol_scheme">fb460102680010973</string>
+    <string name="facebook_client_token">56789</string>
+    <!--end facebook-->
+
+    <!-- không được thay đổi cho tag -->
+    <string name="facebook_tag_name">FACEBOOK</string>
+    <string name="google_tag_name">GOOGLE</string>
+    <string name="tmdb_movie_tag_name">TMDB_MOVIE</string>
+    <string name="tmdb_tv_series_tag_name">TMDB_TV_SERIES</string>
+    <string name="youtube_video_tag_name">YOUTUBE</string>
+    <!--end tag-->
+
+    <string name="message_error_login">Đã xảy ra lỗi trong quá trình đăng nhập, vui lòng thử lại</string>
+    <string name="add_to_playlist">Thêm vào danh sách phát</string>
+    <string name="view_detail">Xem chi tiết</string>
+    <string name="horizontal_3dots">⋮</string>
+    <string name="finish">Hoàn thành</string>
+    <string name="cancel">Hủy</string>
+    <string name="add">Thêm</string>
+    <string name="new_playlist_name">Tên danh sách phát mới</string>
+    <string name="new_playlist">Danh sách phát mới</string>
+    <string name="add_to">Thêm vào</string>
+    <string name="successfully">thành công</string>
+    <string name="failure">thất bại</string>
+    <string name="remove_from">Xóa khỏi</string>
+    <string name="message_have_some_error">Có một số lỗi, vui lòng thử lại sau!</string>
+    <string name="add_to_playlist_successfully">Thêm vào danh sách phát thành công</string>
+
+    <!-- không được dịch cho tên thư mục -->
+    <string name="folder_image_name">MovieReview</string>
+    <!--end tên thư mục-->
+    <string name="day_ago">ngày trước</string>
+    <string name="month_ago">tháng trước</string>
+    <string name="year_ago">năm trước</string>
+    <string name="username_label">Tên người dùng</string>
+    <string name="email_example_label">ví dụ@email.com</string>
+    <string name="name_example_label">Nhà phát triển</string>
+    <string name="history_title">Lịch sử</string>
+    <string name="view_all_playlists">Xem thêm</string>
+    <string name="playlist_title">Danh sách phát</string>
+    <string name="change_avatar">Thay đổi ảnh đại diện</string>
+    <string name="change_name">Thay đổi tên</string>
+    <string name="change_password">Thay đổi mật khẩu</string>
+    <string name="views_string">lượt xem</string>
+    <string name="likes_string">lượt thích</string>
+    <string name="show_more_string">Hiển thị thêm</string>
+    <string name="hide_less">Ẩn bớt</string>
+    <string name="name_label">Tên:</string>
+    <string name="email_label">Email:</string>
+
+    <string name="logout">Đăng Xuất</string>
+
+
+    <string name="user_name_label">Tên người dùng</string>
+
+    <string name="select_photo">Chọn ảnh</string>
+    <string name="take_photo">Chụp ảnh</string>
+
+    <string name="toolbar_title">Nhập mã</string>
+    <string name="hint_code">Mã</string>
+    <string name="confirm_button">Xác nhận</string>
+
+    <string name="my_list">Danh sách của tôi</string>
+    <string name="status">Trạng thái:</string>
+
+    <string name="label_adult">Người lớn:</string>
+    <string name="label_overview">Tổng quan</string>
+    <string name="label_original_language">Ngôn ngữ gốc:</string>
+    <string name="label_spoken_language">Ngôn ngữ nói:</string>
+    <string name="label_trailer">Đoạn phim giới thiệu</string>
+    <string name="label_crew">Nhóm sản xuất</string>
+    <string name="label_cast">Diễn viên</string>
+    <string name="label_product_companies">Công ty sản xuất:</string>
+    <string name="label_popularity">Độ phổ biến:</string>
+    <string name="label_budget">Ngân sách:</string>
+    <string name="label_revenue">Doanh thu:</string>
+    <string name="label_homepage">Trang chủ:</string>
+    <string name="other_video">Các video khác</string>
+    <string name="review_other">Đánh giá khác</string>
+
+    <string name="your_profile">Hồ sơ của bạn</string>
+    <string name="channel">Kênh</string>
+
+    <string name="title">Tiêu đề</string>
+    <string name="movie">Phim</string>
+    <string name="confirm_password">Xác nhận mật khẩu</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="reset_password">Đặt lại mật khẩu</string>
+
+    <string name="new_name">Nhập tên mới</string>
+    <string name="new_email">Nhập email</string>
+    <string name="save">Lưu</string>
+
+    <string name="current_password_hint">Mật khẩu hiện tại</string>
+    <string name="new_password_hint">Mật khẩu mới</string>
+    <string name="confirm_password_hint">Nhập lại mật khẩu mới</string>
+    <string name="change_password_button">Đổi mật khẩu</string>
+    <string name="go_back_button">Quay lại</string>
+
+    <string name="movie_title">Tiêu đề phim</string>
+    <string name="tag">Nhãn</string>
+
+    <string name="series">Phim truyền hình</string>
+    <string name="search">Tìm kiếm</string>
+
+    <string name="rate">Đánh giá</string>
+</resources>

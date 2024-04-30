@@ -56,12 +56,7 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
                     movie.getName(),
                     movie.getPosterPath());
         });
-        holder.btnMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showOptionMenu(v, movie);
-            }
-        });
+        holder.btnMenu.setOnClickListener(v -> showOptionMenu(v, movie));
     }
 
     @Override

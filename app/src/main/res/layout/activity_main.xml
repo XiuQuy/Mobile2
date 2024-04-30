@@ -72,13 +72,13 @@
                     android:id="@+id/tabMovie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Movies" />
+                    android:text="@string/movie" />
 
                 <com.google.android.material.tabs.TabItem
                     android:id="@+id/tabTVShow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TV Series" />
+                    android:text="@string/series" />
 
             </com.google.android.material.tabs.TabLayout>
         </com.google.android.material.appbar.AppBarLayout>

@@ -2,7 +2,9 @@ package com.example.appxemphim.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class YoutubeVideoStatistics {
+import java.io.Serializable;
+
+public class YoutubeVideoStatistics implements Serializable {
     @SerializedName("viewCount")
     private String viewCount;
     @SerializedName("likeCount")
@@ -29,3 +31,4 @@ public class YoutubeVideoStatistics {
         return commentCount;
     }
 }
+

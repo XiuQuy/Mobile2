@@ -26,6 +26,7 @@
     <string name="nav_playlist">Playlist</string>
 
     <!--    các chức năng trong setting-->
+    <string name="setting">Setting</string>
     <string name="label_setting_darkmode">Dark Mode</string>
     <string name="label_setting_wifi">Use only Wifi</string>
     <string name="label_setting_notification">Notification</string>
@@ -55,8 +56,8 @@
     <!--end gooogle-->
 
     <!--facebook không được đổi-->
-    <string name="facebook_app_id">1137577040603838</string>
-    <string name="fb_login_protocol_scheme">fb1137577040603838</string>
+    <string name="facebook_app_id">460102680010973</string>
+    <string name="fb_login_protocol_scheme">fb460102680010973</string>
     <string name="facebook_client_token">56789</string>
     <!--end facebook-->
 
@@ -90,4 +91,77 @@
     <string name="day_ago">day ago</string>
     <string name="month_ago">month ago</string>
     <string name="year_ago">year ago</string>
+    <string name="username_label">Username</string>
+    <string name="email_example_label">example@email.com</string>
+    <string name="name_example_label">Developer</string>
+    <string name="history_title">History</string>
+    <string name="view_all_playlists">See more</string>
+    <string name="playlist_title">Playlist</string>
+    <string name="change_avatar">Change avatar</string>
+    <string name="change_name">Change name</string>
+    <string name="change_password">Change password</string>
+    <string name="views_string">views</string>
+    <string name="likes_string">likes</string>
+    <string name="show_more_string">Show more</string>
+    <string name="hide_less">Hide less</string>
+
+    <string name="name_label">Name:</string>
+    <string name="email_label">Email:</string>
+    <string name="logout">Logout</string>
+
+    <string name="user_name_label">User Name</string>
+
+    <string name="select_photo">Select photo</string>
+    <string name="take_photo">Take a photo</string>
+
+    <string name="toolbar_title">Enter code</string>
+    <string name="hint_code">Code</string>
+    <string name="confirm_button">Confirm</string>
+
+    <string name="my_list">My List</string>
+    <string name="status">Status:</string>
+
+    <string name="label_adult">Adult:</string>
+    <string name="label_overview">Overview</string>
+    <string name="label_original_language">Original language:</string>
+    <string name="label_spoken_language">Spoken language:</string>
+    <string name="label_trailer">Trailer</string>
+    <string name="label_crew">Crew</string>
+    <string name="label_cast">Cast</string>
+    <string name="other_video">Other videos</string>
+    <string name="review_other">Review Video</string>
+
+    <string name="your_profile">Your profile</string>
+
+    <string name="channel">Channel</string>
+
+    <string name="label_product_companies">Product companies:</string>
+    <string name="label_popularity">Popularity:</string>
+    <string name="label_budget">Budget:</string>
+    <string name="label_revenue">Revenue:</string>
+    <string name="label_homepage">Homepage:</string>
+
+    <string name="title">Title</string>
+    <string name="movie">Movie</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="new_password">New password</string>
+    <string name="reset_password">Reset password</string>
+
+    <string name="new_name">Enter a new name</string>
+    <string name="new_email">Enter email</string>
+    <string name="save">Save</string>
+
+    <string name="current_password_hint">Current Password</string>
+    <string name="new_password_hint">New Password</string>
+    <string name="confirm_password_hint">Confirm New Password</string>
+    <string name="change_password_button">Change Password</string>
+    <string name="go_back_button">Go Back</string>
+
+    <string name="movie_title">Movie Title</string>
+    <string name="tag">Tag</string>
+
+    <string name="series">TV Series</string>
+    <string name="search">Search</string>
+
+    <string name="rate">Rate</string>
 </resources>
