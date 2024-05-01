@@ -38,6 +38,7 @@ public class HistoryAllActivity extends AppCompatActivity implements HistoryAllA
     private String userToken;
     private HistoryAllAdapter historyAllAdapter;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +56,9 @@ public class HistoryAllActivity extends AppCompatActivity implements HistoryAllA
         fetchHistories();
         ImageView btnBack = findViewById(R.id.back_button);
         btnBack.setOnClickListener(v -> finish());
+        //nut quay lai
     }
+
 
     private void fetchHistories() {
 
@@ -75,15 +78,17 @@ public class HistoryAllActivity extends AppCompatActivity implements HistoryAllA
                 } else {
                     Toast.makeText(HistoryAllActivity.this, "Failed to fetch movies", Toast.LENGTH_SHORT).show();
                 }
+                //kiem tra lich su va xu ly du lieu duoc tra ve
             }
 
             @Override
             public void onFailure(Call<List<History>> call, Throwable t) {
                 Log.e("API_ERROR", t.getMessage());
                 Toast.makeText(HistoryAllActivity.this, "Network error", Toast.LENGTH_SHORT).show();
-            }
+            } //hien thi thong bao cho nguoi dung
         });
     }
+
 
     @SuppressLint("NonConstantResourceId")
     private void showOptionMenu() {
@@ -244,6 +249,7 @@ public class HistoryAllActivity extends AppCompatActivity implements HistoryAllA
                 .show();
     }
 
+
     @Override
     public void onDeleteItemClick(int position) {
         // Lấy danh sách các mục từ adapter
@@ -254,7 +260,7 @@ public class HistoryAllActivity extends AppCompatActivity implements HistoryAllA
             // Lấy đối tượng history từ danh sách tại vị trí position
             History history = histories.get(position);
 
-            // Lấy thông tin cần thiết từ History
+            // Lấy thông tin cần thiết từ history
             int historyId = history.getId();
             int adapterPosition = position; // Vị trí của mục trong adapter
 
@@ -268,9 +274,9 @@ public class HistoryAllActivity extends AppCompatActivity implements HistoryAllA
     }
 
 
-    // Phương thức xóa mục từ backend
+    // Phương thức xóa mục từ Backend
     private void deleteItemFromBackend(int historyId, int userId, int adapterPosition) {
-        // Gọi API để xóa từ backend
+        // Gọi API để xóa từ Backend
         HistoryService tmdbApi = ServiceApiBuilder.buildUserApiService(HistoryService.class);
         Call<DeleteResponse> call = tmdbApi.deleteOneHistory(historyId, userId, "Bearer " + userToken);
 
@@ -278,19 +284,19 @@ public class HistoryAllActivity extends AppCompatActivity implements HistoryAllA
             @Override
             public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
                 if (response.isSuccessful()) {
-                    // Xử lý phản hồi từ backend
+                    // Xử lý phản hồi từ Backend
                     DeleteResponse deleteResponse = response.body();
                     if (deleteResponse != null && deleteResponse.isSuccess()) {
-                        // Xóa thành công từ backend
+                        // Xóa thành công từ Backend
                         // Chỉ cần thông báo cho adapter biết rằng một mục đã bị xóa
                         historyAllAdapter.notifyItemRemoved(adapterPosition);
                     } else {
-                        // Xử lý trường hợp không thành công từ backend
+                        // Xử lý trường hợp không thành công từ Backend
                         Log.e(TAG, "Delete request failed: API response indicated failure.");
                         // Hiển thị thông báo lỗi cho người dùng nếu cần
                     }
                 } else {
-                    // Xử lý trường hợp không thành công từ backend
+                    // Xử lý trường hợp không thành công từ Backend
                     Log.e(TAG, "Delete request failed: " + response.message());
                     // Hiển thị thông báo lỗi cho người dùng nếu cần
                 }
@@ -300,7 +306,7 @@ public class HistoryAllActivity extends AppCompatActivity implements HistoryAllA
             public void onFailure(Call<DeleteResponse> call, Throwable t) {
                 // Xử lý lỗi nếu có
                 Log.e(TAG, "Delete request failed: " + t.getMessage());
-                // Hiển thị thông báo lỗi cho người dùng nếu cần
+                //Hiển thị thông báo lỗi cho người dùng nếu cần
             }
         });
     }
