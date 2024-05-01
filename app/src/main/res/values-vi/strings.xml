@@ -52,23 +52,6 @@
     <string name="navigation_drawer_open">Mở ngăn kéo điều hướng</string>
     <string name="navigation_drawer_close">Đóng ngăn kéo điều hướng</string>
 
-    <!-- không được thay đổi cho google -->
-    <string name="google_signin_client_id">793964661748-v2eko2imm6pi2dad49oc7ko2gkisgil0.apps.googleusercontent.com</string>
-    <!--end google-->
-
-    <!-- không được thay đổi cho facebook -->
-    <string name="facebook_app_id">460102680010973</string>
-    <string name="fb_login_protocol_scheme">fb460102680010973</string>
-    <string name="facebook_client_token">56789</string>
-    <!--end facebook-->
-
-    <!-- không được thay đổi cho tag -->
-    <string name="facebook_tag_name">FACEBOOK</string>
-    <string name="google_tag_name">GOOGLE</string>
-    <string name="tmdb_movie_tag_name">TMDB_MOVIE</string>
-    <string name="tmdb_tv_series_tag_name">TMDB_TV_SERIES</string>
-    <string name="youtube_video_tag_name">YOUTUBE</string>
-    <!--end tag-->
 
     <string name="message_error_login">Đã xảy ra lỗi trong quá trình đăng nhập, vui lòng thử lại</string>
     <string name="add_to_playlist">Thêm vào danh sách phát</string>

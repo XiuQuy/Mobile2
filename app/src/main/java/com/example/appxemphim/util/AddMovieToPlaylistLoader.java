@@ -36,6 +36,7 @@ public class AddMovieToPlaylistLoader extends AsyncTaskLoader<List<String>> {
 
     @Override
     protected void onStartLoading() {
+        Log.i("LOADER_ADD_TO_PLAYLIST", "START");
         forceLoad();
     }
 
@@ -43,6 +44,7 @@ public class AddMovieToPlaylistLoader extends AsyncTaskLoader<List<String>> {
     @Override
     public List<String> loadInBackground() {
         try {
+            Log.i("LOADER_ADD_TO_PLAYLIST", "LOAD IN BACKGROUND");
             String addToString = getContext().getString(R.string.add_to)+" ";
             String removeFromString = getContext().getString(R.string.remove_from)+" ";
             String successfullyString = " "+getContext().getString(R.string.successfully);
