@@ -26,19 +26,12 @@ public interface HistoryService {
             @Path("userId") int userId,
             @Header("Authorization") String token);
 
-
-    @GET("api/History/{limit}/{userId}")
-    Call<List<History>> getNewestHistory(
-            @Path("limit") int limit,
-            @Path("userId") int userId,
-            @Header("Authorization") String token);
-
     @DELETE("api/History/delete-one/{historyId}/{userId}")
     Call<DeleteResponse> deleteOneHistory(
             @Path("historyId") int historyId,
             @Path("userId") int userId,
             @Header("Authorization") String token);
-
+        //delete-one
     @DELETE("api/History/delete-last-hour/{userId}")
     Call<DeleteResponse> deleteLastHourHistory(
             @Path("userId") int userId,

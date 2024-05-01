@@ -40,24 +40,25 @@ public interface PlaylistService {
             @Body PlaylistWithOneItemDTO playlistWithOneItemDTO
     );
 
+
     @GET("api/WatchListItem/{limit}/{watchListId}/{userId}")
     Call<List<PlaylistItem>> getPlaylistItem(
             @Path("limit") int limit,
             @Path("watchListId") int watchListId,
             @Path("userId") int userId,
-            @Header("Authorization") String token);
+            @Header("Authorization") String token);//danh sach xem gioi han
 
     @GET("api/WatchListItem/all/{watchListId}/{userId}")
     Call<List<PlaylistItem>> getAllPlaylistItem(
             @Path("watchListId") int watchListId,
             @Path("userId") int userId,
-            @Header("Authorization") String token);
+            @Header("Authorization") String token);//dan sach xem tat ca
 
     @DELETE("api/WatchListItem/delete-one/{watchListItemId}/{userId}")
     Call<DeleteResponse> deleteOnePlaylistItem(
             @Path("watchListItemId") int watchListItemId,
             @Path("userId") int userId,
-            @Header("Authorization") String token);
+            @Header("Authorization") String token);//xoa mot muc trong danh sach
 
 
 

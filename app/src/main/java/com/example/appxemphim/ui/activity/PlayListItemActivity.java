@@ -35,7 +35,7 @@ public class PlayListItemActivity extends AppCompatActivity implements PlayListI
     private String userToken;
     private int playlistId;
     private PlayListItemAdapter playListItemAdapter;
-
+//thong tin nguoi duung
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,7 @@ public class PlayListItemActivity extends AppCompatActivity implements PlayListI
         btnBack.setOnClickListener(v -> {
             finish();
         });
+        //hien thi cac du lieu can thiet
     }
 
 
@@ -74,7 +75,7 @@ public class PlayListItemActivity extends AppCompatActivity implements PlayListI
                     List<PlaylistItem> movies = response.body();
                     RecyclerView recyclerView = findViewById(R.id.recycler_view_items);
                     playListItemAdapter = new PlayListItemAdapter(PlayListItemActivity.this, movies);
-                    // Thiết lập listener để nhận sự kiện xóa từ Adapter
+                    //Thiết lập listener để nhận sự kiện xóa từ Adapter
                     playListItemAdapter.setOnDeleteItemClickListener(PlayListItemActivity.this);
                     recyclerView.setAdapter(playListItemAdapter);
 
@@ -94,7 +95,7 @@ public class PlayListItemActivity extends AppCompatActivity implements PlayListI
     // Phương thức xóa mục từ Adapter
     @Override
     public void onDeleteItemClick(int position) {
-        // Lấy danh sách các mục từ adapter
+        //Lấy danh sách các mục từ adapter
         List<PlaylistItem> playListItems = playListItemAdapter.getPlayListItems();
 
         // Kiểm tra xem vị trí có hợp lệ không
@@ -118,7 +119,7 @@ public class PlayListItemActivity extends AppCompatActivity implements PlayListI
 
     // Phương thức xóa mục từ backend
     private void deleteItemFromBackend(int watchListItemId, int userId, int adapterPosition) {
-        // Gọi API để xóa từ backend
+        //Gọi API để xóa từ backend
         PlaylistService tmdbApi = ServiceApiBuilder.buildUserApiService(PlaylistService.class);
         Call<DeleteResponse> call = tmdbApi.deleteOnePlaylistItem(watchListItemId, userId, "Bearer " + userToken);
 
@@ -126,7 +127,7 @@ public class PlayListItemActivity extends AppCompatActivity implements PlayListI
             @Override
             public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
                 if (response.isSuccessful()) {
-                    // Xử lý phản hồi từ backend
+                    //Xử lý phản hồi từ backend
                     DeleteResponse deleteResponse = response.body();
                     if (deleteResponse != null && deleteResponse.isSuccess()) {
                         // Xóa thành công từ backend
@@ -146,7 +147,7 @@ public class PlayListItemActivity extends AppCompatActivity implements PlayListI
 
             @Override
             public void onFailure(Call<DeleteResponse> call, Throwable t) {
-                // Xử lý lỗi nếu có
+                //Xử lý lỗi nếu có
                 Log.e(TAG, "Delete request failed: " + t.getMessage());
                 // Hiển thị thông báo lỗi cho người dùng nếu cần
             }

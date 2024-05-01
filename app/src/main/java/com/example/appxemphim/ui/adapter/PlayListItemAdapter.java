@@ -22,9 +22,9 @@ import com.example.appxemphim.model.PlaylistItem;
 import java.util.List;
 
 public class PlayListItemAdapter extends RecyclerView.Adapter<PlayListItemAdapter.MyViewHolder>{
-    // Khai báo Interface để gửi sự kiện xóa về Activity
+    //Khai báo Interface để gửi sự kiện xóa về Activity
     public interface OnDeleteItemClickListener {
-        void onDeleteItemClick(int position);
+        void onDeleteItemClick(int position);//Phương thức này được gọi khi người dùng thực hiện việc xóa một mục từ danh sách phát
     }
     private Context context;
     private List<PlaylistItem> playListItems;
@@ -33,11 +33,12 @@ public class PlayListItemAdapter extends RecyclerView.Adapter<PlayListItemAdapte
 
     public PlayListItemAdapter(Context context, List<PlaylistItem> playListItems){
         this.context = context;
-        this.playListItems = playListItems;
+        this.playListItems = playListItems;//contructor nhan contex va danh sach cac playlist va gan cho cac bien tuong ung
     }
 
     public void setOnDeleteItemClickListener(OnDeleteItemClickListener listener) {
-        this.deleteItemClickListener = listener;
+        this.deleteItemClickListener = listener;//xử lý sự kiện xóa mục từ danh sách phát.
+
     }
 
     @Override
@@ -46,7 +47,9 @@ public class PlayListItemAdapter extends RecyclerView.Adapter<PlayListItemAdapte
         final MyViewHolder viewHolder = new MyViewHolder(view);
 
         return new MyViewHolder(view);
+        //Mỗi ViewHolder sẽ chứa các tham chiếu đến các thành phần UI trong layout của mỗi item.
     }
+
 
 
     @Override
@@ -54,24 +57,24 @@ public class PlayListItemAdapter extends RecyclerView.Adapter<PlayListItemAdapte
         PlaylistItem playListItem = playListItems.get(position);
         holder.bind(playListItem);
 
-        // Gắn sự kiện onClick cho menu_button
+        //Gắn sự kiện onClick cho menu_button
         holder.getMenu_button().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Gọi phương thức showMenuForItem và chuyển anchorView là menu_button và vị trí từ holder
+                //Gọi phương thức showMenuForItem và chuyển anchorView là menu_button và vị trí từ holder
                 showMenuForItem(view, holder.getAdapterPosition());
             }
         });
     }
 
-    // Phương thức để trả về danh sách các mục
+
     public List<PlaylistItem> getPlayListItems() {
-        return playListItems;
+        return playListItems; // Phương thức để trả về danh sách các mục
     }
 
     @Override
     public int getItemCount() {
-        return playListItems.size();
+        return playListItems.size();//tra ve so luong phan tu danh sach
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -86,6 +89,7 @@ public class PlayListItemAdapter extends RecyclerView.Adapter<PlayListItemAdapte
             output_title = itemView.findViewById(R.id.text_view_title);
             image_thumbnail = itemView.findViewById(R.id.image_view_icon);
             menu_button = itemView.findViewById(R.id.menu_button);
+            //gan cac tham chieu cua cac thanh phan trong giao dien
         }
 
         public void bind(PlaylistItem playListItem) {
@@ -95,14 +99,14 @@ public class PlayListItemAdapter extends RecyclerView.Adapter<PlayListItemAdapte
             Glide.with(context)
                     .load(playListItem.getInformationMovie().getImageLink())
                     .apply(new RequestOptions()
-                            .placeholder(R.drawable.ic_baseline_lock_24) // Placeholder nếu ảnh chưa được tải
+                            .placeholder(R.drawable.ic_baseline_lock_24) //Placeholder nếu ảnh chưa được tải
                             .override(100, 70) // Kích thước mong muốn của ảnh (width, height)
                             .centerCrop()) // Căn chỉnh hình ảnh để lấp đầy ImageView và cắt bớt phần thừa nếu cần
                     .into(image_thumbnail);
 
         }
         public  ImageView getMenu_button(){
-            return menu_button;
+            return menu_button;//trả về tham chiếu đến ImageView "menu_button".
         }
     }
 
@@ -110,7 +114,7 @@ public class PlayListItemAdapter extends RecyclerView.Adapter<PlayListItemAdapte
         PopupMenu popupMenu = new PopupMenu(context, anchorView);
         popupMenu.inflate(R.menu.vertical_menu);
 
-        // Lấy PlaylistItem tại vị trí position
+        //Lấy PlaylistItem tại vị trí position
         PlaylistItem playlistItem = playListItems.get(position);
 
         // Lấy id từ PlaylistItem
@@ -122,7 +126,7 @@ public class PlayListItemAdapter extends RecyclerView.Adapter<PlayListItemAdapte
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.menu_delete) {
-                    // Hiển thị thông báo AlertDialog xác nhận trước khi xóa
+                    //Hiển thị thông báo AlertDialog xác nhận trước khi xóa
                     showDeleteConfirmationDialog(itemId, position);
                     return true;
                 } else {
@@ -143,7 +147,7 @@ public class PlayListItemAdapter extends RecyclerView.Adapter<PlayListItemAdapte
         builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // Nếu người dùng chọn "Có", gọi phương thức onDeleteItemClick() của listener
+                //Nếu người dùng chọn "Có", gọi phương thức onDeleteItemClick() của listener
                 if (deleteItemClickListener != null) {
                     deleteItemClickListener.onDeleteItemClick(position);
                 }
