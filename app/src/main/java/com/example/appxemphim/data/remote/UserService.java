@@ -22,12 +22,6 @@ public interface UserService {
     Call<UserResponse> register(
             @Body UserRegister user);
 
-    @POST("api/User/login-google")
-    Call<User> checkLoginGoogle(@Body String googleIdToken);
-
-    @POST("api/User/login-facebook")
-    Call<User> checkLoginFacebook(@Body String firebaseAuthenFbIdToken);
-
     @POST("api/User/forgot-password-request")
     Call<Void> forgotPasswordRequest(@Body ForgotDTO forgotDTO);
 
@@ -37,12 +31,5 @@ public interface UserService {
     @POST("api/User/forgot-password-change")
     Call<Void> forgotPasswordChange(@Body ForgotDTO forgotDTO);
 
-    @POST("api/User/change-password")
-    Call<Void> changePassword(@Body ChangePasswordDTO changePasswordDTO,
-                                @Header("Authorization") String token);
-
-    @POST("api/User/change-info")
-    Call<User> changeName(@Body ChangeInfoUserDTO changeInfoUserDTO,
-                                @Header("Authorization") String token);
 
 }

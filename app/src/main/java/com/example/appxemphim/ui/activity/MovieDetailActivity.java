@@ -31,6 +31,7 @@ import com.example.appxemphim.data.remote.TrailerTvService;
 import com.example.appxemphim.data.remote.YoutubeService;
 import com.example.appxemphim.model.History;
 import com.example.appxemphim.model.InformationMovie;
+import com.example.appxemphim.model.MovieResponse;
 import com.example.appxemphim.model.ProductionCompanies;
 import com.example.appxemphim.model.ReviewVideo;
 import com.example.appxemphim.model.YoutubeVideoItem;
@@ -124,8 +125,11 @@ public class MovieDetailActivity extends AppCompatActivity {
         recyclerViewCast = findViewById(R.id.recyclerViewCast);
         recyclerViewCrew = findViewById(R.id.recyclerViewCrew);
             Log.d("Báo tag","tag là movie");
+
             DetailMovieService apiService = ServiceApiBuilder.buildTMDBService(DetailMovieService.class);
-            Call<DetailMovieResponse> call = apiService.getDetailMovie(movieId, apiKey);
+
+            String selectedLanguage = LanguageManager.getSelectedLanguage(this);
+            Call<DetailMovieResponse> call = apiService.getDetailMovie(movieId,selectedLanguage, apiKey);
             TrailerService service = ServiceApiBuilder.buildTMDBService(TrailerService.class);
             Call<TrailerResponse> call1 = service.getTrailers(movieId, apiKey);
             CreditMovieService credit = ServiceApiBuilder.buildTMDBService(CreditMovieService.class);
@@ -305,7 +309,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             call1.enqueue(new Callback<TrailerResponse>() {
                 @Override
                 public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
-                    if (response.isSuccessful()){
+                    if (response.isSuccessful() && response.body() != null && !response.body().getResults().isEmpty()){
                         TrailerResponse trailerResponse=response.body();
                         String key = trailerResponse.getResults().get(0).getKey();
                         getLifecycle().addObserver(youTubePlayerView);

@@ -69,18 +69,28 @@ public class SearchActivity extends AppCompatActivity implements
     PopupAddToPlayListFragment popupAddToPlayListFragment;
     private SearchViewModel searchViewModel;
     PlaylistModel playlistModel;
+    private boolean isFirstTimeCreateActivity  = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        // Kiểm tra xem Activity được tạo lần đầu tiên hay không
+        if (savedInstanceState != null) {
+            // Activity được tạo lại từ trạng thái trước đó
+            isFirstTimeCreateActivity = false;
+        } else {
+            // Activity được tạo lần đầu tiên
+            isFirstTimeCreateActivity = true;
+        }
 
         //Init
         drawerLayout = findViewById(R.id.drawer_layout_activity_search);
         rightFilterFragment = new RightFilterFragmentSearchActivity();
-        searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
-        playlistModel = new ViewModelProvider(this).get(PlaylistModel.class);
+        ViewModelProvider viewModelProvider = new ViewModelProvider(this);
+        searchViewModel = viewModelProvider.get(SearchViewModel.class);
+        playlistModel = viewModelProvider.get(PlaylistModel.class);
         fetchPlaylists();
 
 
@@ -165,11 +175,13 @@ public class SearchActivity extends AppCompatActivity implements
         super.onStart();
         //Get query in intent
         Intent intent = getIntent();
-        if (intent != null) {
+        if (intent != null && isFirstTimeCreateActivity) {
             String query = intent.getStringExtra("query");
             if(query != null){
+                Log.i("SEARCH_ACTIVITY", "LOAD QUERY FROM INTENT");
                 searchView.setQuery(query, true);
                 searchView.setIconifiedByDefault(false);
+                isFirstTimeCreateActivity = false;
             }
         }
     }
@@ -317,7 +329,7 @@ public class SearchActivity extends AppCompatActivity implements
         String playlistJson = new Gson().toJson(playlist);
         Bundle args = new Bundle();
         args.putString("playlistJson", playlistJson);
-        LoaderManager.getInstance(this).restartLoader(1, args, loaderAddWithNewPlaylist);
+        LoaderManager.getInstance(SearchActivity.this).restartLoader(2001, args, loaderAddWithNewPlaylist);
     }
 
     LoaderManager.LoaderCallbacks<Playlist> loaderAddWithNewPlaylist = new LoaderManager.LoaderCallbacks<Playlist>() {
@@ -355,6 +367,8 @@ public class SearchActivity extends AppCompatActivity implements
             toast.show();
 
             new Handler().postDelayed(toast::cancel, 2000);
+            // Dọn dẹp Loader sau khi hoàn thành
+            LoaderManager.getInstance(SearchActivity.this).destroyLoader(loader.getId());
         }
 
         @Override
@@ -376,13 +390,15 @@ public class SearchActivity extends AppCompatActivity implements
         args.putIntegerArrayList("listAdd", listAdd);
         args.putIntegerArrayList("listRemove", listRemove);
         args.putString("informationMovieJson", informationMovieJson);
-        LoaderManager.getInstance(this).restartLoader(2, args, loaderAddOrRemoveExistPlaylist);
+        LoaderManager.getInstance(SearchActivity.this).restartLoader(2002, args, loaderAddOrRemoveExistPlaylist);
+        Log.i("CALL_ADD_TO_PLAYLIST", "CALL ADD TO PLAYLIST");
     }
 
     LoaderManager.LoaderCallbacks<List<String>> loaderAddOrRemoveExistPlaylist = new LoaderManager.LoaderCallbacks<List<String>>() {
         @NonNull
         @Override
         public Loader<List<String>> onCreateLoader(int id, @Nullable Bundle args) {
+            Log.i("LOADER_ADD_TO_PLAYLIST", "CREATE");
             assert args != null;
             ArrayList<Integer> listAdd = args.getIntegerArrayList("listAdd");
             ArrayList<Integer> listRemove = args.getIntegerArrayList("listRemove");
@@ -405,6 +421,8 @@ public class SearchActivity extends AppCompatActivity implements
                 data.add(getString(R.string.message_have_some_error));
                 showToastDelayed(data);
             }
+            // Dọn dẹp Loader sau khi hoàn thành
+            LoaderManager.getInstance(SearchActivity.this).destroyLoader(loader.getId());
         }
 
         @Override

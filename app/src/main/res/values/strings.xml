@@ -52,21 +52,21 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!--gooogle không được đổi-->
-    <string name="google_signin_client_id">793964661748-v2eko2imm6pi2dad49oc7ko2gkisgil0.apps.googleusercontent.com</string>
+    <string name="google_signin_client_id" translatable="false">793964661748-v2eko2imm6pi2dad49oc7ko2gkisgil0.apps.googleusercontent.com</string>
     <!--end gooogle-->
 
     <!--facebook không được đổi-->
-    <string name="facebook_app_id">460102680010973</string>
-    <string name="fb_login_protocol_scheme">fb460102680010973</string>
-    <string name="facebook_client_token">56789</string>
+    <string name="facebook_app_id" translatable="false">460102680010973</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb460102680010973</string>
+    <string name="facebook_client_token" translatable="false">56789</string>
     <!--end facebook-->
 
     <!--tag không được đổi-->
-    <string name="facebook_tag_name">FACEBOOK</string>
-    <string name="google_tag_name">GOOGLE</string>
-    <string name="tmdb_movie_tag_name">TMDB_MOVIE</string>
-    <string name="tmdb_tv_series_tag_name">TMDB_TV_SERIES</string>
-    <string name="youtube_video_tag_name">YOUTUBE</string>
+    <string name="facebook_tag_name" translatable="false">FACEBOOK</string>
+    <string name="google_tag_name" translatable="false">GOOGLE</string>
+    <string name="tmdb_movie_tag_name" translatable="false">TMDB_MOVIE</string>
+    <string name="tmdb_tv_series_tag_name" translatable="false">TMDB_TV_SERIES</string>
+    <string name="youtube_video_tag_name" translatable="false">YOUTUBE</string>
     <!--end tag-->
 
     <string name="message_error_login">An error occurred during login, please try again</string>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -62,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
     private MovieAdapter adapter;
     private NavigationView navigationView;
     private static final int YOUR_REQUEST_CODE = 1001;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         EdgeToEdge.enable(this);
@@ -120,9 +120,14 @@ public class MainActivity extends AppCompatActivity {
 
         CircleImageView imageAvatarInNav = headerView.findViewById(R.id.img_user);
         CircleImageView circleImageView = findViewById(R.id.imgAvatar);
-        RequestCreator requestCreatorImageAvatar = Picasso.get().load(userAvatar);
-        requestCreatorImageAvatar.into(imageAvatarInNav);
-        requestCreatorImageAvatar.into(circleImageView);
+        if (userAvatar != null && !userAvatar.isEmpty()) {
+            RequestCreator requestCreatorImageAvatar = Picasso.get().load(userAvatar);
+            requestCreatorImageAvatar.into(imageAvatarInNav);
+            requestCreatorImageAvatar.into(circleImageView);
+        } else {
+            // Xử lý trường hợp userAvatar rỗng ở đây
+        }
+
 
         SearchView searchView = findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -167,10 +172,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent1);
                 finish();
                 return true; // Đánh dấu sự kiện đã được xử lý
-            }else if (item.getItemId() == R.id.nav_setting) {
+            }
+            else if (item.getItemId() == R.id.nav_setting) {
                 Intent intent1 = new Intent(MainActivity.this, SettingActivity.class);
-                startActivity(intent1);
-                return true; // Đánh dấu sự kiện đã được xử lý
+                startActivityForResult(intent1, YOUR_REQUEST_CODE); // Khởi động SettingActivity với yêu cầu trả về kết quả
+                return true;
             }
             // Thêm các trường hợp khác nếu cần
             return false; // Trả về false để đánh dấu sự kiện chưa được xử lý
@@ -188,6 +194,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
     private void fetchMovies() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org/3/")
@@ -196,7 +204,9 @@ public class MainActivity extends AppCompatActivity {
 
         TMDbApi tmdbApi = retrofit.create(TMDbApi.class);
 
-        Call<MovieResponse> call = tmdbApi.getPopularMovies(ServiceApiBuilder.API_KEY_TMDB);
+        // Truyền ngôn ngữ được chọn từ SettingActivity vào phương thức getPopularMovies()
+        String selectedLanguage = LanguageManager.getSelectedLanguage(this);
+        Call<MovieResponse> call = tmdbApi.getPopularMovies(selectedLanguage, ServiceApiBuilder.API_KEY_TMDB);
         call.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
@@ -214,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -226,4 +236,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-        
+
+
+

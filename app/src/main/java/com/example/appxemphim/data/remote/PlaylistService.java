@@ -59,5 +59,4 @@ public interface PlaylistService {
             @Path("watchListItemId") int watchListItemId,
             @Path("userId") int userId,
             @Header("Authorization") String token);//xoa mot muc trong danh sach
-
 }

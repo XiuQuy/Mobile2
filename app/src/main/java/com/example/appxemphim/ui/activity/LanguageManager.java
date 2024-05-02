@@ -11,7 +11,7 @@ import java.util.Locale;
 public class LanguageManager {
 
     public static final String SELECTED_LANGUAGE_KEY = "selected_language";
-
+    public static final String DEFAULT_LANGUAGE = "en"; // English là ngôn ngữ mặc định
     public static void initLanguage(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String selectedLanguage = sharedPreferences.getString(SELECTED_LANGUAGE_KEY, "");
@@ -33,5 +33,9 @@ public class LanguageManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(SELECTED_LANGUAGE_KEY, selectedLanguage);
         editor.apply();
+    }
+    public static String getSelectedLanguage(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getString(SELECTED_LANGUAGE_KEY, DEFAULT_LANGUAGE);
     }
 }
