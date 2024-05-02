@@ -1,106 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black"
-        android:padding="16dp"
-        android:orientation="horizontal">
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@color/black"-->
+<!--        android:padding="16dp"-->
+<!--        android:orientation="horizontal">-->
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            tools:ignore="ExtraText">
+<!--        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--            xmlns:tools="http://schemas.android.com/tools"-->
+<!--            android:layout_width="140dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            tools:ignore="ExtraText">-->
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#808080" />
+<!--            <Button-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:backgroundTint="#808080" />-->
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+<!--            <RelativeLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="8dp">-->
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    app:cardCornerRadius="10dp">
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:id="@+id/card_view"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="90dp"-->
+<!--                    app:cardCornerRadius="10dp">-->
 
-                    <RelativeLayout
-                        android:id="@+id/re_layout_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="90dp">
-
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/item_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop" />
-
-                        <TextView
-                            android:id="@+id/quantityTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginRight="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:background="@drawable/rounded_corner"
-                            android:paddingLeft="5dp"
-                            android:paddingRight="5dp"
-                            android:text="text"
-                            android:textColor="@color/white" />
-
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-
-            </RelativeLayout>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/titleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:paddingLeft="6dp"
-                android:text="@string/movie_title"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tagTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/titleTextView"
-                android:padding="6dp"
-                android:textColor="#808080"
-                android:textSize="10sp" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/menu_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:src="@drawable/ic_menu_vertical"
-            android:paddingTop="10dp"/>
+<!--                    <RelativeLayout-->
+<!--                        android:id="@+id/re_layout_img"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="90dp">-->
 
 
-    </LinearLayout>
+<!--                        <androidx.appcompat.widget.AppCompatImageView-->
+<!--                            android:id="@+id/item_image"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:scaleType="centerCrop" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/quantityTextView"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_alignParentEnd="true"-->
+<!--                            android:layout_alignParentRight="true"-->
+<!--                            android:layout_alignParentBottom="true"-->
+<!--                            android:layout_marginRight="5dp"-->
+<!--                            android:layout_marginBottom="5dp"-->
+<!--                            android:background="@drawable/rounded_corner"-->
+<!--                            android:paddingLeft="5dp"-->
+<!--                            android:paddingRight="5dp"-->
+<!--                            android:text="text"-->
+<!--                            android:textColor="@color/white" />-->
+
+<!--                    </RelativeLayout>-->
+<!--                </androidx.cardview.widget.CardView>-->
+
+<!--            </RelativeLayout>-->
+<!--        </RelativeLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/titleTextView"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:ellipsize="end"-->
+<!--                android:maxLines="1"-->
+<!--                android:paddingLeft="6dp"-->
+<!--                android:text="@string/movie_title"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tagTextView"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/titleTextView"-->
+<!--                android:padding="6dp"-->
+<!--                android:textColor="#808080"-->
+<!--                android:textSize="10sp" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/menu_button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="end"-->
+<!--            android:src="@drawable/ic_menu_vertical"-->
+<!--            android:paddingTop="10dp"/>-->
+
+
+<!--    </LinearLayout>-->
