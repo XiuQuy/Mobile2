@@ -26,42 +26,6 @@ public interface HistoryService {
             @Path("userId") int userId,
             @Header("Authorization") String token);
 
-    @DELETE("api/History/delete-one/{historyId}/{userId}")
-    Call<DeleteResponse> deleteOneHistory(
-            @Path("historyId") int historyId,
-            @Path("userId") int userId,
-            @Header("Authorization") String token);
-        //delete-one
-    @DELETE("api/History/delete-last-hour/{userId}")
-    Call<DeleteResponse> deleteLastHourHistory(
-            @Path("userId") int userId,
-            @Header("Authorization")
-            String token);
-
-    @DELETE("api/History/delete-last-day/{userId}")
-    Call<DeleteResponse> deleteLastDayHistory(
-            @Path("userId") int userId,
-            @Header("Authorization")
-            String token);
-
-    @DELETE("api/History/delete-last-week/{userId}")
-    Call<DeleteResponse> deleteLastWeekHistory(
-            @Path("userId") int userId,
-            @Header("Authorization")
-            String token);
-
-    @DELETE("api/History/delete-last-month/{userId}")
-    Call<DeleteResponse> deleteLastMonthHistory(
-            @Path("userId") int userId,
-            @Header("Authorization")
-            String token);
-
-    @DELETE("api/History/delete-all/{userId}")
-    Call<DeleteResponse> deleteAll(
-            @Path("userId") int userId,
-            @Header("Authorization")
-            String token);
-
     @POST("api/History/add")
     Call<History> addOrUpdateHistory(
             @Body History history,
