@@ -19,9 +19,7 @@
         android:text="Ten"
         android:ellipsize="end"
         android:textSize="14sp"
-        android:textStyle="bold"
-
-        android:textColor="@color/white" />
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textViewJob"

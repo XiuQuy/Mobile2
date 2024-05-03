@@ -17,7 +17,6 @@
         android:layout_height="42dp"
         android:layout_marginTop="8dp"
         android:text="Movie Title"
-        android:textColor="@android:color/white"
         android:textSize="16sp"
         android:textStyle="bold" />
 

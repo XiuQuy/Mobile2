@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         LanguageManager.initLanguage(this);
-
         recyclerView = findViewById(R.id.rcv_allcate);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -120,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
         CircleImageView imageAvatarInNav = headerView.findViewById(R.id.img_user);
         CircleImageView circleImageView = findViewById(R.id.imgAvatar);
+      
         if (userAvatar != null && !userAvatar.isEmpty()) {
             RequestCreator requestCreatorImageAvatar = Picasso.get().load(userAvatar);
             requestCreatorImageAvatar.into(imageAvatarInNav);
@@ -127,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             // Xử lý trường hợp userAvatar rỗng ở đây
         }
-
 
         SearchView searchView = findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

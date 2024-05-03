@@ -24,7 +24,6 @@
                 android:id="@+id/toolbar_main"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/black"
                 app:layout_collapseMode="pin">
 
                 <RelativeLayout
@@ -35,7 +34,8 @@
                         android:id="@+id/imageView"
                         android:layout_width="35dp"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="0dp"
                         android:src="@drawable/icon_logo_new" />
 
                     <androidx.appcompat.widget.SearchView
@@ -45,7 +45,8 @@
                         android:layout_centerVertical="true"
                         android:layout_toStartOf="@+id/imgAvatar"
                         android:layout_toEndOf="@+id/imageView"
-                        android:layoutDirection="rtl" />
+                        android:layoutDirection="rtl"
+                        style="@style/SearchViewStyle"/>
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/imgAvatar"
@@ -65,7 +66,6 @@
                 android:layout_height="wrap_content"
                 app:tabBackground="@color/black"
                 app:tabIndicator="@color/text_color"
-                app:tabSelectedTextColor="@color/text_color"
                 app:tabTextColor="#989696">
 
                 <com.google.android.material.tabs.TabItem

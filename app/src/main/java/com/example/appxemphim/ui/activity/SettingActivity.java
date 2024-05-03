@@ -1,31 +1,36 @@
 package com.example.appxemphim.ui.activity;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.appxemphim.R;
+import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.util.Locale;
 
 public class SettingActivity extends AppCompatActivity {
     private AutoCompleteTextView autoCompleteTextView;
+    private MaterialSwitch themeSwitch;
     private ImageView backButton;
     private String selectedLanguage; // Thêm biến instance
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-
         autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
         backButton = findViewById(R.id.back_button);
 
@@ -62,6 +67,19 @@ public class SettingActivity extends AppCompatActivity {
                 recreate();
             }
         });
+        themeSwitch = findViewById(R.id.themeswitch);
+        int currentNightMode = ThemeManager.loadNightMode(this);
+        themeSwitch.setChecked(currentNightMode == AppCompatDelegate.MODE_NIGHT_YES);
+        int nightMode = ThemeManager.getNightModeConfiguration(this);
+        AppCompatDelegate.setDefaultNightMode(nightMode);
+        themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            int selectedTheme = isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO;
+            ThemeManager.saveNightMode(this, selectedTheme);
+            AppCompatDelegate.setDefaultNightMode(selectedTheme);
+            ThemeManager.setNightModeConfiguration(this, selectedTheme);
+            recreate();
+        });
+
 
 
         backButton.setOnClickListener(new View.OnClickListener() {

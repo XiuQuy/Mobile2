@@ -19,7 +19,7 @@
         android:ellipsize="end"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:textColor="@color/white"/>
+        />
 
     <TextView
         android:id="@+id/textViewCharacter"

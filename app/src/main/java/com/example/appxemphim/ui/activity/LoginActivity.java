@@ -15,8 +15,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.core.content.ContextCompat;
 import androidx.credentials.Credential;
 import androidx.credentials.CredentialManager;
 import androidx.credentials.CredentialManagerCallback;
@@ -33,6 +35,7 @@ import com.example.appxemphim.data.remote.UserService;
 import com.example.appxemphim.model.UserLogin;
 import com.example.appxemphim.model.UserResponse;
 import com.example.appxemphim.ui.activity.RegisterActivity;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
@@ -69,7 +72,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-
+    private View view;
     private TextInputLayout emailInputLayout;
     private TextInputLayout passwordInputLayout;
     CallbackManager callbackManager;
@@ -80,13 +83,23 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int nightMode = ThemeManager.getNightModeConfiguration(this);
+        Log.d("nightMode",String.valueOf(nightMode));
+        AppCompatDelegate.setDefaultNightMode(nightMode);
         setContentView(R.layout.activity_login_screen);
 
         LanguageManager.initLanguage(this);
+
         if(checkTokenExpiration()){
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
+        }
+        view = findViewById(R.id.loginview);
+        if (nightMode == 1) {
+            view.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white));
+        } else {
+            view.setBackgroundColor(ContextCompat.getColor(this, android.R.color.black));
         }
 
         emailInputLayout = findViewById(R.id.username);
@@ -107,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
+          @Override
             public void onClick(View v) {
                 String email = emailInputLayout.getEditText().getText().toString().trim();
                 String password = passwordInputLayout.getEditText().getText().toString().trim();
