@@ -34,7 +34,7 @@
             android:fontFamily="@font/montserrat"
             android:text="@string/new_playlist"
             android:textAlignment="textEnd"
-            android:textColor="@color/btn_link_color"
+            android:textColor="@color/bg_toolbar"
             android:textSize="@dimen/title_popup_add_to_playlist" />
 
     </LinearLayout>

@@ -11,13 +11,15 @@
         android:layout_height="80dp"
         android:src="@drawable/user1"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:background="#781717"/>
     <TextView
         android:id="@+id/txtNavName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/name"
+        android:background="#781717"
         android:textColor="@color/text_color"
         android:layout_margin="10dp"
         android:textSize="20sp"
@@ -32,5 +34,6 @@
         android:textColor="@color/text_color"
         android:layout_margin="10dp"
         android:textSize="15sp"
+        android:background="#781717"
         android:fontFamily="@font/antic" />
 </LinearLayout>

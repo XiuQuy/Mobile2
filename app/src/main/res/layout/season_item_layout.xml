@@ -29,7 +29,7 @@
             android:textAllCaps="true"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/white"/>
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,8 +60,6 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:text="@string/rate"
-                    android:textColor="@color/white"
-
                     />
             </LinearLayout>
             <TextView
@@ -88,8 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:textColor="@color/white"/>
-
+            />
     </LinearLayout>
 
 </LinearLayout>

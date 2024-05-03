@@ -118,9 +118,9 @@ public class MainActivity extends AppCompatActivity {
 
         CircleImageView imageAvatarInNav = headerView.findViewById(R.id.img_user);
         CircleImageView circleImageView = findViewById(R.id.imgAvatar);
-        RequestCreator requestCreatorImageAvatar = Picasso.get().load(userAvatar);
-        requestCreatorImageAvatar.into(imageAvatarInNav);
-        requestCreatorImageAvatar.into(circleImageView);
+        //RequestCreator requestCreatorImageAvatar = Picasso.get().load(userAvatar);
+        //requestCreatorImageAvatar.into(imageAvatarInNav);
+       // requestCreatorImageAvatar.into(circleImageView);
 
         SearchView searchView = findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
