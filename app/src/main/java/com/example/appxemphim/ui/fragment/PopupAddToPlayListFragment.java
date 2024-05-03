@@ -1,6 +1,7 @@
 package com.example.appxemphim.ui.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -97,8 +98,11 @@ public class PopupAddToPlayListFragment extends DialogFragment {
     }
     // Ham kiem tra movie da co trong playlist nao
     private void checkMovieInPlaylist(InformationMovie informationMovie){
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+        int userId = sharedPreferences.getInt("userId", -1);
+        String token = sharedPreferences.getString("token", "");
         PlaylistItemService playlistItemService = ServiceApiBuilder.buildUserApiService(PlaylistItemService.class);
-        Call<List<Integer>> call = playlistItemService.checkMovieInAllPlaylist(1, "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKV1RTZXJ2aWNlQWNjZXNzVG9rZW4iLCJqdGkiOiIyNDVmN2M4My0wODMxLTRiNzUtYTBiYi0wMGU1ZmQ0OTVlNTMiLCJpYXQiOiIxNi8wNC8yMDI0IDk6Mzk6MzAgU0EiLCJVc2VySWQiOiIxIiwiRW1haWwiOiJkb2xlaHV5MjIyQGdtYWlsLmNvbSIsImV4cCI6MTcxNDEyNDM3MCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0OTg3MCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDk4NzAifQ.3c0qceENeVBMoDiqNgMuvLSFurfVS2PhPmjeZ0_m8pQ", informationMovie);
+        Call<List<Integer>> call = playlistItemService.checkMovieInAllPlaylist(userId, "Bearer " + token, informationMovie);
         call.enqueue(new Callback<List<Integer>>() {
             @Override
             public void onResponse(Call<List<Integer>> call, Response<List<Integer>> response) {

@@ -119,7 +119,7 @@ public class HistoryAllAdapter extends RecyclerView.Adapter<HistoryAllAdapter.My
         public  ImageView getMenu_button(){
             return menu_button;
         }
-        
+
     }
 
     public String formatDuration(int durationInSeconds) {

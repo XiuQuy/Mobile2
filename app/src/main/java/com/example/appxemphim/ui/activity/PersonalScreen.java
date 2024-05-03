@@ -79,11 +79,38 @@ public class PersonalScreen extends AppCompatActivity {
                 txtUsername.setText(userEmail);
             }
         }
+        Button btnSeeMorePlaylist = findViewById(R.id.btn_view_all_playlist);
+        btnSeeMorePlaylist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Điều hướng người dùng đến màn hình đăng ký
+                Intent intent = new Intent(PersonalScreen.this, PlaylistActivity.class);
+                intent.putExtra("userId", userId);
+                intent.putExtra("userName", userName);
+                intent.putExtra("userEmail", userEmail);
+                intent.putExtra("userToken", userToken);
+                startActivity(intent);
+            }
+        });
+
+        Button btnSeeMoreHistory = findViewById(R.id.btn_view_all_history);
+        btnSeeMoreHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Điều hướng người dùng đến màn hình đăng ký
+                Intent intent = new Intent(PersonalScreen.this, HistoryAllActivity.class);
+                intent.putExtra("userId", userId);
+                intent.putExtra("userName", userName);
+                intent.putExtra("userEmail", userEmail);
+                intent.putExtra("userToken", userToken);
+                startActivity(intent);
+            }
+        });
         // Lấy dữ liệu từ SharedPreferences
         SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
         String avatarUrl = prefs.getString("avatar", "");
 
-        // Sử dụng Glide để tải hình ảnh
+        // Sử dụng Glide để tải hình ảnhgit
         Glide.with(this)
                 .load(avatarUrl) // Load từ URL lấy từ SharedPreferences
                 .apply(new RequestOptions().placeholder(R.drawable.placeholder_img_load))
@@ -96,7 +123,7 @@ public class PersonalScreen extends AppCompatActivity {
         // Xử lý sự kiện khi người dùng nhấn vào nút đổi mật khẩu
         Button btnChangePassword = findViewById(R.id.btnChangePassword);
         String tagSocialNetwork = prefs.getString("tagSocialNetwork", "");
-        
+
         // ẩn nút đổi mật khẩu khi người dùng đăng nhập bằng facebook hoặc google
         if(tagSocialNetwork.equals("FACEBOOK") || tagSocialNetwork.equals("GOOGLE")){
             btnChangePassword.setVisibility(View.GONE);

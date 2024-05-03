@@ -9,7 +9,9 @@ import retrofit2.http.Query;
 public interface DetailMovieService {
 @GET("movie/{id}")
     public Call<DetailMovieResponse> getDetailMovie(
+
             @Path("id") int id,
+            @Query("language") String language,
             @Query("api_key") String apiKey
 );
 

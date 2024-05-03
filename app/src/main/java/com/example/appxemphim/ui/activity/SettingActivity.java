@@ -26,27 +26,45 @@ public class SettingActivity extends AppCompatActivity {
     private AutoCompleteTextView autoCompleteTextView;
     private MaterialSwitch themeSwitch;
     private ImageView backButton;
+    private String selectedLanguage; // Thêm biến instance
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
         backButton = findViewById(R.id.back_button);
+
+        String selectedLanguageCode = LanguageManager.getSelectedLanguage(this);
+        String selectedLanguageName = "";
+        switch (selectedLanguageCode) {
+            case "vi":
+                selectedLanguageName = "Tiếng Việt";
+                break;
+            case "en":
+                selectedLanguageName = "English";
+                break;
+            // Thêm các trường hợp cho các ngôn ngữ khác nếu cần
+            default:
+                selectedLanguageName = selectedLanguageCode; // Sử dụng mã ngôn ngữ nếu không khớp với bất kỳ trường hợp nào
+                break;
+        }
+        autoCompleteTextView.setText(selectedLanguageName);
+
         String[] languages = getResources().getStringArray(R.array.simple_items);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, languages);
         autoCompleteTextView.setAdapter(adapter);
-        autoCompleteTextView.setSelection(0);
 
 
         autoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
-            String selectedLanguage = (String) parent.getItemAtPosition(position);
-            if(selectedLanguage.equals("English")) {
-                setLocal(SettingActivity.this, "en");
+            String newSelectedLanguage = (String) parent.getItemAtPosition(position);
+            if (!newSelectedLanguage.equals(selectedLanguage)) {
+                selectedLanguage = newSelectedLanguage;
+                if (selectedLanguage.equals("English")) {
+                    setLocal(SettingActivity.this, "en");
+                } else {
+                    setLocal(SettingActivity.this, "vi");
+                }
                 recreate();
-
-            } else {
-                setLocal(SettingActivity.this, "vi");
-                recreate();
-
             }
         });
         themeSwitch = findViewById(R.id.themeswitch);
@@ -61,6 +79,7 @@ public class SettingActivity extends AppCompatActivity {
             ThemeManager.setNightModeConfiguration(this, selectedTheme);
             recreate();
         });
+
 
 
         backButton.setOnClickListener(new View.OnClickListener() {

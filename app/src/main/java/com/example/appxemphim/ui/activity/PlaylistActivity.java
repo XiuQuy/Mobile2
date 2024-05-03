@@ -63,7 +63,7 @@ public class PlaylistActivity extends AppCompatActivity implements PlaylistAllAd
     @Override
     protected void onResume() {
         super.onResume();
-        // Gọi fetchPlaylists() khi activity quay lại trạng thái active
+        //Gọi fetchPlaylists() khi activity quay lại trạng thái active
         fetchPlaylists();
     }
     interface OnFetchCompletedListener {
@@ -87,7 +87,7 @@ public class PlaylistActivity extends AppCompatActivity implements PlaylistAllAd
                             public void onFetchCompleted() {
                                 int playlistsProcessedSoFar = playlistsProcessed.incrementAndGet();
                                 if (playlistsProcessedSoFar == totalPlaylists) {
-                                    // Tất cả các playlist đã được xử lý, vì vậy bạn có thể thiết lập Adapter ngay bây giờ
+                                    //Tất cả các playlist đã được xử lý, vì vậy bạn có thể thiết lập Adapter ngay bây giờ
                                     RecyclerView recyclerView = findViewById(R.id.recycler_view_items);
                                     playlistAllAdapter = new PlaylistAllAdapter(PlaylistActivity.this, playlists, userId, userToken);
                                     playlistAllAdapter.setOnDeleteItemClickListener(PlaylistActivity.this);
@@ -105,7 +105,7 @@ public class PlaylistActivity extends AppCompatActivity implements PlaylistAllAd
             public void onFailure(Call<List<Playlist>> call, Throwable t) {
                 Log.e("API_ERROR", t.getMessage());
                 Toast.makeText(PlaylistActivity.this, "Network error", Toast.LENGTH_SHORT).show();
-            }
+            }//thong bao loi cho nguoi dung
         });
     }
 
@@ -118,7 +118,7 @@ public class PlaylistActivity extends AppCompatActivity implements PlaylistAllAd
             public void onResponse(Call<List<PlaylistItem>> call, Response<List<PlaylistItem>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<PlaylistItem> playlistItems = response.body();
-                    // Kiểm tra xem playlistItems của playlist có null hay không trước khi thêm vào
+                    //Kiểm tra xem playlistItems của playlist có null hay không trước khi thêm vào
                     if (playlist.getPlaylistItems() == null) {
                         // Nếu null, khởi tạo danh sách mới
                         playlist.setPlaylistItems(new ArrayList<PlaylistItem>());
@@ -136,13 +136,13 @@ public class PlaylistActivity extends AppCompatActivity implements PlaylistAllAd
             public void onFailure(Call<List<PlaylistItem>> call, Throwable t) {
                 Log.e("API_ERROR", t.getMessage());
                 Toast.makeText(PlaylistActivity.this, "Network error", Toast.LENGTH_SHORT).show();
-            }
+            }//xu ly loi
         });
     }
     // Phương thức xóa mục từ Adapter
     @Override
     public void onDeleteItemClick(int position) {
-        // Lấy danh sách các mục từ adapter
+        //Lấy danh sách các mục từ adapter
         List<Playlist> playlists = playlistAllAdapter.getPlaylists();
 
         // Kiểm tra xem vị trí có hợp lệ không
@@ -166,7 +166,7 @@ public class PlaylistActivity extends AppCompatActivity implements PlaylistAllAd
 
     // Phương thức xóa mục từ backend
     private void deleteItemFromBackend(int watchListId, int userId, int adapterPosition) {
-        // Gọi API để xóa từ backend
+        //Gọi API để xóa từ backend
         PlaylistService tmdbApi = ServiceApiBuilder.buildUserApiService(PlaylistService.class);
         Call<DeleteResponse> call = tmdbApi.deleteonePlaylist(watchListId, userId, "Bearer " + userToken);
 
@@ -174,7 +174,7 @@ public class PlaylistActivity extends AppCompatActivity implements PlaylistAllAd
             @Override
             public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
                 if (response.isSuccessful()) {
-                    // Xử lý phản hồi từ backend
+                    //Xử lý phản hồi từ backend
                     DeleteResponse deleteResponse = response.body();
                     if (deleteResponse != null && deleteResponse.isSuccess()) {
                         // Xóa thành công từ backend
@@ -196,7 +196,7 @@ public class PlaylistActivity extends AppCompatActivity implements PlaylistAllAd
             public void onFailure(Call<DeleteResponse> call, Throwable t) {
                 // Xử lý lỗi nếu có
                 Log.e(TAG, "Delete request failed: " + t.getMessage());
-                // Hiển thị thông báo lỗi cho người dùng nếu cần
+                //Hiển thị thông báo lỗi cho người dùng nếu cần
             }
         });
     }

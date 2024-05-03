@@ -87,6 +87,9 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("nightMode",String.valueOf(nightMode));
         AppCompatDelegate.setDefaultNightMode(nightMode);
         setContentView(R.layout.activity_login_screen);
+
+        LanguageManager.initLanguage(this);
+
         if(checkTokenExpiration()){
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);

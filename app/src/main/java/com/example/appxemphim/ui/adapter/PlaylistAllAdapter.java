@@ -33,36 +33,39 @@ public class PlaylistAllAdapter extends RecyclerView.Adapter<PlaylistAllAdapter.
     private OnDeleteItemClickListener deleteItemClickListener;
 
     public interface OnDeleteItemClickListener {
-        void onDeleteItemClick(int position);
+        void onDeleteItemClick(int position);//Phương thức này được gọi khi người dùng thực hiện việc xóa một mục từ danh sách phát
     }
     public void setOnDeleteItemClickListener(OnDeleteItemClickListener listener) {
         this.deleteItemClickListener = listener;
+        // Phương thức này được sử dụng để thiết lập một bộ lắng nghe (listener) để xử lý sự kiện khi người dùng muốn xóa một mục từ danh sách phát.
     }
     public List<Playlist> getPlaylists() {
-        return playlists;
+        return playlists;//Phương thức này trả về danh sách các playlist.
     }
     public PlaylistAllAdapter(Context context, List<Playlist> playlists, int userId,String userToken) {
         this.context = context;
         this.playlists = playlists;
         this.userId = userId;
         this.userToken = userToken;
+        //Constructor này được sử dụng để khởi tạo một đối tượng PlaylistAllAdapter với context,danh sách playlist, userId và userToken được cung cấp.
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_playlist_item_seemore, parent, false);
         return new MyViewHolder(view);
+        //Mỗi ViewHolder sẽ chứa các tham chiếu đến các thành phần UI trong layout của mỗi item.
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Playlist playlist = playlists.get(position);
         holder.bind(playlist);
-        // Gắn sự kiện onClick cho menu_button
+        //Gắn sự kiện onClick cho menu_button
         holder.getMenu_button().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Gọi phương thức showMenuForItem và chuyển anchorView là menu_button và vị trí từ holder
+                //Gọi phương thức showMenuForItem và chuyển anchorView là menu_button và vị trí từ holder
                 showMenuForItem(view, holder.getAdapterPosition());
             }
         });
@@ -74,7 +77,7 @@ public class PlaylistAllAdapter extends RecyclerView.Adapter<PlaylistAllAdapter.
                 // Lấy playlistId của playlist khi click vào
                 int playlistId = playlist.getId();
 
-                // Tạo Intent để chuyển đến PlaylistItemActivity
+                //Tạo Intent để chuyển đến PlaylistItemActivity
                 Intent intent = new Intent(context, PlayListItemActivity.class);
 
                 // Đính kèm playlistId vào Intent
@@ -105,13 +108,14 @@ public class PlaylistAllAdapter extends RecyclerView.Adapter<PlaylistAllAdapter.
             imageView = itemView.findViewById(R.id.item_image);
             itemCountTextView = itemView.findViewById(R.id.quantityTextView);
             menu_button = itemView.findViewById(R.id.menu_button);
+            //gan cac tham chieu cua cac thanh phan trong giao dien
         }
 
         public void bind(Playlist playlist) {
             titleTextView.setText(playlist.getTitle());
             itemCountTextView.setText(String.valueOf(playlist.getItemCount())); // Hiển thị itemCount
 
-            // Lấy danh sách các mục trong playlist
+            //Lấy danh sách các mục trong playlist
             List<PlaylistItem> playlistItems = playlist.getPlaylistItems();
 
             // Kiểm tra xem danh sách không rỗng và không null
@@ -136,14 +140,14 @@ public class PlaylistAllAdapter extends RecyclerView.Adapter<PlaylistAllAdapter.
             }
         }
         public ImageView getMenu_button(){
-            return menu_button;
+            return menu_button;// trả về tham chiếu đến ImageView menu_button.
         }
     }
     private void showMenuForItem(View anchorView, int position) {
         PopupMenu popupMenu = new PopupMenu(context, anchorView);
         popupMenu.inflate(R.menu.vertical_menu);
 
-        // Lấy Playlist tại vị trí position
+        //Lấy Playlist tại vị trí position
         Playlist playlist = playlists.get(position);
 
         // Lấy id từ Playlist
@@ -155,7 +159,7 @@ public class PlaylistAllAdapter extends RecyclerView.Adapter<PlaylistAllAdapter.
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.menu_delete) {
-                    // Hiển thị thông báo AlertDialog xác nhận trước khi xóa
+                    //Hiển thị thông báo AlertDialog xác nhận trước khi xóa
                     showDeleteConfirmationDialog(itemId, position);
                     return true;
                 } else {
@@ -176,7 +180,7 @@ public class PlaylistAllAdapter extends RecyclerView.Adapter<PlaylistAllAdapter.
         builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // Nếu người dùng chọn "Có", gọi phương thức onDeleteItemClick() của listener
+                //Nếu người dùng chọn "Có", gọi phương thức onDeleteItemClick() của listener
                 if (deleteItemClickListener != null) {
                     deleteItemClickListener.onDeleteItemClick(position);
                 }
