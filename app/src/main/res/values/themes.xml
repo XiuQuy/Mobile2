@@ -13,7 +13,9 @@
         <!-- Thiết lập nền -->
         <item name="android:background">@color/gray</item>
     </style>
-    <style name="Theme.Appxemphim" parent="Base.Theme.Appxemphim" />
+    <style name="Theme.Appxemphim" parent="Base.Theme.Appxemphim" >
+        <item name="android:popupMenuStyle">@style/MyPopupMenuStyle</item>
+    </style>
 
     <style name="Widget.Appxemphim.Chip.Filter" parent="Widget.MaterialComponents.Chip.Filter">
         <item name="materialThemeOverlay">@style/ThemeOverlay.Appxemphim.Chip.Filter</item>
@@ -25,4 +27,8 @@
     <style name="ThemeOverlay.Appxemphim.Chip.Filter" parent="">
         <item name="elevationOverlayEnabled">false</item>
     </style>
+    <style name="MyPopupMenuStyle" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@color/background_popup</item>
+    </style>
+
 </resources>

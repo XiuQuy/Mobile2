@@ -2,8 +2,10 @@ package com.example.appxemphim.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,20 +13,37 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
+import com.example.appxemphim.data.remote.PlaylistService;
 import com.example.appxemphim.data.remote.ServiceApiBuilder;
 
 import com.example.appxemphim.data.remote.YoutubeService;
+import com.example.appxemphim.model.InformationMovie;
+import com.example.appxemphim.model.Movie;
+import com.example.appxemphim.model.Playlist;
+import com.example.appxemphim.model.PlaylistWithOneItemDTO;
 import com.example.appxemphim.model.YoutubeChannelItem;
 import com.example.appxemphim.model.YoutubeChannelResponse;
 import com.example.appxemphim.model.YoutubeVideoItem;
 import com.example.appxemphim.ui.adapter.GlideLoadImgListener;
+import com.example.appxemphim.ui.fragment.PopupAddToPlayListFragment;
+import com.example.appxemphim.ui.fragment.PopupAddWithNewPlaylistFragment;
+import com.example.appxemphim.ui.fragment.RightFilterFragmentSearchActivity;
+import com.example.appxemphim.ui.viewmodel.PlaylistModel;
+import com.example.appxemphim.util.AddMovieToPlaylistLoader;
+import com.example.appxemphim.util.AddWithNewPlaylistLoader;
 import com.example.appxemphim.util.ConvertDateToDayAgo;
 import com.example.appxemphim.util.ConvertNumberToShortFormat;
 import com.google.gson.Gson;
@@ -50,7 +69,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VideoYoutubePlayerActivity extends AppCompatActivity {
+public class VideoYoutubePlayerActivity extends AppCompatActivity implements
+        PopupAddWithNewPlaylistFragment.IPopupAddWithNewPlaylistAddSendListener,
+        PopupAddToPlayListFragment.IPopupAddToPlaylistSendListener{
     private YouTubePlayerView youTubePlayerView;
     private YouTubePlayer youTubePlayer;
     private FrameLayout fullscreenViewContainer;
@@ -63,6 +84,8 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity {
     private YoutubeVideoItem videoPlaying;
     private String languageCode;
     private LinearLayout containerVideo;
+    PlaylistModel playlistModel;
+    PopupAddToPlayListFragment popupAddToPlayListFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +106,8 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity {
         btnShowMoreOverview = findViewById(R.id.btn_show_more_overview);
         btnShowMoreOverview.setPaintFlags(textViewOverview.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         btnHideLessOverview.setPaintFlags(textViewOverview.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        playlistModel = new ViewModelProvider(this).get(PlaylistModel.class);
+        fetchPlaylists();
 
         //click bnt view overview
         btnShowMoreOverview.setOnClickListener(v -> {
@@ -200,7 +225,7 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity {
     private void bindListVideoToContainer(List<YoutubeVideoItem> listVideo){
         LayoutInflater inflater = LayoutInflater.from(this);
         ImageView imageThumbnail;
-        TextView channelName, viewCount, likeCount, title;
+        TextView channelName, viewCount, likeCount, title, menu;
         for(YoutubeVideoItem video : listVideo){
             View itemLayout = inflater.inflate(
                     R.layout.item_list_video_youtube_activity_player,
@@ -210,6 +235,10 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity {
             channelName = itemLayout.findViewById(R.id.tv_channel);
             viewCount = itemLayout.findViewById(R.id.view_count);
             likeCount = itemLayout.findViewById(R.id.like_count);
+            menu = itemLayout.findViewById(R.id.menu);
+
+            TextView finalMenu = menu;
+            menu.setOnClickListener(v -> showOptionMenu(finalMenu, video));
 
             title.setText(video.getSnippet().getTitle());
             channelName.setText(video.getSnippet().getChannelTitle());
@@ -297,5 +326,188 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity {
             }
         });
     }
+    private void showOptionMenu(View view, YoutubeVideoItem video) {
+        Movie movie = new Movie();
+        movie.setId(video.getId());
+        movie.setTag("YOUTUBE");
+        movie.setName(video.getSnippet().getTitle());
+        movie.setPosterPath(video.getSnippet().getThumbnails().getMediumThumbnail().getUrl());
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu.inflate(R.menu.menu_youtube_video_item);
+        popupMenu.setOnMenuItemClickListener(item -> {
+            int idItem = item.getItemId();
+            if(idItem == R.id.item_add_to_playlist){
+                popupAddToPlayListFragment = new PopupAddToPlayListFragment(movie);
+                popupAddToPlayListFragment.show(getSupportFragmentManager(), "popup_add_to_playlist_fragment");
+                Log.i("ITEM RECYCLER VIEW", "click add playlist option");
+                return true;
+            }
+            return false;
+        });
+        popupMenu.show();
+    }
+    //
+    // LOADER ADD WITH NEW PLAYLIST
+    //
+    @Override
+    public void btnAddWithNewPlaylistClick(PlaylistWithOneItemDTO playlist) {
+        String playlistJson = new Gson().toJson(playlist);
+        Bundle args = new Bundle();
+        args.putString("playlistJson", playlistJson);
+        LoaderManager.getInstance(VideoYoutubePlayerActivity.this).restartLoader(2001, args, loaderAddWithNewPlaylist);
+    }
 
+    LoaderManager.LoaderCallbacks<Playlist> loaderAddWithNewPlaylist = new LoaderManager.LoaderCallbacks<Playlist>() {
+        @NonNull
+        @Override
+        public Loader<Playlist> onCreateLoader(int id, @Nullable Bundle args) {
+            assert args != null;
+            String playlistJson = args.getString("playlistJson");
+            Gson gson = new Gson();
+            PlaylistWithOneItemDTO playlist = gson.fromJson(playlistJson, PlaylistWithOneItemDTO.class);
+            return new AddWithNewPlaylistLoader(VideoYoutubePlayerActivity.this, playlist);
+        }
+
+        @Override
+        public void onLoadFinished(@NonNull Loader<Playlist> loader, Playlist data) {
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.layout_toast_message_add_or_remove_playlist_item,
+                    findViewById(R.id.toast_message_add_or_remove_playlist_item_container));
+            String addToString =  getString(R.string.add_to) + " ";
+            String successfullyString = " " + getString(R.string.successfully);
+            String failureString = " " + getString(R.string.failure);
+            String message ;
+            TextView text = layout.findViewById(R.id.message);
+            if(data == null){
+                message = addToString + "new playlist" + failureString;
+            }else{
+                message = addToString + data.getTitle() + successfullyString;
+                playlistModel.addAPlaylist(data);
+            }
+            text.setText(message);
+
+            Toast toast = new Toast(getApplicationContext());
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
+
+            new Handler().postDelayed(toast::cancel, 2000);
+            // Dọn dẹp Loader sau khi hoàn thành
+            LoaderManager.getInstance(VideoYoutubePlayerActivity.this).destroyLoader(loader.getId());
+        }
+
+        @Override
+        public void onLoaderReset(@NonNull Loader<Playlist> loader) {
+
+        }
+    };
+
+
+    //
+    // LOADER ADD OR REMOVE WITH EXIST PLAYLIST
+    //
+    @Override
+    public void whenPopupAddToPlaylistDismiss(ArrayList<Integer> listAdd,
+                                              ArrayList<Integer> listRemove,
+                                              InformationMovie informationMovie) {
+        String informationMovieJson = new Gson().toJson(informationMovie);
+        Bundle args = new Bundle();
+        args.putIntegerArrayList("listAdd", listAdd);
+        args.putIntegerArrayList("listRemove", listRemove);
+        args.putString("informationMovieJson", informationMovieJson);
+        LoaderManager.getInstance(VideoYoutubePlayerActivity.this).restartLoader(2002, args, loaderAddOrRemoveExistPlaylist);
+        Log.i("CALL_ADD_TO_PLAYLIST", "CALL ADD TO PLAYLIST");
+    }
+
+    LoaderManager.LoaderCallbacks<List<String>> loaderAddOrRemoveExistPlaylist = new LoaderManager.LoaderCallbacks<List<String>>() {
+        @NonNull
+        @Override
+        public Loader<List<String>> onCreateLoader(int id, @Nullable Bundle args) {
+            Log.i("LOADER_ADD_TO_PLAYLIST", "CREATE");
+            assert args != null;
+            ArrayList<Integer> listAdd = args.getIntegerArrayList("listAdd");
+            ArrayList<Integer> listRemove = args.getIntegerArrayList("listRemove");
+            String informationMovieJson = args.getString("informationMovieJson");
+            Gson gson = new Gson();
+            InformationMovie informationMovie = gson.fromJson(informationMovieJson, InformationMovie.class);
+            return new AddMovieToPlaylistLoader(VideoYoutubePlayerActivity.this, listAdd, listRemove, informationMovie);
+        }
+
+        @Override
+        public void onLoadFinished(@NonNull Loader<List<String>> loader, List<String> data) {
+            if(data != null){
+                List<String> updateMessage = new ArrayList<>();
+                for (String message: data) {
+                    updateMessage.add(replaceIdWithName(message));
+                }
+                showToastDelayed(updateMessage);
+            }else{
+                data = new ArrayList<>();
+                data.add(getString(R.string.message_have_some_error));
+                showToastDelayed(data);
+            }
+            // Dọn dẹp Loader sau khi hoàn thành
+            LoaderManager.getInstance(VideoYoutubePlayerActivity.this).destroyLoader(loader.getId());
+        }
+
+        @Override
+        public void onLoaderReset(@NonNull Loader<List<String>> loader) {
+
+        }
+    };
+    private void showToastDelayed(List<String> messages) {
+        for (int i = 0; i < messages.size(); i++) {
+            final int index = i;
+            new Handler().postDelayed(() -> {
+                // Hiển thị Toast với message tại vị trí hiện tại của danh sách
+                showToastMessageAddItemPlaylist(messages.get(index));
+            }, i * 2000L); // Mỗi Toast hiển thị sau 1 giây
+        }
+    }
+
+    private void showToastMessageAddItemPlaylist(String message){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.layout_toast_message_add_or_remove_playlist_item,
+                findViewById(R.id.toast_message_add_or_remove_playlist_item_container));
+        TextView text = layout.findViewById(R.id.message);
+        text.setText(message);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
+    }
+
+    //Fetch playlist
+    private void fetchPlaylists() {
+        PlaylistService tmdbApi = ServiceApiBuilder.buildUserApiService(PlaylistService.class);
+        SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        int userId = prefs.getInt("userId", -1);
+        String userToken = prefs.getString("token", "");
+
+        Call<List<Playlist>> call = tmdbApi.getPlaylist(userId, "Bearer " + userToken);
+
+        call.enqueue(new Callback<List<Playlist>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Playlist>> call, @NonNull Response<List<Playlist>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    playlistModel.setListPlaylist(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Playlist>> call, @NonNull Throwable t) {
+                Log.e("API_ERROR", "", t);
+            }
+        });
+    }
+
+    private String replaceIdWithName(String message) {
+        for (Playlist playlist : playlistModel.getListPlaylist()) {
+            String idString = String.valueOf(playlist.getId());
+            String searchPattern = "\\b" + idString + "\\b";
+            message = message.replaceAll(searchPattern, playlist.getTitle());
+        }
+        return message;
+    }
 }

@@ -84,6 +84,7 @@ public class PlaylistAllAdapter extends RecyclerView.Adapter<PlaylistAllAdapter.
                 intent.putExtra("playlistId", playlistId);
                 intent.putExtra("userId", userId);
                 intent.putExtra("userToken", userToken);
+                intent.putExtra("playlistName", playlist.getTitle());
 
                 // Chuyển đến PlaylistItemActivity
                 context.startActivity(intent);
@@ -100,7 +101,7 @@ public class PlaylistAllAdapter extends RecyclerView.Adapter<PlaylistAllAdapter.
         private TextView titleTextView;
         private TextView itemCountTextView;
         private AppCompatImageView imageView;
-        private ImageView menu_button;
+        private TextView menu_button;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -139,7 +140,7 @@ public class PlaylistAllAdapter extends RecyclerView.Adapter<PlaylistAllAdapter.
                 }
             }
         }
-        public ImageView getMenu_button(){
+        public TextView getMenu_button(){
             return menu_button;// trả về tham chiếu đến ImageView menu_button.
         }
     }

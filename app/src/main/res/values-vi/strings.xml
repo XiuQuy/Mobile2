@@ -6,7 +6,7 @@
     <string name="user">Tên người dùng</string>
     <string name="pass">Mật khẩu</string>
     <string name="passConfirm">Xác nhận mật khẩu</string>
-    <string name="forgotpass">Quên mật khẩu</string>
+    <string name="forgotpass">Quên mật khẩu ?</string>
     <string name="login">Đăng nhập</string>
     <string name="or">hoặc</string>
     <string name="signup">Đăng ký</string>
@@ -104,9 +104,9 @@
     <string name="confirm_button">Xác nhận</string>
 
     <string name="my_list">Danh sách của tôi</string>
-    <string name="status">Trạng thái:</string>
+    <string name="status">"Trạng thái: "</string>
 
-    <string name="label_adult">Người lớn:</string>
+    <string name="label_adult">"Nội dung người lớn: "</string>
     <string name="label_overview">Tổng quan</string>
     <string name="label_original_language">Ngôn ngữ gốc:</string>
     <string name="label_spoken_language">Ngôn ngữ nói:</string>
@@ -147,4 +147,20 @@
     <string name="search">Tìm kiếm</string>
 
     <string name="rate">Đánh giá</string>
+    <string name="views">" lượt xem"</string>
+    <string name="likes">" lượt thích"</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+    <string name="clear_history_last_hour">Xóa lịch sử trong 1 giờ qua</string>
+    <string name="clear_history_last_24_hours">Xóa lịch sử trong 24 giờ qua</string>
+    <string name="clear_history_last_7_days">Xóa lịch sử trong 7 ngày qua</string>
+    <string name="clear_history_last_4_weeks">Xóa lịch sử trong 1 tháng qua</string>
+    <string name="clear_all_history">Xóa tất cả lịch sử</string>
+    <string name="your_history">Lịch sử của bạn</string>
+    <string name="delete">Xóa</string>
+    <string name="your_playlists">Các danh sách phát của bạn</string>
+    <string name="loading">Đang tải…</string>
+    <string name="movie_tag">Phim điện ảnh</string>
+    <string name="tv_series_tag">Phim dài tập</string>
+    <string name="youtube_tag">Youtube video</string>
 </resources>

@@ -95,12 +95,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        view = findViewById(R.id.loginview);
-        if (nightMode == 1) {
-            view.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white));
-        } else {
-            view.setBackgroundColor(ContextCompat.getColor(this, android.R.color.black));
-        }
 
         emailInputLayout = findViewById(R.id.username);
         passwordInputLayout = findViewById(R.id.password);

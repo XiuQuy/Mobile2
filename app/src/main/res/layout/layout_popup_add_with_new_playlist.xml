@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-
+    android:background="@color/background_popup"
     android:padding="20dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
         android:textStyle="bold"
-
+        android:backgroundTint="@android:color/transparent"
         android:textSize="20sp"
         android:text="@string/new_playlist" />
 
@@ -30,6 +30,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:backgroundTint="@android:color/transparent"
         android:layoutDirection="rtl"
         android:paddingTop="15dp"
         android:orientation="horizontal">
@@ -40,10 +41,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:backgroundTint="@android:color/transparent"
             android:textSize="15sp"
             android:textStyle="bold"
             android:enabled="false"
-            android:textColor="@color/bg_toolbar"
+            android:textColor="@color/btn_link_disable_color"
             android:text="@string/add" />
 
         <TextView
@@ -52,9 +54,10 @@
             android:fontFamily="@font/montserrat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
             android:layout_marginStart="20dp"
             android:textSize="15sp"
-            android:textColor="@color/bg_toolbar"
+            android:textColor="@color/btn_link_color"
             android:text="@string/cancel" />
     </LinearLayout>
 </LinearLayout>

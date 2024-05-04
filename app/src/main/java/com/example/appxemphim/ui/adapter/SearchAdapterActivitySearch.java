@@ -127,8 +127,8 @@ public class SearchAdapterActivitySearch extends RecyclerView.Adapter<SearchAdap
     }
 
     private void showOptionMenu(View view, Movie movie) {
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_item_search, popupMenu.getMenu());
+        PopupMenu popupMenu = new PopupMenu(context, view);
+        popupMenu.inflate(R.menu.menu_item_search);
         popupMenu.setOnMenuItemClickListener(item -> {
             int idItem = item.getItemId();
             if(idItem == R.id.item_search_add_to_playlist_option){

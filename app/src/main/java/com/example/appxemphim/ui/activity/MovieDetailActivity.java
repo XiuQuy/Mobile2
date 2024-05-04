@@ -124,6 +124,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         txtHomepage = findViewById(R.id.txtHomepage);
         recyclerViewCast = findViewById(R.id.recyclerViewCast);
         recyclerViewCrew = findViewById(R.id.recyclerViewCrew);
+
             Log.d("Báo tag","tag là movie");
 
             DetailMovieService apiService = ServiceApiBuilder.buildTMDBService(DetailMovieService.class);
@@ -150,13 +151,13 @@ public class MovieDetailActivity extends AppCompatActivity {
                         String overview = movieDetailResponse.getOverview();
                         txtDescription.setText(overview);
                         String language = movieDetailResponse.getOriginalLanguage();
-                        txtLanguage.setText(language);
+                        txtLanguage.setText(new Locale(language).getDisplayLanguage(getResources().getConfiguration().getLocales().get(0)));
                         String spokenLanguage = movieDetailResponse.getFormattedSpokenLanguages();
                         txtSpokenLanguage.setText(spokenLanguage);
                         int time = movieDetailResponse.getRuntime();
                         String runtime = convertTime(time);
                         txtStat.setText(releaseDate + " • " + formattedGenres + " • " + runtime);
-                        String adult = movieDetailResponse.isAdult() ? "true" : "false";
+                        String adult = movieDetailResponse.isAdult() ? getString(R.string.yes) : getString(R.string.no);
                         txtAdult.setText(adult);
                         String status = movieDetailResponse.getStatus();
                         txtStatus.setText(status);

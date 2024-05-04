@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -73,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         // Xử lý sự kiện khi người dùng nhấn quay lai
-        AppCompatImageButton backButton = findViewById(R.id.btnBack);
+        ImageView backButton = findViewById(R.id.btnBack);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

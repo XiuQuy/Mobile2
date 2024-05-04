@@ -15,7 +15,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
 import com.example.appxemphim.model.History;
+import com.example.appxemphim.model.YoutubeVideoItem;
 import com.example.appxemphim.ui.activity.MovieDetailActivity;
+import com.example.appxemphim.ui.activity.VideoYoutubePlayerActivity;
 
 import java.util.List;
 import java.util.Objects;
@@ -56,6 +58,7 @@ public class HistoryAdapterPersonal extends RecyclerView.Adapter<HistoryAdapterP
                 }
                 if(tagMovie.equals("YOUTUBE")){
 
+                    //VideoYoutubePlayerActivity.sendIntent(context,);
                 }
             }
         });
@@ -85,7 +88,15 @@ public class HistoryAdapterPersonal extends RecyclerView.Adapter<HistoryAdapterP
 
         public void bind(History history) {
             output_title.setText(history.getInformationMovie().getTitle());
-            output_tag.setText(history.getInformationMovie().getTag());
+            String tagString = history.getInformationMovie().getTag();
+            if(Objects.equals(tagString, "YOUTUBE")){
+                tagString = context.getString(R.string.youtube_tag);
+            }else if (Objects.equals(tagString, "TMDB_MOVIE")){
+                tagString = context.getString(R.string.movie_tag);
+            }else if (Objects.equals(tagString, "TMDB_TV_SERIES")){
+                tagString = context.getString(R.string.tv_series_tag);
+            }
+            output_tag.setText(tagString);
             // Load image using Picasso or any other image loading library
             String imageUrl = history.getInformationMovie().getImageLink();
             Glide.with(context)

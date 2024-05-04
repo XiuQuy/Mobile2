@@ -30,7 +30,7 @@ public class TMDBMovieResult {
     public Movie toMovie(){
         Movie movie = new Movie();
         movie.setAdult(this.adult);
-        movie.setId(this.id);
+        movie.setId(String.valueOf(this.id));
         movie.setGenreIds(this.genreIds);
         movie.setOriginalLanguage(this.originalLanguage);
         movie.setPosterPath("https://image.tmdb.org/t/p/w500/"+this.posterPath);

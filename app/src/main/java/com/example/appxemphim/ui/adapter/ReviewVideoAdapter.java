@@ -42,7 +42,7 @@ public class ReviewVideoAdapter extends RecyclerView.Adapter<ReviewVideoAdapter.
         YoutubeVideoItem video = listVideos.get(position);
         holder.bind(video);
         holder.itemView.setOnClickListener(view -> {
-//            VideoYoutubePlayerActivity.sendIntent(context, video, listVideos);
+            VideoYoutubePlayerActivity.sendIntent(context, video, listVideos);
         });
     }
 
@@ -62,7 +62,7 @@ public class ReviewVideoAdapter extends RecyclerView.Adapter<ReviewVideoAdapter.
             imageThumbnail = itemView.findViewById(R.id.img_thumbnail);
             title = itemView.findViewById(R.id.tv_title);
             channelName = itemView.findViewById(R.id.tv_channel);
-          //  btnGoToYoutube = itemView.findViewById(R.id.btn_to_youtube);
+            btnGoToYoutube = itemView.findViewById(R.id.btn_to_youtube);
         }
 
         public void bind(YoutubeVideoItem video) {

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,6 +46,7 @@ public class PlayListItemActivity extends AppCompatActivity implements PlayListI
         RecyclerView recyclerView = findViewById(R.id.recycler_view_items);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        String playlistName = "";
         Intent intent = getIntent();
         if (intent != null) {
             SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
@@ -53,7 +55,11 @@ public class PlayListItemActivity extends AppCompatActivity implements PlayListI
             userId = prefs.getInt("userId", -1);
             userToken = prefs.getString("token", "");
             playlistId = getIntent().getIntExtra("playlistId", -1);
+            playlistName = intent.getStringExtra("playlistName");
         }
+
+        TextView title = findViewById(R.id.title_text);
+        title.setText(playlistName);
 
         fetchPlayListItem();
         ImageView btnBack = findViewById(R.id.back_button);

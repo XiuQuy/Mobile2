@@ -75,7 +75,7 @@ public class HistoryAllAdapter extends RecyclerView.Adapter<HistoryAllAdapter.My
         private TextView output_time;
         private AppCompatImageView output_image;
         private ProgressBar output_progress;
-        private ImageView menu_button;
+        private TextView menu_button;
 
 
         public MyViewHolder(View itemView) {
@@ -116,7 +116,7 @@ public class HistoryAllAdapter extends RecyclerView.Adapter<HistoryAllAdapter.My
                 output_progress.setProgress(100);
             }
         }
-        public  ImageView getMenu_button(){
+        public  TextView getMenu_button(){
             return menu_button;
         }
 

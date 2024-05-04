@@ -26,13 +26,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:paddingVertical="10dp"
                 android:src="@drawable/ic_baseline_arrow_back_ios_24" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@drawable/icons8_netflix_48px" />
+                />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
         <ImageView
@@ -40,12 +41,6 @@
             android:layout_width="match_parent"
             android:layout_height="600dp"
             android:scaleType="fitXY" />
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/netflix_logo_icon" />
 
         <TextView
             android:id="@+id/txtNameMovie"
@@ -54,7 +49,6 @@
             android:layout_marginStart="10dp"
             android:fontFamily="@font/montserrat"
             android:text=""
-            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
         <TextView
@@ -92,7 +86,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/antic"
                     android:text="My List"
-                    android:textColor="@color/white" />
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -118,7 +112,6 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/antic"
                     android:text=""
-                    android:textColor="@color/white"
                     android:id="@+id/txtVote"/>
             </LinearLayout>
 
@@ -140,7 +133,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Status: "
-                android:textColor="@color/white"
                 android:paddingLeft="16dp"
                 android:textStyle="bold"
                 android:textSize="16dp"
@@ -150,7 +142,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
-                android:textColor="@color/white"
                 android:id="@+id/txtStatus"
                 android:textStyle="italic"
 
@@ -165,7 +156,6 @@
                 android:layout_height="wrap_content"
                 android:text="Adult: "
                 android:textSize="16dp"
-                android:textColor="@color/white"
                 android:paddingLeft="16dp"
                 android:textStyle="bold"
                 android:paddingTop="10dp"/>
@@ -174,7 +164,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtAdult"
                 android:textSize="16dp"
-                android:textColor="@color/white"
                 android:textStyle="italic"/>
         </LinearLayout>
         <LinearLayout
@@ -185,7 +174,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="First air date: "
-                android:textColor="@color/white"
                 android:paddingLeft="16dp"
                 android:textStyle="bold"
                 android:textSize="16dp"
@@ -195,7 +183,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
-                android:textColor="@color/white"
                 android:id="@+id/txtFirstAirDay"
                 android:textStyle="italic"
                 />
@@ -208,7 +195,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Episode run time: "
-                android:textColor="@color/white"
                 android:paddingLeft="16dp"
                 android:textStyle="bold"
                 android:textSize="16dp"
@@ -218,7 +204,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
-                android:textColor="@color/white"
                 android:id="@+id/txtEpisodeRunTime"
                 android:textStyle="italic"
                 />
@@ -228,7 +213,6 @@
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
             android:text="Overview"
-            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingTop="10dp"
@@ -239,7 +223,6 @@
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
             android:paddingRight="2dp"
-            android:textColor="@color/white"
             android:textSize="16sp"
             android:gravity="start"/>
         <LinearLayout
@@ -252,7 +235,6 @@
                 android:layout_height="wrap_content"
                 android:text="Original language:"
                 android:paddingLeft="16dp"
-                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
             <TextView
@@ -261,7 +243,6 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:paddingLeft="10dp"
-                android:textColor="@color/white"
                 android:textSize="16sp"/>
         </LinearLayout>
         <LinearLayout
@@ -272,7 +253,6 @@
                 android:layout_height="wrap_content"
                 android:text="Spoken language:"
                 android:paddingLeft="16dp"
-                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
             <TextView
@@ -281,7 +261,6 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:paddingLeft="10dp"
-                android:textColor="@color/white"
                 android:textSize="16sp"/>
         </LinearLayout>
         <TextView
@@ -290,7 +269,6 @@
             android:text="Trailer"
             android:paddingTop="15dp"
             android:paddingLeft="16dp"
-            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"/>
         <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -304,7 +282,6 @@
             android:text="Other videos"
             android:paddingLeft="16dp"
             android:paddingTop="10dp"
-            android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold"
             android:paddingBottom="10dp"/>
@@ -327,7 +304,6 @@
             android:text="Review Video"
             android:paddingLeft="16dp"
             android:paddingTop="10dp"
-            android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold"
             android:paddingBottom="10dp"/>
@@ -350,7 +326,6 @@
             android:text="Season"
             android:paddingTop="15dp"
             android:paddingLeft="16dp"
-            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"/>
         <androidx.recyclerview.widget.RecyclerView
@@ -365,7 +340,6 @@
             android:text="Crew"
             android:paddingLeft="16dp"
             android:paddingTop="10dp"
-            android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold"
             android:paddingBottom="10dp"/>
@@ -380,7 +354,6 @@
             android:layout_height="wrap_content"
             android:text="Cast"
             android:paddingLeft="16dp"
-            android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold"
             android:paddingBottom="10dp"/>
@@ -401,8 +374,7 @@
         android:text="Product companies: "
         android:layout_marginLeft="16dp"
         android:textStyle="bold"
-        android:textSize="16dp"
-        android:textColor="@color/white"/>
+        android:textSize="16dp" />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -420,7 +392,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:text="Popularity: "
                 android:textSize="16dp"
@@ -429,8 +400,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtPopularity"
-                android:textSize="16dp"
-                android:textColor="@color/white"/>
+                android:textSize="16dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -442,7 +412,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Homepage: "
-                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="16dp"
                 android:paddingLeft="16dp"/>
@@ -451,7 +420,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtHomepage"
                 android:textSize="16dp"
-                android:textColor="@color/white"
                 android:autoLink="web"/>
         </LinearLayout>
     </LinearLayout>

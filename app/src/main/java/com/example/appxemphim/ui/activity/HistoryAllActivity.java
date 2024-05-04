@@ -4,6 +4,7 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -42,21 +43,23 @@ public class HistoryAllActivity extends AppCompatActivity implements HistoryAllA
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_seemore);
+        setContentView(R.layout.activity_history);
         // Nhận thông tin người dùng từ Intent
         Intent intent = getIntent();
         if (intent != null) {
-            userName = intent.getStringExtra("userName");
-            userEmail = intent.getStringExtra("userEmail");
-            userId = intent.getIntExtra("userId", -1);
-            userToken = intent.getStringExtra("userToken");
+            SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
+            userName = prefs.getString("name", "");
+            userEmail = prefs.getString("email", "");
+            userId = prefs.getInt("userId", -1);
+            userToken = prefs.getString("token", "");
         }
         RecyclerView recyclerView = findViewById(R.id.recycler_view_items);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         fetchHistories();
+        //nut quay lai
         ImageView btnBack = findViewById(R.id.back_button);
         btnBack.setOnClickListener(v -> finish());
-        //nut quay lai
+        showOptionMenu();
     }
 
 
@@ -266,7 +269,7 @@ public class HistoryAllActivity extends AppCompatActivity implements HistoryAllA
 
             // Thực hiện xóa mục và cập nhật RecyclerView
             histories.remove(position);
-            historyAllAdapter.notifyItemRemoved(position); // Thông báo cho adapter biết một mục đã bị xóa
+            //historyAllAdapter.notifyItemRemoved(position); // Thông báo cho adapter biết một mục đã bị xóa
 
             // Gọi phương thức xóa từ backend
             deleteItemFromBackend(historyId, userId, adapterPosition);

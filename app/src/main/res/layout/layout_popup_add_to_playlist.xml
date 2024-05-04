@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
+        android:backgroundTint="@android:color/transparent"
         android:orientation="horizontal"
         android:padding="8dp">
 
@@ -17,24 +18,26 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
             android:fontFamily="@font/montserrat"
             android:text="@string/add_to"
-            android:textColor="@color/text_color"
             android:textSize="@dimen/title_popup_add_to_playlist" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
             app:srcCompat="@drawable/baseline_add_blue_24" />
 
         <TextView
             android:id="@+id/btn_add_to_new_playlist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
             android:fontFamily="@font/montserrat"
             android:text="@string/new_playlist"
             android:textAlignment="textEnd"
-            android:textColor="@color/bg_toolbar"
+            android:textColor="@color/btn_link_color"
             android:textSize="@dimen/title_popup_add_to_playlist" />
 
     </LinearLayout>
@@ -49,21 +52,23 @@
         android:layout_height="300dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:backgroundTint="@android:color/transparent"
         android:maxHeight="300dp">
 
         <LinearLayout
             android:id="@+id/container_checkbox_playlist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:backgroundTint="@android:color/transparent"
                 android:textAlignment="center"
-                android:textColor="@color/text_color"
                 android:textSize="15sp"
-                android:text="Loading..." />
+                android:text="@string/loading" />
         </LinearLayout>
     </ScrollView>
 

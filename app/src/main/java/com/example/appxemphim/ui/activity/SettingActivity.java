@@ -27,7 +27,7 @@ public class SettingActivity extends AppCompatActivity {
     private MaterialSwitch themeSwitch;
     private ImageView backButton;
     private String selectedLanguage; // Thêm biến instance
-
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);

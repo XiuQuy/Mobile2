@@ -20,6 +20,7 @@ import com.example.appxemphim.R;
 import com.example.appxemphim.model.PlaylistItem;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PlayListItemAdapter extends RecyclerView.Adapter<PlayListItemAdapter.MyViewHolder>{
     //Khai báo Interface để gửi sự kiện xóa về Activity
@@ -81,7 +82,7 @@ public class PlayListItemAdapter extends RecyclerView.Adapter<PlayListItemAdapte
         private TextView output_title;
         private TextView output_tag;
         private ImageView image_thumbnail;
-        private ImageView menu_button;
+        private TextView menu_button;
 
         public MyViewHolder(View itemView){
             super(itemView);
@@ -94,7 +95,15 @@ public class PlayListItemAdapter extends RecyclerView.Adapter<PlayListItemAdapte
 
         public void bind(PlaylistItem playListItem) {
             output_title.setText(playListItem.getInformationMovie().getTitle());
-            output_tag.setText(playListItem.getInformationMovie().getTag());
+            String tagString = playListItem.getInformationMovie().getTag();
+            if(Objects.equals(tagString, "YOUTUBE")){
+                tagString = context.getString(R.string.youtube_tag);
+            }else if (Objects.equals(tagString, "TMDB_MOVIE")){
+                tagString = context.getString(R.string.movie_tag);
+            }else if (Objects.equals(tagString, "TMDB_TV_SERIES")){
+                tagString = context.getString(R.string.tv_series_tag);
+            }
+            output_tag.setText(tagString);
 
             Glide.with(context)
                     .load(playListItem.getInformationMovie().getImageLink())
@@ -105,7 +114,7 @@ public class PlayListItemAdapter extends RecyclerView.Adapter<PlayListItemAdapte
                     .into(image_thumbnail);
 
         }
-        public  ImageView getMenu_button(){
+        public  TextView getMenu_button(){
             return menu_button;//trả về tham chiếu đến ImageView "menu_button".
         }
     }

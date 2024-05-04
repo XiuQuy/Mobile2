@@ -179,7 +179,7 @@ public class PlaylistActivity extends AppCompatActivity implements PlaylistAllAd
                     if (deleteResponse != null && deleteResponse.isSuccess()) {
                         // Xóa thành công từ backend
                         // Chỉ cần thông báo cho adapter biết rằng một mục đã bị xóa
-                        playlistAllAdapter.notifyItemRemoved(adapterPosition);
+                        //playlistAllAdapter.notifyItemRemoved(adapterPosition);
                     } else {
                         // Xử lý trường hợp không thành công từ backend
                         Log.e(TAG, "Delete request failed: API response indicated failure.");

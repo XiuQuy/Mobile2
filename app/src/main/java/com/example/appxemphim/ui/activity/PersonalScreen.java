@@ -99,10 +99,6 @@ public class PersonalScreen extends AppCompatActivity {
             public void onClick(View v) {
                 // Điều hướng người dùng đến màn hình đăng ký
                 Intent intent = new Intent(PersonalScreen.this, HistoryAllActivity.class);
-                intent.putExtra("userId", userId);
-                intent.putExtra("userName", userName);
-                intent.putExtra("userEmail", userEmail);
-                intent.putExtra("userToken", userToken);
                 startActivity(intent);
             }
         });

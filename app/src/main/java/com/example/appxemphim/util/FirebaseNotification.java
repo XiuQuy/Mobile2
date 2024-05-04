@@ -57,7 +57,7 @@ public class FirebaseNotification extends FirebaseMessagingService {
 
         String channelId = "new_content";
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId)
-                .setSmallIcon(R.drawable.user1)
+                .setSmallIcon(R.drawable.icon_logo_new)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setLargeIcon(bitmap)
@@ -65,7 +65,7 @@ public class FirebaseNotification extends FirebaseMessagingService {
                 .setContentIntent(pendingIntent)
                 .setStyle(new NotificationCompat.BigPictureStyle()
                         .bigPicture(bitmap)
-                        .bigLargeIcon(null));;
+                        .bigLargeIcon((Bitmap) null));;
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 

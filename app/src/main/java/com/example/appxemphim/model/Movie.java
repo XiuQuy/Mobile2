@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Movie {
     private boolean adult;
-    private long id;
+    private String id;
     private List<Integer> genreIds;
     private String originalLanguage;
     private String posterPath;
@@ -31,11 +31,11 @@ public class Movie {
         this.adult = adult;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

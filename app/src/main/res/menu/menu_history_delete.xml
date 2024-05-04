@@ -4,18 +4,18 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Clear history last hour"
+    <item android:title="@string/clear_history_last_hour"
           android:id="@+id/one_hour" />
 
-    <item android:title="Clear history last 24 hours"
+    <item android:title="@string/clear_history_last_24_hours"
           android:id="@+id/one_day" />
 
-    <item android:title="Clear history last 7 days"
+    <item android:title="@string/clear_history_last_7_days"
           android:id="@+id/one_week" />
 
-    <item android:title="Clear history last 4 weeks"
+    <item android:title="@string/clear_history_last_4_weeks"
           android:id="@+id/one_month" />
 
-    <item android:title="Clear all history"
+    <item android:title="@string/clear_all_history"
           android:id="@+id/all" />
 </menu>

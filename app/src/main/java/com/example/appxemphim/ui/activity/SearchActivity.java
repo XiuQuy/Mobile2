@@ -2,6 +2,7 @@ package com.example.appxemphim.ui.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -160,8 +161,17 @@ public class SearchActivity extends AppCompatActivity implements
         toggle.syncState();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.right_drawer_search_activity, rightFilterFragment).commit();
-        //Btn open
+        //Btn open filter
         ImageView btnFilter = findViewById(R.id.btn_filter_activity_search);
+        // Lấy chủ đề hiện tại của ứng dụng
+        int currentTheme = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        // Đặt hình ảnh tùy thuộc vào chủ đề
+        if (currentTheme == Configuration.UI_MODE_NIGHT_YES) {
+            btnFilter.setImageResource(R.drawable.ic_filter_dark);
+        } else {
+            btnFilter.setImageResource(R.drawable.ic_filter_light);
+        }
+
         btnFilter.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.END));
 
         ImageView btnBack = findViewById(R.id.imgBack);

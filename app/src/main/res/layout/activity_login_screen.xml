@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -18,7 +23,7 @@
             android:id="@+id/logoImg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/netflix_logo_icon"
+            android:src="@drawable/icon_logo_new"
             android:layout_marginTop="35dp"
             android:transitionName="logo_trans"/>
     </LinearLayout>
@@ -47,7 +52,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
-        android:paddingBottom="20dp"
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -85,9 +89,10 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:text="@string/forgotpass"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:elevation="0dp"
             android:fontFamily="@font/antic"
+            android:textAlignment="textEnd"
             android:layout_marginBottom="5dp"
             android:transitionName="btn_trans"/>
 
@@ -127,13 +132,15 @@
             android:textAllCaps="false"
             android:textSize="20dp" />
 
-        <View
-            android:id="@+id/loginview"
-            android:layout_width="300dp"
-            android:layout_height="1dp"
+        <TextView
+            android:layout_marginVertical="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/or"
             android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:background="?attr/btn_drawable"/>
+            android:fontFamily="@font/antic"
+            android:textSize="20sp"
+            android:transitionName="or_trans"/>
     </LinearLayout>
 
     <LinearLayout
@@ -141,6 +148,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
+        android:paddingBottom="30dp"
         >
 
         <androidx.appcompat.widget.AppCompatImageButton
@@ -174,3 +182,4 @@
         app:SpinKit_Color="@color/bg_toolbar"
         android:visibility="gone"/>
 </LinearLayout>
+</ScrollView>

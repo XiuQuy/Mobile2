@@ -5,7 +5,7 @@
     <string name="user">User name</string>
     <string name="pass">Password</string>
     <string name="passConfirm">Password Confirm</string>
-    <string name="forgotpass">Forgot password</string>
+    <string name="forgotpass">Forgot password ?</string>
     <string name="login">Login</string>
     <string name="or">or</string>
     <string name="signup">SignUp</string>
@@ -119,9 +119,9 @@
     <string name="confirm_button">Confirm</string>
 
     <string name="my_list">My List</string>
-    <string name="status">Status:</string>
+    <string name="status">"Status: "</string>
 
-    <string name="label_adult">Adult:</string>
+    <string name="label_adult">"Adult: "</string>
     <string name="label_overview">Overview</string>
     <string name="label_original_language">Original language:</string>
     <string name="label_spoken_language">Spoken language:</string>
@@ -164,4 +164,20 @@
     <string name="search">Search</string>
 
     <string name="rate">Rate</string>
+    <string name="views">" views"</string>
+    <string name="likes">" likes"</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="clear_history_last_hour">Clear history last hour</string>
+    <string name="clear_history_last_24_hours">Clear history last 24 hours</string>
+    <string name="clear_history_last_7_days">Clear history last 7 days</string>
+    <string name="clear_history_last_4_weeks">Clear history last 4 weeks</string>
+    <string name="clear_all_history">Clear all history</string>
+    <string name="your_history">Your history</string>
+    <string name="delete">Delete</string>
+    <string name="your_playlists">Your playlists</string>
+    <string name="loading">Loading…</string>
+    <string name="movie_tag">Movie</string>
+    <string name="tv_series_tag">TV Series</string>
+    <string name="youtube_tag">Youtube video</string>
 </resources>
