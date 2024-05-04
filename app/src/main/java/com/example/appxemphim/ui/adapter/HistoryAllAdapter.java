@@ -18,9 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appxemphim.R;
 import com.example.appxemphim.model.History;
+import com.example.appxemphim.ui.activity.MovieDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class HistoryAllAdapter extends RecyclerView.Adapter<HistoryAllAdapter.MyViewHolder>{
@@ -59,6 +61,22 @@ public class HistoryAllAdapter extends RecyclerView.Adapter<HistoryAllAdapter.My
                 showMenuForItem(view, holder.getAdapterPosition());
             }
         });
+        holder.itemView.setOnClickListener(view -> {
+            String tagMovie = history.getInformationMovie().getTag();
+            if(Objects.equals(tagMovie, "TMDB_MOVIE") ||
+                    Objects.equals(tagMovie, "TMDB_TV_SERIES")){
+                MovieDetailActivity.sendIntent(
+                        context,
+                        history.getInformationMovie().getMovieId(),
+                        history.getInformationMovie().getTag(),
+                        history.getInformationMovie().getTitle(),
+                        history.getInformationMovie().getImageLink());
+            }
+            if(tagMovie.equals("YOUTUBE")){
+                String[] ids = {history.getInformationMovie().getMovieId()};
+                HistoryAdapterPersonal.getVideoYoutube(context, ids, history.getSecondsCount());
+            }
+        });
     }
 
     @Override
@@ -90,7 +108,15 @@ public class HistoryAllAdapter extends RecyclerView.Adapter<HistoryAllAdapter.My
 
         public void bind(History history) {
             output_title.setText(history.getInformationMovie().getTitle());
-            output_tag.setText(history.getInformationMovie().getTag());
+            String tagString = history.getInformationMovie().getTag();
+            if(Objects.equals(tagString, "YOUTUBE")){
+                tagString = context.getString(R.string.youtube_tag);
+            }else if (Objects.equals(tagString, "TMDB_MOVIE")){
+                tagString = context.getString(R.string.movie_tag);
+            }else if (Objects.equals(tagString, "TMDB_TV_SERIES")){
+                tagString = context.getString(R.string.tv_series_tag);
+            }
+            output_tag.setText(tagString);
             // Load image using Picasso or any other image loading library
             String imageUrl = history.getInformationMovie().getImageLink();
             Picasso.get().load(imageUrl).into(output_image);

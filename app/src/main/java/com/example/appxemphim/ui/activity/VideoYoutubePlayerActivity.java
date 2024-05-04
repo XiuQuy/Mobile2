@@ -86,6 +86,7 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity implements
     private LinearLayout containerVideo;
     PlaylistModel playlistModel;
     PopupAddToPlayListFragment popupAddToPlayListFragment;
+    private int secondViewCount = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,6 +133,7 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity implements
                         intent.getStringExtra("listVideo"),
                         new TypeToken<ArrayList<YoutubeVideoItem>>(){}.getType()
                 );
+                secondViewCount = intent.getIntExtra("secondViewCount", 0);
             }
             else {
                 finish();
@@ -184,7 +186,7 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity implements
                 VideoYoutubePlayerActivity.this.youTubePlayer = youTubePlayer;
                 if(videoPlaying != null){
                     // Phát video
-                    youTubePlayer.loadVideo(videoPlaying.getId(), 0);
+                    youTubePlayer.loadVideo(videoPlaying.getId(), secondViewCount);
                 }
 
             }
@@ -277,10 +279,11 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity implements
         }
     }
 
-    public static void sendIntent(Context context, YoutubeVideoItem youtubeVideo, List<YoutubeVideoItem> listVideo){
+    public static void sendIntent(Context context, YoutubeVideoItem youtubeVideo, List<YoutubeVideoItem> listVideo, int secondViewCount){
         Intent intent = new Intent(context, VideoYoutubePlayerActivity.class);
         intent.putExtra("youtubeVideo", youtubeVideo);
         intent.putExtra("listVideo", new Gson().toJson(listVideo));
+        intent.putExtra("secondViewCount", secondViewCount);
         context.startActivity(intent);
     }
 

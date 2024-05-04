@@ -2,26 +2,37 @@ package com.example.appxemphim.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
+import com.example.appxemphim.data.remote.ServiceApiBuilder;
+import com.example.appxemphim.data.remote.YoutubeService;
 import com.example.appxemphim.model.History;
 import com.example.appxemphim.model.YoutubeVideoItem;
+import com.example.appxemphim.model.YoutubeVideoResponse;
 import com.example.appxemphim.ui.activity.MovieDetailActivity;
 import com.example.appxemphim.ui.activity.VideoYoutubePlayerActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HistoryAdapterPersonal extends RecyclerView.Adapter<HistoryAdapterPersonal.MyViewHolder> {
 
@@ -57,8 +68,8 @@ public class HistoryAdapterPersonal extends RecyclerView.Adapter<HistoryAdapterP
                             history.getInformationMovie().getImageLink());
                 }
                 if(tagMovie.equals("YOUTUBE")){
-
-                    //VideoYoutubePlayerActivity.sendIntent(context,);
+                    String[] ids = {history.getInformationMovie().getMovieId()};
+                    getVideoYoutube(context, ids, history.getSecondsCount());
                 }
             }
         });
@@ -144,6 +155,32 @@ public class HistoryAdapterPersonal extends RecyclerView.Adapter<HistoryAdapterP
         formattedDuration.append(String.format("%02d", seconds));
 
         return formattedDuration.toString();
+    }
+    public static void getVideoYoutube(Context context, String[] videoId, int secondCount) {
+        String[] part = {"snippet", "statistics"};
+        YoutubeService youtubeService = ServiceApiBuilder.buildYoutubeApiService(YoutubeService.class);
+        Call<YoutubeVideoResponse> call = youtubeService.getVideoInfo(
+                part,
+                videoId,
+                ServiceApiBuilder.API_KEY_YOUTUBE_DATA
+        );
+        call.enqueue(new Callback<YoutubeVideoResponse>() {
+            @Override
+            public void onResponse(Call<YoutubeVideoResponse> call, Response<YoutubeVideoResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<YoutubeVideoItem> items = response.body().getItems();
+                    if (items != null && !items.isEmpty()) {
+                        VideoYoutubePlayerActivity.sendIntent(context, items.get(0), new ArrayList<>(), secondCount);
+                    }
+                } else {
+                    Toast.makeText(context, "Failed to fetch", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<YoutubeVideoResponse> call, Throwable t) {
+                Log.e("API_ERROR", "Network error", t);
+            }
+        });
     }
 
 }

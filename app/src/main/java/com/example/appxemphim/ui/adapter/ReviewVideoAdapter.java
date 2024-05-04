@@ -42,7 +42,7 @@ public class ReviewVideoAdapter extends RecyclerView.Adapter<ReviewVideoAdapter.
         YoutubeVideoItem video = listVideos.get(position);
         holder.bind(video);
         holder.itemView.setOnClickListener(view -> {
-            VideoYoutubePlayerActivity.sendIntent(context, video, listVideos);
+            VideoYoutubePlayerActivity.sendIntent(context, video, listVideos, 0);
         });
     }
 

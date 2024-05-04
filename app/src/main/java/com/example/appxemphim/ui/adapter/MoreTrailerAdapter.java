@@ -40,7 +40,7 @@ public class MoreTrailerAdapter extends RecyclerView.Adapter<MoreTrailerAdapter.
         YoutubeVideoItem video = listVideos.get(position);
         holder.bind(video);
         holder.itemView.setOnClickListener(view -> {
-            VideoYoutubePlayerActivity.sendIntent(context, video, listVideos);
+            VideoYoutubePlayerActivity.sendIntent(context, video, listVideos, 0);
         });
     }
 

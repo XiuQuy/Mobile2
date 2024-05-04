@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.appxemphim.R;
 import com.example.appxemphim.model.PlaylistItem;
+import com.example.appxemphim.ui.activity.MovieDetailActivity;
 
 import java.util.List;
 import java.util.Objects;
@@ -64,6 +65,25 @@ public class PlayListItemAdapter extends RecyclerView.Adapter<PlayListItemAdapte
             public void onClick(View view) {
                 //Gọi phương thức showMenuForItem và chuyển anchorView là menu_button và vị trí từ holder
                 showMenuForItem(view, holder.getAdapterPosition());
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String tagMovie = playListItem.getInformationMovie().getTag();
+                if(Objects.equals(tagMovie, "TMDB_MOVIE") ||
+                        Objects.equals(tagMovie, "TMDB_TV_SERIES")){
+                    MovieDetailActivity.sendIntent(
+                            context,
+                            playListItem.getInformationMovie().getMovieId(),
+                            playListItem.getInformationMovie().getTag(),
+                            playListItem.getInformationMovie().getTitle(),
+                            playListItem.getInformationMovie().getImageLink());
+                }
+                if(tagMovie.equals("YOUTUBE")){
+                    String[] ids = {playListItem.getInformationMovie().getMovieId()};
+                    HistoryAdapterPersonal.getVideoYoutube(context, ids, 0);
+                }
             }
         });
     }
