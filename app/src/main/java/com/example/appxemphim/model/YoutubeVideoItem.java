@@ -16,6 +16,9 @@ public class YoutubeVideoItem implements Serializable {
     @SerializedName("statistics")
     private YoutubeVideoStatistics statistics;
 
+    @SerializedName("contentDetails")
+    private YoutubeVideoContentDetails contentDetails;
+
     public YoutubeVideoSnippet getSnippet() {
         return snippet;
     }
@@ -28,5 +31,8 @@ public class YoutubeVideoItem implements Serializable {
         return statistics;
     }
 
+    public YoutubeVideoContentDetails getContentDetails() {
+        return contentDetails;
+    }
 }
 

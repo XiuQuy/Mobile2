@@ -444,7 +444,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     public void getVideoYoutubeInfo(String[] videoId) {
-        String[] part = {"snippet", "statistics"};
+        String[] part = {"snippet", "statistics", "contentDetails"};
         YoutubeService youtubeService = ServiceApiBuilder.buildYoutubeApiService(YoutubeService.class);
         Call<YoutubeVideoResponse> call = youtubeService.getVideoInfo(
                 part,
@@ -498,7 +498,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     public void getVideoYoutubeReviewVideo(String[] videoId) {
-        String[] part = {"snippet", "statistics"};
+        String[] part = {"snippet", "statistics", "contentDetails"};
         YoutubeService youtubeService = ServiceApiBuilder.buildYoutubeApiService(YoutubeService.class);
         Call<YoutubeVideoResponse> call = youtubeService.getVideoInfo(
                 part,

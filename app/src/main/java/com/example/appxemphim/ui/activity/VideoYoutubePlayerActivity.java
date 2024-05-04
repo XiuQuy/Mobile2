@@ -30,6 +30,7 @@ import com.example.appxemphim.data.remote.PlaylistService;
 import com.example.appxemphim.data.remote.ServiceApiBuilder;
 
 import com.example.appxemphim.data.remote.YoutubeService;
+import com.example.appxemphim.model.History;
 import com.example.appxemphim.model.InformationMovie;
 import com.example.appxemphim.model.Movie;
 import com.example.appxemphim.model.Playlist;
@@ -42,6 +43,7 @@ import com.example.appxemphim.ui.fragment.PopupAddToPlayListFragment;
 import com.example.appxemphim.ui.fragment.PopupAddWithNewPlaylistFragment;
 import com.example.appxemphim.ui.fragment.RightFilterFragmentSearchActivity;
 import com.example.appxemphim.ui.viewmodel.PlaylistModel;
+import com.example.appxemphim.util.AddHistoryLoader;
 import com.example.appxemphim.util.AddMovieToPlaylistLoader;
 import com.example.appxemphim.util.AddWithNewPlaylistLoader;
 import com.example.appxemphim.util.ConvertDateToDayAgo;
@@ -49,15 +51,19 @@ import com.example.appxemphim.util.ConvertNumberToShortFormat;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.FullscreenListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTubePlayerTracker;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -87,6 +93,10 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity implements
     PlaylistModel playlistModel;
     PopupAddToPlayListFragment popupAddToPlayListFragment;
     private int secondViewCount = 0;
+    private Handler handler;
+    private Runnable runnable;
+    YouTubePlayerTracker tracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +119,8 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity implements
         btnHideLessOverview.setPaintFlags(textViewOverview.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         playlistModel = new ViewModelProvider(this).get(PlaylistModel.class);
         fetchPlaylists();
+        handler = new Handler();
+        tracker = new YouTubePlayerTracker();
 
         //click bnt view overview
         btnShowMoreOverview.setOnClickListener(v -> {
@@ -184,11 +196,49 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity implements
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 VideoYoutubePlayerActivity.this.youTubePlayer = youTubePlayer;
+                youTubePlayer.addListener(tracker);
                 if(videoPlaying != null){
                     // Phát video
                     youTubePlayer.loadVideo(videoPlaying.getId(), secondViewCount);
                 }
 
+            }
+
+            @Override
+            public void onStateChange(@NonNull YouTubePlayer youTubePlayer, @NonNull PlayerConstants.PlayerState state) {
+                if (state == PlayerConstants.PlayerState.PLAYING) {
+                    // Bắt đầu công việc sau mỗi 5 giây khi video đang được phát
+                    runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.d("YOUTUBE_PLAYER", "SAVE HISTORY 5 SECOND");
+                            int secondViewCount = (int) Math.floor(tracker.getCurrentSecond());
+                            saveHistory(videoPlaying.getId(), videoPlaying.getSnippet().getTitle(),
+                                    getString(R.string.youtube_video_tag_name),
+                                    videoPlaying.getSnippet().getThumbnails().getMediumThumbnail().getUrl(),
+                                    (int) Math.ceil(tracker.getVideoDuration()), secondViewCount);
+                            // Lặp lại sau mỗi 5 giây
+                            handler.postDelayed(this, 5000);
+                        }
+                    };
+                    handler.postDelayed(runnable, 5000); // Bắt đầu sau mỗi 5 giây
+                } else {
+                    // Dừng công việc khi video không được phát
+                    handler.removeCallbacks(runnable);
+                }
+                if(state == PlayerConstants.PlayerState.UNSTARTED){
+                    Log.d("YOUTUBE_PLAYER", "SAVE HISTORY START VIDEO");
+                    saveHistory(videoPlaying.getId(), videoPlaying.getSnippet().getTitle(),
+                            getString(R.string.youtube_video_tag_name),
+                            videoPlaying.getSnippet().getThumbnails().getMediumThumbnail().getUrl(),
+                            videoPlaying.getContentDetails().getSecondDuration(), secondViewCount);
+                } else if(state == PlayerConstants.PlayerState.ENDED){
+                    Log.d("YOUTUBE_PLAYER", "SAVE HISTORY ENDED VIDEO");
+                    saveHistory(videoPlaying.getId(), videoPlaying.getSnippet().getTitle(),
+                            getString(R.string.youtube_video_tag_name),
+                            videoPlaying.getSnippet().getThumbnails().getMediumThumbnail().getUrl(),
+                            (int) Math.ceil(tracker.getVideoDuration()), secondViewCount);
+                }
             }
         };
         // Khởi tạo YouTubePlayerView
@@ -210,6 +260,56 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity implements
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Loại bỏ callback để tránh rò rỉ bộ nhớ khi Activity bị hủy
+        handler.removeCallbacks(runnable);
+    }
+
+    LoaderManager.LoaderCallbacks<Void> loaderAddHistory =  new LoaderManager.LoaderCallbacks<Void>() {
+        @NonNull
+        @Override
+        public Loader<Void> onCreateLoader(int id, @Nullable Bundle args) {
+            assert args != null;
+            String historyJson = args.getString("historyJson");
+            Gson json = new Gson();
+            History history = json.fromJson(historyJson, History.class);
+            return new AddHistoryLoader(VideoYoutubePlayerActivity.this, history);
+        }
+        @Override
+        public void onLoadFinished(@NonNull Loader<Void> loader, Void data) {}
+        @Override
+        public void onLoaderReset(@NonNull Loader<Void> loader) {}
+    };
+
+    private void saveHistory(String movieId, String title, String tag, String imgLink, int duration, int secondViewCount){
+        SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        String formattedDate = sdf.format(calendar.getTime());
+
+        InformationMovie informationMovie = new InformationMovie();
+        informationMovie.setMovieId(movieId);
+        informationMovie.setTitle(title);
+        informationMovie.setTag(tag);
+        informationMovie.setImageLink(imgLink);
+        informationMovie.setDurations(duration);
+
+        History history = new History();
+        history.setUserId(sharedPreferences.getInt("userId", -1));
+        history.setSecondsCount(secondViewCount);
+        history.setWatchedDate(formattedDate);
+        history.setInformationMovie(informationMovie);
+
+        Gson gson = new Gson();
+        String historyJson = gson.toJson(history);
+        Bundle bundle = new Bundle();
+        bundle.putString("historyJson", historyJson);
+        LoaderManager.getInstance(this).restartLoader(3, bundle, loaderAddHistory);
+    }
+
+
     private void handlePlayVideoInActivity(YoutubeVideoItem newVideo){
         // add video cu vao
         listVideo.add(videoPlaying);
@@ -227,7 +327,7 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity implements
     private void bindListVideoToContainer(List<YoutubeVideoItem> listVideo){
         LayoutInflater inflater = LayoutInflater.from(this);
         ImageView imageThumbnail;
-        TextView channelName, viewCount, likeCount, title, menu;
+        TextView channelName, viewCount, likeCount, title, menu, duration;
         for(YoutubeVideoItem video : listVideo){
             View itemLayout = inflater.inflate(
                     R.layout.item_list_video_youtube_activity_player,
@@ -238,10 +338,12 @@ public class VideoYoutubePlayerActivity extends AppCompatActivity implements
             viewCount = itemLayout.findViewById(R.id.view_count);
             likeCount = itemLayout.findViewById(R.id.like_count);
             menu = itemLayout.findViewById(R.id.menu);
+            duration = itemLayout.findViewById(R.id.timeTextView);
 
             TextView finalMenu = menu;
             menu.setOnClickListener(v -> showOptionMenu(finalMenu, video));
 
+            duration.setText(video.getContentDetails().getDurationMinuteFormat());
             title.setText(video.getSnippet().getTitle());
             channelName.setText(video.getSnippet().getChannelTitle());
             Glide.with(this)

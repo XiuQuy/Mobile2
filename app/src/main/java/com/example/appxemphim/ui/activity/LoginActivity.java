@@ -191,6 +191,11 @@ public class LoginActivity extends AppCompatActivity {
         buttonFace.setOnClickListener(v -> {
             LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
         });
+        AppCompatButton btnForgotPassword = findViewById(R.id.btnFogotPass);
+        btnForgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void LoginUser(UserLogin user) {

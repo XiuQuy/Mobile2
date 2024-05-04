@@ -52,7 +52,7 @@ public class MoreTrailerAdapter extends RecyclerView.Adapter<MoreTrailerAdapter.
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private ImageView imageThumbnail;
         private TextView title;
-        private TextView channelName;
+        private TextView channelName, duration;
         private ImageView btnGoToYoutube;
 
         public MyViewHolder(View itemView){
@@ -61,6 +61,7 @@ public class MoreTrailerAdapter extends RecyclerView.Adapter<MoreTrailerAdapter.
             title = itemView.findViewById(R.id.tv_title);
             channelName = itemView.findViewById(R.id.tv_channel);
             btnGoToYoutube = itemView.findViewById(R.id.btn_to_youtube);
+            duration = itemView.findViewById(R.id.timeTextView);
         }
 
         public void bind(YoutubeVideoItem video) {
@@ -76,6 +77,7 @@ public class MoreTrailerAdapter extends RecyclerView.Adapter<MoreTrailerAdapter.
                         Uri.parse("https://www.youtube.com/watch?v="+video.getId()));
                 context.startActivity(intent);
             });
+            duration.setText(video.getContentDetails().getDurationMinuteFormat());
         }
     }
 

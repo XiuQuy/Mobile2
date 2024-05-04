@@ -24,6 +24,7 @@ import com.example.appxemphim.model.YoutubeVideoItem;
 import com.example.appxemphim.model.YoutubeVideoResponse;
 import com.example.appxemphim.ui.activity.MovieDetailActivity;
 import com.example.appxemphim.ui.activity.VideoYoutubePlayerActivity;
+import com.example.appxemphim.util.ConvertISO8601Time;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,7 +120,7 @@ public class HistoryAdapterPersonal extends RecyclerView.Adapter<HistoryAdapterP
             String tag = history.getInformationMovie().getTag();
             if ("YOUTUBE".equals(tag)) {
                 int durationsInSeconds = history.getInformationMovie().getDurations();
-                String formattedDuration = formatDuration(durationsInSeconds);
+                String formattedDuration = ConvertISO8601Time.formatSeconds(durationsInSeconds);
                 output_time.setText(formattedDuration);
                 output_time.setPadding(10,0,10,0);
                 int secondsCount = history.getSecondsCount();
@@ -157,7 +158,7 @@ public class HistoryAdapterPersonal extends RecyclerView.Adapter<HistoryAdapterP
         return formattedDuration.toString();
     }
     public static void getVideoYoutube(Context context, String[] videoId, int secondCount) {
-        String[] part = {"snippet", "statistics"};
+        String[] part = {"snippet", "statistics", "contentDetails"};
         YoutubeService youtubeService = ServiceApiBuilder.buildYoutubeApiService(YoutubeService.class);
         Call<YoutubeVideoResponse> call = youtubeService.getVideoInfo(
                 part,
