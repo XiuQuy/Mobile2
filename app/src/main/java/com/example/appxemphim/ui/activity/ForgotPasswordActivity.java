@@ -80,10 +80,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             }
         });
     }
+
     public void goBack(View view) {
         finish();
     }
-
-
 
 }

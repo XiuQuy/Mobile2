@@ -46,10 +46,6 @@ public class EnterCodeActivity extends AppCompatActivity {
         });
     }
 
-
-    public void goBack(View view) {
-        finish();
-    }
     private void checkCodeRequest(int code, String email) {
         UserService userService = ServiceApiBuilder.buildUserApiService(UserService.class);
         ForgotDTO checkCodeDTO = new ForgotDTO(code, email);
@@ -75,4 +71,7 @@ public class EnterCodeActivity extends AppCompatActivity {
         });
     }
 
+    public void goBack(View view) {
+        finish();
+    }
 }

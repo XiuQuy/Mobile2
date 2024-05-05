@@ -95,5 +95,4 @@ public class ResetPasswordActivity extends AppCompatActivity {
         finish();
     }
 
-
 }
