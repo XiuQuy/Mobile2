@@ -65,12 +65,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         });
     }
 
-
-
-    public void goBack(View view) {
-        finish();
-    }
-
     private void changePassword(int code, String email, String password, String passwordConfirm) {
         ForgotDTO forgotDTO = new ForgotDTO(code, email, password, passwordConfirm);
 
@@ -96,4 +90,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void goBack(View view) {
+        finish();
+    }
+
+
 }

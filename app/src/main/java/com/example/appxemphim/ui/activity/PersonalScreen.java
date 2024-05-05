@@ -157,10 +157,6 @@ public class PersonalScreen extends AppCompatActivity {
 
     }
 
-    public void goBack(View view) {
-        finish();
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -301,4 +297,9 @@ public class PersonalScreen extends AppCompatActivity {
             }
         });
     }
+
+    public void goBack(View view) {
+        finish();
+    }
+
 }

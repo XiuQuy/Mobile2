@@ -46,6 +46,10 @@ public class EnterCodeActivity extends AppCompatActivity {
         });
     }
 
+
+    public void goBack(View view) {
+        finish();
+    }
     private void checkCodeRequest(int code, String email) {
         UserService userService = ServiceApiBuilder.buildUserApiService(UserService.class);
         ForgotDTO checkCodeDTO = new ForgotDTO(code, email);
@@ -69,10 +73,6 @@ public class EnterCodeActivity extends AppCompatActivity {
                 Toast.makeText(EnterCodeActivity.this, "Không kiểm tra được mã", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    public void goBack(View view) {
-        finish();
     }
 
 }
