@@ -46,6 +46,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.appxemphim.R;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MovieAdapter adapter;
     private NavigationView navigationView;
+    private TabLayout tabLayout;
     private static final int YOUR_REQUEST_CODE = 1001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +78,31 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MovieAdapter(new ArrayList<>(), this);
         recyclerView.setAdapter(adapter);
 
-        // Gọi API và cập nhật danh sách phim
+        tabLayout = findViewById(R.id.tabCategory);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                // Handle tab selection
+                switch (tab.getPosition()) {
+                    case 0:
+                        fetchMovies();
+                        break;
+                    case 1:
+                        fetchTVShows();
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                // Handle tab unselection
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                // Handle tab reselection
+            }
+        });
         fetchMovies();
         adapter.setOnItemClickListener(new MovieAdapter.OnItemClickListener() {
             @Override
@@ -119,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
         CircleImageView imageAvatarInNav = headerView.findViewById(R.id.img_user);
         CircleImageView circleImageView = findViewById(R.id.imgAvatar);
-      
+
         if (userAvatar != null && !userAvatar.isEmpty()) {
             RequestCreator requestCreatorImageAvatar = Picasso.get().load(userAvatar);
             requestCreatorImageAvatar.into(imageAvatarInNav);
@@ -224,6 +250,35 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void fetchTVShows() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.themoviedb.org/3/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TMDbApi tmdbApi = retrofit.create(TMDbApi.class);
+
+        // Truyền ngôn ngữ được chọn từ SettingActivity vào phương thức getPopularMovies()
+        String selectedLanguage = LanguageManager.getSelectedLanguage(this);
+        Call<MovieResponse> call = tmdbApi.getTvShows(selectedLanguage, ServiceApiBuilder.API_KEY_TMDB);
+        call.enqueue(new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<TMDBMovieResult> movies = response.body().getResults();
+                    adapter.setMovies(TMDBMovieResult.toListTVShow(movies));
+                } else {
+                    Toast.makeText(MainActivity.this, "Failed to fetch movies", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Network error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -235,6 +290,3 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
-
-

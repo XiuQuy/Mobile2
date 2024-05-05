@@ -24,6 +24,11 @@ public interface TMDbApi {
             @Query("language") String language,
             @Query("api_key") String apiKey);
 
+    @GET("tv/popular")
+    Call<MovieResponse> getTvShows(
+            @Query("language") String language,
+            @Query("api_key") String apiKey);
+
 
     @GET("movie/{movie_id}/videos")
     Call<VideoResponse> getMovieVideos(

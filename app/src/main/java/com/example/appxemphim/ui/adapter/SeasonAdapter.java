@@ -66,10 +66,17 @@ public class SeasonAdapter extends RecyclerView.Adapter<SeasonAdapter.SeasonView
                 formattedRating = String.valueOf(rating);
             }
             seasonRate.setText(formattedRating + "%");
-            String date=season.getAirDate();
-            String[] parts = date.split("-");
-            String year = parts[0];
-            seasonDate.setText(year+" • ");
+
+            // Kiểm tra xem date có null không trước khi sử dụng
+            String date = season.getAirDate();
+            if (date != null) {
+                String[] parts = date.split("-");
+                String year = parts[0];
+                seasonDate.setText(year+" • ");
+            } else {
+                seasonDate.setText(""); // Xử lý trường hợp date là null
+            }
+
             Picasso.get()
                     .load("https://image.tmdb.org/t/p/w500" + season.getPosterPath())
                     .fit()
@@ -77,5 +84,6 @@ public class SeasonAdapter extends RecyclerView.Adapter<SeasonAdapter.SeasonView
                     .into(img);
             seasonOverview.setText(season.getOverview());
         }
+
     }
 }

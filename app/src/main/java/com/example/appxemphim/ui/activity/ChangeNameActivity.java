@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,6 +46,10 @@ public class ChangeNameActivity extends AppCompatActivity {
                 saveName();
 
             }
+        });
+        ImageView btnBack = findViewById(R.id.back_button);
+        btnBack.setOnClickListener(v -> {
+            finish();
         });
     }
 
