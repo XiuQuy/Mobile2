@@ -222,36 +222,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    private void fetchMovies() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        TMDbApi tmdbApi = retrofit.create(TMDbApi.class);
-
-        // Truyền ngôn ngữ được chọn từ SettingActivity vào phương thức getPopularMovies()
-        String selectedLanguage = LanguageManager.getSelectedLanguage(this);
-        Call<MovieResponse> call = tmdbApi.getPopularMovies(selectedLanguage, ServiceApiBuilder.API_KEY_TMDB);
-        call.enqueue(new Callback<MovieResponse>() {
-            @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<TMDBMovieResult> movies = response.body().getResults();
-                    adapter.setMovies(TMDBMovieResult.toListMovie(movies));
-                } else {
-                    Toast.makeText(MainActivity.this, "Failed to fetch movies", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Network error", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
     private void fetchTVShows() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org/3/")
@@ -276,6 +246,34 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<TVResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Network error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void fetchMovies() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.themoviedb.org/3/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TMDbApi tmdbApi = retrofit.create(TMDbApi.class);
+
+        // Truyền ngôn ngữ được chọn từ SettingActivity vào phương thức getPopularMovies()
+        String selectedLanguage = LanguageManager.getSelectedLanguage(this);
+        Call<MovieResponse> call = tmdbApi.getPopularMovies(selectedLanguage, ServiceApiBuilder.API_KEY_TMDB);
+        call.enqueue(new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<TMDBMovieResult> movies = response.body().getResults();
+                    adapter.setMovies(TMDBMovieResult.toListMovie(movies));
+                } else {
+                    Toast.makeText(MainActivity.this, "Failed to fetch movies", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Network error", Toast.LENGTH_SHORT).show();
             }
         });
