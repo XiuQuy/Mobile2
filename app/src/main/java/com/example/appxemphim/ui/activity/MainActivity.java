@@ -17,6 +17,8 @@ import com.example.appxemphim.model.ChangePasswordDTO;
 import com.example.appxemphim.model.Movie;
 import com.example.appxemphim.model.MovieResponse;
 import com.example.appxemphim.model.TMDBMovieResult;
+import com.example.appxemphim.model.TMDBTVResult;
+import com.example.appxemphim.model.TVResponse;
 import com.example.appxemphim.ui.adapter.MovieAdapter;
 
 import java.util.ArrayList;
@@ -260,20 +262,20 @@ public class MainActivity extends AppCompatActivity {
 
         // Truyền ngôn ngữ được chọn từ SettingActivity vào phương thức getPopularMovies()
         String selectedLanguage = LanguageManager.getSelectedLanguage(this);
-        Call<MovieResponse> call = tmdbApi.getTvShows(selectedLanguage, ServiceApiBuilder.API_KEY_TMDB);
-        call.enqueue(new Callback<MovieResponse>() {
+        Call<TVResponse> call = tmdbApi.getTvShows(selectedLanguage, ServiceApiBuilder.API_KEY_TMDB);
+        call.enqueue(new Callback<TVResponse>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+            public void onResponse(Call<TVResponse> call, Response<TVResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<TMDBMovieResult> movies = response.body().getResults();
-                    adapter.setMovies(TMDBMovieResult.toListTVShow(movies));
+                    List<TMDBTVResult> movies = response.body().getResults();
+                    adapter.setMovies(TMDBTVResult.toListMovie(movies));
                 } else {
                     Toast.makeText(MainActivity.this, "Failed to fetch movies", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(Call<TVResponse> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Network error", Toast.LENGTH_SHORT).show();
             }
         });

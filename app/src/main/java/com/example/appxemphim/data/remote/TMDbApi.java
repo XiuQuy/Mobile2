@@ -2,6 +2,8 @@ package com.example.appxemphim.data.remote;
 
 import com.example.appxemphim.model.MovieResponse;
 import com.example.appxemphim.model.TMDBGenreListResponse;
+import com.example.appxemphim.model.TMDBTVResult;
+import com.example.appxemphim.model.TVResponse;
 import com.example.appxemphim.model.VideoResponse;
 
 import retrofit2.Call;
@@ -25,7 +27,7 @@ public interface TMDbApi {
             @Query("api_key") String apiKey);
 
     @GET("tv/popular")
-    Call<MovieResponse> getTvShows(
+    Call<TVResponse> getTvShows(
             @Query("language") String language,
             @Query("api_key") String apiKey);
 
