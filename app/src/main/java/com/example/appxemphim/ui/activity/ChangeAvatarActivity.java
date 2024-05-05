@@ -144,12 +144,6 @@ public class ChangeAvatarActivity extends AppCompatActivity {
         });
     }
 
-    private void openCamera() {
-        // Tạo Intent để mở trình camera
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        captureImageLauncher.launch(intent);
-    }
-
     private void openCropLauncher(Uri selectedImageUri){
         // Khởi chạy ActivityResultLauncher để cắt ảnh
         CropImageOptions cropImageOptions = new CropImageOptions();
@@ -280,4 +274,11 @@ public class ChangeAvatarActivity extends AppCompatActivity {
         captureImageButton.setEnabled(true);
         selectImageButton.setEnabled(true);
     }
+    private void openCamera() {
+        // Tạo Intent để mở trình camera
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        captureImageLauncher.launch(intent);
+    }
+
+
 }

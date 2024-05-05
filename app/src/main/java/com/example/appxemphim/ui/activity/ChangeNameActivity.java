@@ -52,11 +52,6 @@ public class ChangeNameActivity extends AppCompatActivity {
             finish();
         });
     }
-
-    public void goBack(View view) {
-        finish();
-    }
-
     private void saveName() {
         String newName = editTextNewName.getText().toString().trim();
         // Kiểm tra xem tên mới có rỗng không
@@ -97,5 +92,11 @@ public class ChangeNameActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void goBack(View view) {
+        finish();
+    }
+
+
 
 }

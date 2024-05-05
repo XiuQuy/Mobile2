@@ -54,11 +54,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         });
     }
 
-
-
-    public void goBack(View view) {
-        finish();
-    }
     private void changePassword() {
         String currentPassword = editTextCurrentPassword.getText().toString().trim();
         String newPassword = editTextNewPassword.getText().toString().trim();
@@ -138,5 +133,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void goBack(View view) {
+        finish();
+    }
+
 
 }

@@ -434,6 +434,45 @@ public class MovieDetailActivity extends AppCompatActivity {
         LoaderManager.getInstance(this).restartLoader(3, bundle, loaderAddHistory);
     }
 
+    private void loadListVideoTrailerMovie(List<Trailer> trailerList){
+        ArrayList<String> arrId = new ArrayList<>();
+        for(Trailer trailer: trailerList){
+            if(trailer.getSite().equals("YouTube")){
+                arrId.add(trailer.getKey());
+            }
+        }
+        getVideoYoutubeInfo(arrId.toArray(new String[0]));
+    }
+
+    public void getVideoYoutubeInfo(String[] videoId) {
+        String[] part = {"snippet", "statistics", "contentDetails"};
+        YoutubeService youtubeService = ServiceApiBuilder.buildYoutubeApiService(YoutubeService.class);
+        Call<YoutubeVideoResponse> call = youtubeService.getVideoInfo(
+                part,
+                videoId,
+                ServiceApiBuilder.API_KEY_YOUTUBE_DATA
+        );
+        call.enqueue(new Callback<YoutubeVideoResponse>() {
+            @Override
+            public void onResponse(Call<YoutubeVideoResponse> call, Response<YoutubeVideoResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<YoutubeVideoItem> items = response.body().getItems();
+                    if (items != null && !items.isEmpty()) {
+                        MoreTrailerAdapter moreTrailerAdapter = new MoreTrailerAdapter(MovieDetailActivity.this, items);
+                        LinearLayoutManager layoutManager = new LinearLayoutManager(MovieDetailActivity.this, LinearLayoutManager.HORIZONTAL, false);
+                        recyclerViewMoreVideo.setLayoutManager(layoutManager);
+                        recyclerViewMoreVideo.setAdapter(moreTrailerAdapter);
+                    }
+                } else {
+                    Toast.makeText(MovieDetailActivity.this, "Failed to fetch", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<YoutubeVideoResponse> call, Throwable t) {
+                Log.e("API_ERROR", "Network error", t);
+            }
+        });
+    }
     public void loadReviewVideo(String movieId){
         ReviewVideoService reviewVideoService = ServiceApiBuilder.buildUserApiService(ReviewVideoService.class);
         Call<List<ReviewVideo>> call =  reviewVideoService.getAllReviewVideoByMovieId(movieId);
@@ -488,45 +527,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void loadListVideoTrailerMovie(List<Trailer> trailerList){
-        ArrayList<String> arrId = new ArrayList<>();
-        for(Trailer trailer: trailerList){
-            if(trailer.getSite().equals("YouTube")){
-                arrId.add(trailer.getKey());
-            }
-        }
-        getVideoYoutubeInfo(arrId.toArray(new String[0]));
-    }
 
-    public void getVideoYoutubeInfo(String[] videoId) {
-        String[] part = {"snippet", "statistics", "contentDetails"};
-        YoutubeService youtubeService = ServiceApiBuilder.buildYoutubeApiService(YoutubeService.class);
-        Call<YoutubeVideoResponse> call = youtubeService.getVideoInfo(
-                part,
-                videoId,
-                ServiceApiBuilder.API_KEY_YOUTUBE_DATA
-        );
-        call.enqueue(new Callback<YoutubeVideoResponse>() {
-            @Override
-            public void onResponse(Call<YoutubeVideoResponse> call, Response<YoutubeVideoResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<YoutubeVideoItem> items = response.body().getItems();
-                    if (items != null && !items.isEmpty()) {
-                        MoreTrailerAdapter moreTrailerAdapter = new MoreTrailerAdapter(MovieDetailActivity.this, items);
-                        LinearLayoutManager layoutManager = new LinearLayoutManager(MovieDetailActivity.this, LinearLayoutManager.HORIZONTAL, false);
-                        recyclerViewMoreVideo.setLayoutManager(layoutManager);
-                        recyclerViewMoreVideo.setAdapter(moreTrailerAdapter);
-                    }
-                } else {
-                    Toast.makeText(MovieDetailActivity.this, "Failed to fetch", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<YoutubeVideoResponse> call, Throwable t) {
-                Log.e("API_ERROR", "Network error", t);
-            }
-        });
-    }
 
 
 
