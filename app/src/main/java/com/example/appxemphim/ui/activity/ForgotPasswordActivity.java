@@ -52,11 +52,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     }
 
-
-    public void goBack(View view) {
-        finish();
-    }
-
     private boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         Pattern pattern = Pattern.compile(emailRegex);
@@ -85,5 +80,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             }
         });
     }
+    public void goBack(View view) {
+        finish();
+    }
+
+
 
 }
