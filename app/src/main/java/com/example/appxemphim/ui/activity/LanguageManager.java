@@ -17,7 +17,10 @@ public class LanguageManager {
         String selectedLanguage = sharedPreferences.getString(SELECTED_LANGUAGE_KEY, "");
         setLanguage(context, selectedLanguage);
     }
-
+    public static String getSelectedLanguage(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getString(SELECTED_LANGUAGE_KEY, DEFAULT_LANGUAGE);
+    }
     public static void setLanguage(Context context, String selectedLanguage) {
         Locale locale = new Locale(selectedLanguage);
         Locale.setDefault(locale);
@@ -33,9 +36,5 @@ public class LanguageManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(SELECTED_LANGUAGE_KEY, selectedLanguage);
         editor.apply();
-    }
-    public static String getSelectedLanguage(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getString(SELECTED_LANGUAGE_KEY, DEFAULT_LANGUAGE);
     }
 }
