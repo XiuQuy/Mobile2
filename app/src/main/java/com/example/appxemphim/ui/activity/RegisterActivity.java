@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -88,12 +89,12 @@ public class RegisterActivity extends AppCompatActivity {
         UserService userService = ServiceApiBuilder.buildUserApiService(UserService.class);
 
         // Gọi phương thức đăng ký từ UserService và truyền đối tượng UserRegister vào
-        Call<UserResponse> call = userService.register(userRegister);
+        Call<Void> call = userService.register(userRegister);
 
         // Gửi yêu cầu đăng ký người dùng và xử lý kết quả
-        call.enqueue(new Callback<UserResponse>() {
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     // Xử lý phản hồi từ server sau khi đăng ký thành công
                     showSuccessDialog();
@@ -108,8 +109,9 @@ public class RegisterActivity extends AppCompatActivity {
                     showDialog("Lỗi", errorMessage);                }
             }
             @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 // Xử lý khi gặp lỗi trong quá trình gửi yêu cầu đến server
+                Log.e("REGISTER", "FAILURE", t);
                 showDialog("Lỗi", "Đã xảy ra lỗi");            }
         });
     }

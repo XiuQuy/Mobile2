@@ -19,7 +19,7 @@ public interface UserService {
             @Body UserLogin user);
 
     @POST("api/User/register")
-    Call<UserResponse> register(
+    Call<Void> register(
             @Body UserRegister user);
 
     @POST("api/User/login-google")

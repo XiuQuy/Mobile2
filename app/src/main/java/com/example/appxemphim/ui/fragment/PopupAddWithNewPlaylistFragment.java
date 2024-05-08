@@ -1,6 +1,7 @@
 package com.example.appxemphim.ui.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -53,6 +54,8 @@ public class PopupAddWithNewPlaylistFragment extends DialogFragment {
         txtNewPlaylistName = rootView.findViewById(R.id.txt_name_playlist);
         btnAdd = rootView.findViewById(R.id.btn_add);
 
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+        int userId = sharedPreferences.getInt("userId", -1);
 
         //listener
         btnCancel.setOnClickListener(v -> {
@@ -70,7 +73,7 @@ public class PopupAddWithNewPlaylistFragment extends DialogFragment {
 
             PlaylistWithOneItemDTO playlist = new PlaylistWithOneItemDTO();
             playlist.setTitle(txtNewPlaylistName.getText().toString().trim());
-            playlist.setUserId(1);
+            playlist.setUserId(userId);
             playlist.setItem(playlistItem);
             iPopupAddWithNewPlaylistAddSendListener.btnAddWithNewPlaylistClick(playlist);
             dismiss();
