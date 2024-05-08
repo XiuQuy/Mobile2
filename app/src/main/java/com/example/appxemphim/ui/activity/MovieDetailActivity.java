@@ -242,7 +242,10 @@ public class MovieDetailActivity extends AppCompatActivity {
             recyclerViewMoreVideo = findViewById(R.id.recyclerViewMoreVideo);
             recyclerViewReviewVideo = findViewById(R.id.recyclerViewReviewVideo);
             loadReviewVideo(String.valueOf(movieId));
-
+            ImageView btnBack = findViewById(R.id.imgBack);
+            btnBack.setOnClickListener(v -> {
+                finish();
+            });
             imgDetail=findViewById(R.id.imgDetail);
             txtNameMovie=findViewById(R.id.txtNameMovie);
             txtStat=findViewById(R.id.txtStat);
